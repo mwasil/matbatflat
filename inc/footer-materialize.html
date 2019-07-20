@@ -1,0 +1,50 @@
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">{$users.1.fullname}</h5>
+          <p class="grey-text text-lighten-4">{$users.1.description}</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">{$lang.blog.categories}</h5>
+          <ul>
+            {loop: $allTags}
+            <li><a class="grey-text text-lighten-4" href="{?=url(['blog','tag', $value.slug]) ?}">{$value.name} ({$value.count})</a></li>
+            {/loop}
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">{$lang.blog.latest_posts}</h5>
+          <ul>
+            {loop: $latestPosts}
+            <li><a class="grey-text text-lighten-4" href="{?= url(['blog', 'post', $value.slug]) ?}">{$value.title}</a></li>
+            {/loop}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+          <p class="copyright text-muted">
+        {$settings.footer}
+      </p>
+        <p class="copyright text-muted">
+        Made by <a target="_blank" href="https://marcinwasilewski.eu">marcinwasilewski.eu</a>  with <a target="_blank" href="http://materializecss.com">Materialize</a>.
+        {$bat.powered}.
+      </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+
+  {loop: $bat.footer}{$value}{/loop}
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{$bat.theme}/js/materialize.js"></script>
+  <script src="{$bat.theme}/js/init.js"></script>
+  </body>
+</html>

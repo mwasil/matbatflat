@@ -1,0 +1,42 @@
+{template: inc/header-materialize.html}
+<article>
+    <!-- Page Header -->
+    {if: $post.cover_photo}
+    <header class="intro-header background-image" alt="{$page.title}" style="background-image: url('{$post.cover_url}')">
+        {else}
+        <header class="intro-header background-image" alt="{$page.title}" style="background-image: url('{$bat.theme}/img/default-bg.jpg')">
+            {/if}
+            <!-- Page Header -->
+            <div class="section no-pad-bot" id="index-banner">
+                <div class="container valign">
+                    <h1 class="header center white-text">{$page.title}</h1>
+                    <div class="row center">
+                        <h5 class="header col s12 white-text">{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}</h5>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content -->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m10 offset-m1 l8 offset-l2">
+                        {if: $bat.notify}
+                        <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
+                        {/if}
+                        {$post.content}
+                        <p><i class="fa fa-tags"></i> {loop: $post.tags}{if: $key != 0}, {/if}<a
+                                href="{$value.url}">{$value.name}</a>{/loop}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m10 offset-m1 l8 offset-l2">
+                        <hr />
+                        <div id="disqus_thread"></div>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                                rel="nofollow">comments powered by Disqus.</a></noscript>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        {template: inc/footer-materialize.html}

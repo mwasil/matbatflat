@@ -1,0 +1,59 @@
+{template: inc/header-materialize.html}
+<article>
+    <!-- Page Header -->
+    <header class="intro-header">
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container valign">
+                <h1 class="header center orange-text">{$page.title}</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}</h5>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10 offset-m1 l8 offset-l2">
+                {if: $bat.notify}
+                <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
+                {/if}
+                {loop: $blog.posts}
+                <div class="post-preview">
+                    <a href="{$value.url}">
+                        {if: $value.cover_photo}
+                        <img src="{$value.cover_url}" alt="{$page.title}" class="post-cover" />
+                        {/if}
+                        <h2 class="post-title">
+                            {$value.title}
+                        </h2>
+                    </a>
+                    <p class="post-intro">{$value.content}</p>
+                    <p class="post-meta">
+                        {?= sprintf($lang.blog.posted, $value.author.name, $value.published_at) ?}
+                        | <a href="{$value.url}#disqus_thread"
+                            data-disqus-identifier="{$value.disqus_identifier}">{$lang.blog.no_comments}</a>
+                        | <i class="fa fa-tags"></i> {loop: $value.tags as $tag}{if: $key != 0}, {/if}<a
+                            href="{$tag.url}">{$tag.name}</a>{/loop}
+                    </p>
+                </div>
+                <hr> {/loop}
+                <!-- Pager -->
+                <ul class="pager">
+                    {if: isset($prev)}
+                    <li class="previous">
+                        <a href="{$prev.url}">&larr; {$lang.blog.newer}</a>
+                    </li>
+                    {/if} {if: isset($next)}
+                    <li class="next">
+                        <a href="{$next.url}">{$lang.blog.older} &rarr;</a>
+                    </li>
+                    {/if}
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+{template: inc/footer-materialize.html}

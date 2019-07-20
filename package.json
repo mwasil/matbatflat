@@ -1,0 +1,16 @@
+{
+  "name": "matbatflat",
+  "version": "0.0.1",
+  "description": "Materialize-based batflat cms theme",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "marcinwasilewski.eu",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-sass-glob": "^1.1.0"
+  }
+}
