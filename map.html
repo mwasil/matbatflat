@@ -1,0 +1,121 @@
+{template: inc/header-materialize.html}
+<article>
+    <!-- Map Content -->
+    <div class="container-fluid">
+        <div class="row center">
+            <div id="map" style="width: 100%; height: calc(100vh - 64px); position: relative; outline: none;">
+            </div>
+        </div>
+    </div>
+    <div id="reklamowka">
+        <div id="reklama">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
+                data-ad-slot="2690994103" data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <div id="zamknij_reklame">
+            [ zamknij ]
+        </div>
+    </div>
+    <link href="{$bat.path}/app/css/css.php" type="text/css" rel="stylesheet" />
+    <script defer src="https://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+    <script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
+    <script defer src="{$bat.path}/app/js/script.min.js?2019-10-18-15-18"></script>
+
+    <!-- Page Header -->
+    <header class="intro-header">
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="valign">
+                <div class="row center">
+                    <div class="header col s12 ">
+                        <div class="reklamowka_header_footer">
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
+                                data-ad-slot="2690994103" data-ad-format="auto"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container valign">
+                <h1 class="header center orange-text">{$page.title}</h1>
+
+                <div class="row center">
+                    <h5 class="header col s12 grey-text">{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}
+                    </h5>
+                </div>
+
+            </div>
+
+
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="section">
+
+                <!--   Icon Section   -->
+                <div class="row">
+                    <div class="col s12">
+                        {if: $bat.notify}
+                        <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
+                        {/if}
+                        {$page.content}
+                    </div>
+
+                </div>
+
+            </div>
+            <br><br>
+        </div>
+    </article>
+    <!-- Blog -->
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10 offset-m1 l10 offset-l1">
+                {if: $bat.notify}
+                <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
+                {/if}
+                {loop: $blog.posts}
+                <div class="post-preview">
+                    <a href="{$value.url}">
+                        {if: $value.cover_photo}
+                        <img src="{$value.cover_url}" alt="{$page.title}" class="post-cover" />
+                        {/if}
+                        <h2 class="post-title">
+                            {$value.title}
+                        </h2>
+                    </a>
+                    <p class="post-intro">{$value.content}</p>
+                    <p class="post-meta">
+                        {?= sprintf($lang.blog.posted, $value.author.name, $value.published_at) ?}
+                        | <a href="{$value.url}#disqus_thread"
+                            data-disqus-identifier="{$value.disqus_identifier}">{$lang.blog.no_comments}</a>
+                        | <i class="fa fa-tags"></i> {loop: $value.tags as $tag}{if: $key != 0}, {/if}<a
+                            href="{$tag.url}">{$tag.name}</a>{/loop}
+                    </p>
+                </div>
+                <hr> {/loop}
+                <!-- Pager -->
+                <ul class="pager">
+                    {if: isset($prev)}
+                    <li class="previous">
+                        <a href="{$prev.url}">&larr; {$lang.blog.newer}</a>
+                    </li>
+                    {/if} {if: isset($next)}
+                    <li class="next">
+                        <a href="{$next.url}">{$lang.blog.older} &rarr;</a>
+                    </li>
+                    {/if}
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+{template: inc/footer-materialize.html}

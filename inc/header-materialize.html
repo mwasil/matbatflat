@@ -1,31 +1,84 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width">
   <title>{$page.title} - {$settings.title}</title>
   <meta name="description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
   <meta name="keywords" content="{$settings.keywords}">
-
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <link href="{$bat.theme}/css/materialize.css" type="text/css" rel="stylesheet" />
+  <link href="{$bat.theme}/css/materialize.min.css" type="text/css" rel="stylesheet" />
   <link href="{$bat.theme}/css/style-custom.css" type="text/css" rel="stylesheet" />
-
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#da532c">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/pwa/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  {$snippet.google-ads}
+  {$snippet.hotjar}
 </head>
-<body>
-  <nav class="light-blue lighten-1">
-    <div class="nav-wrapper container"><a id="logo-container" class="brand-logo" href="{$bat.path}">{$settings.title}</a>
-      <ul class="right hide-on-med-and-down">
-        {$navigation.main}
-        <li>{$langSwitcher}</li>
-      </ul>
 
-      <ul id="nav-mobile" class="sidenav">
-        {$navigation.main}
-        <li>{$langSwitcher}</li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
+<body>
+  <div class="navbar-fixed">
+    <nav class="white">
+      <div class="nav-wrapper row">
+        <div class="col s12">
+          <a href="#!" data-target="sidenav-left" class="sidenav-trigger left">
+            <i class="material-icons orange-text">menu</i>
+          </a>
+          <a id="logo-container" class="brand-logo" href="{$bat.path}">
+            <img class="brand-logo-image" src="{$bat.theme}/img/wirtualneszlaki-logo.svg" />
+            <span class="brand-logo-text">{$settings.title}</span>
+          </a>
+          <ul class="right">
+            <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-map"><i
+                  class="material-icons right">map</i></a>
+              <ul id="dropdown-map" class="dropdown-content" tabindex="0" style="">
+              </ul>
+            </li>
+          </ul>
+          <ul class="right">
+            <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search"><i
+                  class="material-icons right">search</i></a>
+              <ul id="dropdown-search" class="dropdown-content" tabindex="0" style="">
+              </ul>
+              <div id="search-results-container"></div>
+            </li>
+          </ul>
+
+          <ul class="right hide-on-med-and-down">
+            {$navigation.main}
+            <li>{$langSwitcher}</li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <ul id="sidenav-left" class="sidenav" style="transform: translateX(-105%);">
+    <li>
+      <div class="user-view orange">
+        <a class="circle" href="https://zapisy.krokdonatury.pl/login">
+          <div style="background-image: url(https://zapisy.krokdonatury.pl/images/user-solid.svg);"></div>
+        </a>
+        <span class="white-text name"></span>
+        <span class="white-text email">
+          <b>MENU</b>
+        </span>
+      </div>
+    </li>
+    <li>
+      <div class="switch">
+        <label>
+          <input id="mapgest_switch" type="checkbox" checked>
+          <span class="lever"></span>
+          Przesuwanie mapy z CTRL / gestem
+        </label>
+      </div>
+    </li>
+    {$navigation.main}
+    <li>{$langSwitcher}</li>
+  </ul>

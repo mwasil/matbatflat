@@ -24,8 +24,16 @@ article {
 	font-size: inherit;
 }
 
+.dropdown ul {
+  display: none;
+}
+
 .intro-header {
-  padding: 3em;
+  padding: 0;
+}
+
+.intro-header h1{
+  font-size: 5vmax;
 }
 
 .intro-header.background-image {

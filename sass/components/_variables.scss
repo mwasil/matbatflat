@@ -247,8 +247,8 @@ $navbar-line-height: $navbar-height !default;
 $navbar-height-mobile: 56px !default;
 $navbar-line-height-mobile: $navbar-height-mobile !default;
 $navbar-font-size: 1rem !default;
-$navbar-font-color: #fff !default;
-$navbar-brand-font-size: 2.1rem !default;
+$navbar-font-color: color('orange', 'base') !default;
+$navbar-brand-font-size: 1.4rem !default;
 
 // 14. Side Navigation
 // ==========================================================================
@@ -303,7 +303,10 @@ $toast-action-color: #eeff41;
 // 20. Typography
 // ==========================================================================
 
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap&subset=latin-ext');
+
+$font-stack: -apple-system, BlinkMacSystemFont, "Nunito", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
 $off-black: rgba(0, 0, 0, 0.87) !default;
 // Header Styles
 $h1-fontsize: 4.2rem !default;

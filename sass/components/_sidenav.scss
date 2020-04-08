@@ -10,7 +10,7 @@
   height: -moz-calc(100%); //Temporary Firefox Fix
   padding-bottom: 60px;
   background-color: $sidenav-bg-color;
-  z-index: 999;
+  z-index: 9999;
   overflow-y: auto;
   will-change: transform;
   backface-visibility: hidden;
@@ -152,7 +152,7 @@
   width: 10px;
   position: fixed;
   top: 0;
-  z-index: 998;
+  z-index: 9998;
 }
 
 
@@ -211,6 +211,6 @@
   opacity: 0;
   height: 120vh;
   background-color: rgba(0,0,0,.5);
-  z-index: 997;
+  z-index: 9997;
   display: none;
 }

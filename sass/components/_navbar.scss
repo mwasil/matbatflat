@@ -37,7 +37,7 @@ nav {
   }
 
   @media #{$large-and-up} {
-    a.sidenav-trigger { display: none; }
+    a.sidenav-trigger { display: block; }
   }
 
 
@@ -69,9 +69,14 @@ nav {
       transform: translateX(-50%);
     }
 
-    @media #{$medium-and-down} {
+    @media #{$small-and-down} {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
       left: 50%;
       transform: translateX(-50%);
+      line-height: 1rem;
+      font-size: 1rem;
 
       &.left, &.right {
         padding: 0;
@@ -98,6 +103,16 @@ nav {
     }
   }
 
+ .brand-logo-image{
+  height: 2.5rem;
+  vertical-align: middle;
+  padding-right: 10px;
+}
+
+.brand-logo-text {
+  @media #{$small-and-down} {
+  }
+}
 
   // Title
   .nav-title {
@@ -188,7 +203,7 @@ nav {
 .navbar-fixed {
   position: relative;
   height: $navbar-height-mobile;
-  z-index: 997;
+  z-index: 9997;
 
   nav {
     position: fixed;
