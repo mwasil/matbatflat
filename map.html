@@ -2,11 +2,25 @@
 <article>
     <!-- Map Content -->
     <div class="container-fluid">
+    <div class="row center iframe-hidden">
+            <div class="header col s12 ">
+                <div class="reklamowka_header_footer reklamowka_half-height">
+                        <ins class="adsbygoogle"
+                        style="display:block"
+                        data-ad-client="ca-pub-6601178235337602"
+                        data-ad-slot="2690994103"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"></ins>
+
+                </div>
+            </div>
+        </div>
         <div class="row center">
-            <div id="map" style="width: 100%; height: calc(100vh - 64px); position: relative; outline: none;">
+            <div id="map" class="anchor">
             </div>
         </div>
     </div>
+    <!---
     <div id="reklamowka">
         <div id="reklama">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
@@ -19,20 +33,27 @@
             [ zamknij ]
         </div>
     </div>
-    <link href="{$bat.path}/app/css/css.php" type="text/css" rel="stylesheet" />
-    <script defer src="https://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+    -->
+    <link href="{$bat.path}/app/css/css.php?2022-06-23-13-55-24" type="text/css" rel="stylesheet" />
+    <!--<script defer src="https://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>-->
     <script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
-    <script defer src="{$bat.path}/app/js/script.min.js?2019-10-18-15-18"></script>
+    <script defer src="{$bat.path}/app/js/script.min.js?2022-06-23-13-55-32"></script> 
+
+    <!-- <script defer src="{$bat.path}/app/compilejs.php?force=1"></script>-->
 
     <!-- Page Header -->
     <header class="intro-header">
         <div class="section no-pad-bot" id="index-banner">
-            <div class="valign">
+            <div class="valign hide-on-small-only">
                 <div class="row center">
                     <div class="header col s12 ">
                         <div class="reklamowka_header_footer">
-                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
-                                data-ad-slot="2690994103" data-ad-format="auto"></ins>
+                                <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-client="ca-pub-6601178235337602"
+                                data-ad-slot="2690994103"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"></ins>
                             <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({});
                             </script>
@@ -118,4 +139,44 @@
     </div>
 </article>
 
+<ul id="poi-panel" class="sidenav">
+    <li>
+        <div class="user-view">
+            <div id="poi-panel__image" class="background">
+                <img src="">
+            </div>
+            <!--
+            <a href="#user"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/ZF_grodzisko_Zamczysko.jpg/200px-ZF_grodzisko_Zamczysko.jpg"></a>
+            -->
+        </div>
+        <div class="sidenav-text">
+            <h1 id="poi-panel__title"></h1>
+            <p id="poi-panel__extract">
+            </p>
+            <p id="poi-panel__phototitle">
+            </p>
+            <p id="poi-panel__tags"></p>
+        </div>
+        
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="waves-effect" id="poi-panel__route-from" href="#!">Trasa z...</a></li>
+    <li><a class="waves-effect"  id="poi-panel__route-via" href="#!">Trasa przez...</a></li>
+    <li><a class="waves-effect"  id="poi-panel__route-to" href="#!">Trasa do...</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="waves-effect"  id="poi-panel__download-gpx"  href="#!"><i class="material-icons">file_download</i>Pobierz GPX</a></li>
+    <li><a class="waves-effect"  id="poi-panel__download-kml" href="#!"><i class="material-icons">file_download</i>Pobierz KML</a></li>
+    <li>
+        <div class="sidenav-text">
+            <p  id="poi-panel__source" >
+                
+            </p>
+
+        </div>
+    </li>
+</ul>
 {template: inc/footer-materialize.html}

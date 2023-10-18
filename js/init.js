@@ -5,22 +5,22 @@ var searchDropdown, mapDropdown;
 
     $('.sidenav').sidenav();
 
-    $('#dropdown-map').append($('.leaflet-control-layers-list'));
+    $('.leaflet-control-layers-list').appendTo($('#dropdown-map'));
     mapDropdown = $(".dropdown-trigger[data-target='dropdown-map']").dropdown({
       closeOnClick: false,
       hover: false,
       constrainWidth: false
     });
 
-    $('#dropdown-search').append($('.leaflet-pelias-control'));
+    $('#dropdown-search').append($('.leaflet-locationiq-control'));
     searchDropdown = $(".dropdown-trigger[data-target='dropdown-search']").dropdown({
       closeOnClick: false,
       hover: false,
       constrainWidth: false
     });
 
-    $('#search-results-container').append($('.leaflet-pelias-results'));
-
+    //$('#search-results-container').append($('.leaflet-locationiq-results'));
+    $('.leaflet-locationiq-control').append($('.leaflet-locationiq-results'));
 
     $( ".dropdown" ).each(function( index ) {
       console.log(index);
@@ -37,7 +37,7 @@ var searchDropdown, mapDropdown;
 
     if ($('#map').length==0) $(".map-dropdown").hide();
 
-    $('.leaflet-pelias-input').addClass('browser-default').attr('type','text');
+    $('.leaflet-locationiq-input').addClass('browser-default').attr('type','text');
 
     $('.sledz').click(function () {
       ga('send', 'event', {

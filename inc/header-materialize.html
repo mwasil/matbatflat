@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width">
-  <title>{$page.title} - {$settings.title}</title>
+  <title>{$page.title}</title>
   <meta name="description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
   <meta name="keywords" content="{$settings.keywords}">
   <!-- CSS  -->
@@ -17,11 +17,60 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/pwa/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
+  <meta property="og:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"."?type=static" ?}" />
+  
+  
   {$snippet.google-ads}
   {$snippet.hotjar}
 </head>
 
 <body>
+  <ol id="tour" style="display: none;">
+      <li data-target=".map-search" data-angle="250">
+          Wyszukaj miejscowość.
+      </li>	
+      <li data-target=".map-layer" data-angle="250">
+      Wybierz podkłady mapy i nakładkę
+      </li>
+      <li data-target=".leaflet-routing-container" data-angle="250">
+        <p>Wyznacz trasę automatycznie i pobierz w GPX.</p> 
+
+    <p>Odpowiednie opcje są też dostępne po kliknięciu prawym przyciskiem myszy na mapie.</p>
+      </li>
+      <li data-target=".leaflet-html-legend" data-angle="250">
+        Przełącz tymczasowo widoczność warst i zmień ich przezroczystość
+      </li>
+      
+      <li data-target=".sidenav-trigger" data-angle="120">
+      W tym menu wyłączysz m.in. powiększanie mapy z CTRL
+      </li>
+      <li data-target="#polyline-measure-control" data-angle="120">
+        Zmierz odeległość, rysuj trasę, pobierz w GPX
+      </li> 
+      <li data-target=".leaflet-control-locate" data-angle="120">
+        Wyświetl swoją lokalizację (włącz wcześniej GPS w urządzeniach mobilnych)
+      </li>
+  
+  
+      <li data-target=".leaflet-control-filelayer" data-angle="120">
+        Wczytaj swój plik .gpx, .kml lub .geojson, żeby przejrzeć go na tle mapy
+      </li>
+    </li>
+      
+      <li data-target=".leaflet-control-fullscreen-button" data-angle="120">
+      Tu Wygodnie obejrzysz mapę w trybie pełnego ekranu
+      </li>
+      <li data-target=".leaflet-control-rainviewer-button" ddata-angle="120">
+        <p>Sprawdź aktualne opady.</p>
+      </li>
+      <li data-target="#jak_korzystac"  data-angle="0">
+        <p>Dodatkowe opcje znajdziesz pod prawym przyciskiem myszy i klikająć obiekty na mapie.</p> </br> PRZYJEMNEGO KORZYSTANIA! ;)
+      </li>
+  </ol>
+  <div class="content_box pierwszy_raz">
+    <h2>Pokazać, jak korzystać z mapy?</h2>
+    <div class="przyciski"><a id="przewodnik_tak" class="przycisk tak sledz">OK</a> <a id="przewodnik_nie" class="przycisk nie sledz">Nie, dzięki</a></div>
+  </div>
   <div class="navbar-fixed">
     <nav class="white">
       <div class="nav-wrapper row">
@@ -33,14 +82,14 @@
             <img class="brand-logo-image" src="{$bat.theme}/img/wirtualneszlaki-logo.svg" />
             <span class="brand-logo-text">{$settings.title}</span>
           </a>
-          <ul class="right">
+          <ul class="right map-layer">
             <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-map"><i
                   class="material-icons right">map</i></a>
               <ul id="dropdown-map" class="dropdown-content" tabindex="0" style="">
               </ul>
             </li>
           </ul>
-          <ul class="right">
+          <ul class="right map-search">
             <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search"><i
                   class="material-icons right">search</i></a>
               <ul id="dropdown-search" class="dropdown-content" tabindex="0" style="">
@@ -50,6 +99,7 @@
           </ul>
 
           <ul class="right hide-on-med-and-down">
+            <li id="jak_korzystac">Jak korzystać z mapy?</li>
             {$navigation.main}
             <li>{$langSwitcher}</li>
 
@@ -79,6 +129,34 @@
         </label>
       </div>
     </li>
+    <li>
+      <div class="switch">
+        <label>
+          <input id="googleads_switch" type="checkbox" checked>
+          <span class="lever"></span>
+          Reklamy
+        </label>
+      </div>
+    </li>
+    <li>
+      <div class="switch">
+        <label>
+          <input id="elepointslimit_switch" type="checkbox" checked>
+          <span class="lever"></span>
+          Optymalizacja trasy GPX (max. 600 pkt.)
+        </label>
+      </div>
+    </li>
     {$navigation.main}
+    <li>
+      <div class="switch">
+        <label>
+          <input id="contextmenu_switch" type="checkbox" checked>
+          <span class="lever"></span>
+          Menu contekstowe
+        </label>
+      </div>
+    </li>
     <li>{$langSwitcher}</li>
+    
   </ul>

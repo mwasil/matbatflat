@@ -2,8 +2,12 @@
   <div class="row center">
     <div class="col s12">
       <div class="reklamowka_header_footer">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
-          data-ad-slot="2690994103" data-ad-format="auto"></ins>
+          <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-6601178235337602"
+          data-ad-slot="2690994103"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
@@ -12,6 +16,14 @@
   </div>
 </div>
 <footer class="page-footer orange">
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zamknij</a>
+    </div>
+  </div>
+
   <div class="container">
     <div class="row">
       <div class="col l6 s12">
@@ -28,8 +40,6 @@
               ({$value.count})</a></li>
           {/loop}
         </ul>
-      </div>
-      <div class="col l3 s12">
         <h5 class="white-text">{$lang.blog.latest_posts}</h5>
         <ul>
           {loop: $latestPosts}
@@ -37,6 +47,12 @@
           </li>
           {/loop}
         </ul>
+      </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">Linki:</h5>
+        <div id="footer-links">
+          {$navigation.mapy-administracyjne}
+        </div>
       </div>
     </div>
   </div>
