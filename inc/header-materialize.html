@@ -2,6 +2,7 @@
 <html lang="pl">
 
 <head>
+  {$snippet.gtm-header}	
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width">
   <title>{$page.title}</title>
@@ -25,6 +26,7 @@
 </head>
 
 <body>
+  {$snippet.gtm-body}	
   <ol id="tour" style="display: none;">
       <li data-target=".map-search" data-angle="250">
           Wyszukaj miejscowość.
@@ -144,6 +146,15 @@
           <input id="elepointslimit_switch" type="checkbox" checked>
           <span class="lever"></span>
           Optymalizacja trasy GPX (max. 600 pkt.)
+        </label>
+      </div>
+    </li>
+    <li>
+      <div class="switch">
+        <label>
+          <input id="centermarker_switch" type="checkbox">
+          <span class="lever"></span>
+          Marker na środku mapy (do udostępniania linków)
         </label>
       </div>
     </li>
