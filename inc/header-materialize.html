@@ -77,12 +77,12 @@
     <nav class="white">
       <div class="nav-wrapper row">
         <div class="col s12">
-          <a href="#!" data-target="sidenav-left" class="sidenav-trigger left">
-            <i class="material-icons orange-text">menu</i>
-          </a>
           <a id="logo-container" class="brand-logo" href="{$bat.path}">
             <img class="brand-logo-image" src="{$bat.theme}/img/wirtualneszlaki-logo.svg" />
             <span class="brand-logo-text">{$settings.title}</span>
+          </a>
+          <a href="#!" data-target="sidenav-left" class="sidenav-trigger right">
+            <i class="material-icons orange-text">settings</i>
           </a>
           <ul class="right map-layer">
             <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-map"><i
@@ -118,7 +118,7 @@
         </a>
         <span class="white-text name"></span>
         <span class="white-text email">
-          <b>MENU</b>
+          <b>Ustawienia</b>
         </span>
       </div>
     </li>
@@ -145,7 +145,16 @@
         <label>
           <input id="elepointslimit_switch" type="checkbox" checked>
           <span class="lever"></span>
-          Optymalizacja trasy GPX (max. 600 pkt.)
+          Optymalizacja pobieranej trasy GPX do max. 600 pkt.
+        </label>
+      </div>
+    </li>
+    <li>
+      <div class="switch">
+        <label>
+          <input id="contextmenu_switch" type="checkbox" checked>
+          <span class="lever"></span>
+          Menu kontekstowe (prawy przycisk myszy / przytrzymaj na mobile)
         </label>
       </div>
     </li>
@@ -154,20 +163,12 @@
         <label>
           <input id="centermarker_switch" type="checkbox">
           <span class="lever"></span>
-          Marker na środku mapy (do udostępniania linków)
+          Ustaw marker na środku mapy (do udostępniania linków)
         </label>
       </div>
     </li>
     {$navigation.main}
-    <li>
-      <div class="switch">
-        <label>
-          <input id="contextmenu_switch" type="checkbox" checked>
-          <span class="lever"></span>
-          Menu contekstowe
-        </label>
-      </div>
-    </li>
+
     <li>{$langSwitcher}</li>
     
   </ul>

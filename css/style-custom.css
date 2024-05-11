@@ -14,6 +14,11 @@
   height: calc(100vh - 64px); 
   position: relative; 
   outline: none;
+  cursor:crosshair;
+ }
+
+ #map.grabbing {
+	cursor: grabbing !important;
  }
 
  article ul{
@@ -130,8 +135,12 @@ h3,h4 {
   line-height: 1.5em;
 }
 
-.sidenav label{
+.sidenav label {
   font-size: inherit;
+  display: flex;
+  align-items: center;
+  line-height: 1.3em;
+  margin: 20px 0;
 }
 
 
@@ -141,4 +150,17 @@ word-break: break-word;
 
 #poi-panel__extract li {
 line-height: 1.2em;
+}
+
+
+@media only screen and (max-width: 600px) {
+  nav .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    left: 30%;
+    transform: translateX(-50%);
+    line-height: 1rem;
+    font-size: 1rem;
+}
 }
