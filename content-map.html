@@ -1,0 +1,233 @@
+{template: inc/header-materialize.html}
+
+{? $split_content = (strpos($page['content'], ':::') !== false) ? preg_split('/<[^>]+>:::<\/[^>]+>|:::/', $page['content'], (substr_count($page['content'], ':::') >= 2 ? 3 : 2)) : false ?}
+{if: !$split_content}
+{? $split_content = (strpos($page['content'], ':::') !== false) ? explode(':::', $page['content']) : false ?}
+{/if}
+    
+{if: $split_content}
+    {if: count($split_content) > 1}
+        {? $page['intro'] = $split_content[0] ?}
+        {? $page['content'] = $split_content[1] ?}
+        {if: $split_content[2]}
+        {? $page['belowcontent'] = $split_content[2] ?}
+        {/if}
+    {else}
+        {? $page['content'] = $split_content[0] ?}
+    {/if}
+{else}
+    {? $page['content'] = $page['content'] ?}  <!-- Domyślne zachowanie, jeśli nie ma podziału -->
+{/if}
+
+
+
+<link href="{$bat.path}/app/css/style.min.css?2024-09-19-16-22-48" type="text/css" rel="stylesheet" >
+<!--<script defer src="https://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>-->
+<script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
+<script defer src="{$bat.path}/app/js/script.min.js?2024-09-19-16-22-44"></script>
+<!-- 
+<script defer src="{$bat.path}/app/js/mapa.js?2024-09-05-13-35-597"></script>
+<script defer src="{$bat.path}/app/compilejs.php?force=1"></script>
+-->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Ładujemy mapa.js
+    var mapaScript = document.createElement('script');
+    mapaScript.src = "https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2024-09-24-20-02-52";
+    mapaScript.onload = function() {
+        // Po zakończeniu ładowania mapa.js, ładowanie init.js
+        var initScript = document.createElement('script');
+        initScript.src = "{$bat.theme}/js/init.js?2024-09-24-20-02-49";
+        document.body.appendChild(initScript);
+    };
+    document.body.appendChild(mapaScript);
+});
+
+</script>
+<!-- Page Header -->
+<main>
+    <article class="{$page.slug}" id="{$page.slug}"">
+        <header class="intro-header">
+            <div class="section no-pad-bot" id="index-banner">
+                <div class="container valign">
+                    {if: $_SERVER['REQUEST_URI'] != '/'}
+                    <nav aria-label="breadcrumb" class="wsmap-breadcrumb">
+                        <div itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb center">
+                            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"
+                                class="breadcrumb-item">
+                                <a href="https://mapa.wirtualneszlaki.pl/" itemprop="item">
+                                    <span class="grey-text" itemprop="name">Główna</span>
+                                </a>
+                                <meta itemprop="position" content="1" >
+                            </span>
+
+                            <!-- Slash separator -->
+                            <span class="breadcrumb-separator grey-text"> > </span>
+
+                            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"
+                                class="breadcrumb-item">
+                                <a href="https://mapa.wirtualneszlaki.pl/mapy" itemprop="item">
+                                    <span class="grey-text" itemprop="name">Mapy</span>
+                                </a>
+                                <meta itemprop="position" content="2" >
+                            </span>
+
+                            <!-- Slash separator -->
+                            <span class="breadcrumb-separator grey-text"> > </span>
+
+                            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"
+                                class="breadcrumb-item active" aria-current="page">
+                                <span class="grey-text" itemprop="name">{$page.title}</span>
+                                <meta itemprop="position" content="3" >
+                            </span>
+                        </div>
+                    </nav>
+                    {/if}
+
+                    <h1 class="header center orange-text">{$page.title}</h1>
+
+                    <div class="row center">
+                        <p class="header wsmap-desc col s12 grey-text">
+                            {if: $page.intro}{$page.intro}{elseif: $page.desc}{$page.desc}{else}{$settings.description}{/if}
+
+
+                        </p>
+                          <!-- Dropdown Trigger -->
+                        <a class='dropdown-trigger hide-on-large-only btn' href='#' data-target='toc'>Spis treści</a>
+
+                        <!-- Dropdown Structure -->
+                        <ul id='toc' class='dropdown-content'>
+                            <li><a href="#map"><strong class="text-bold">{$page.title}</strong></a></li>
+                        </ul>
+                        <a class="btn pushpin" href="#map">Przewiń do mapy </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container-fluid">
+            <div class="section">
+                <!--   Icon Section   -->
+                <div class="row resizable-columns-row">
+                    <div class="col s12 m12 l3 resizable-column left-column">
+                        <!-- Map Content -->
+                        {if: $bat.notify}
+                        <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
+                        {/if}
+                        <div id="wsmap-content">
+
+                            <div class="reklamowka_header_footer reklamowka_half-height iframe-hidden" aria-hidden="true">
+                                <ins class="adsbygoogle" style="display:block"
+                                    data-ad-client="ca-pub-6601178235337602" data-ad-slot="2690994103"
+                                    data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            </div>
+                            <section>
+                            <p class="grey-text wsmap-last-update">Data ostatniej aktualizacji: {?= date('d-m-Y', strtotime('last Wednesday')) ?}</p>
+                            {$page.content}
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Dodaj pasek przesuwania ze strzałką -->
+                    <div class="drag-bar">
+                        <span class="toggle-arrow">&lsaquo;</span> <!-- Strzałka -->
+                    </div>
+
+                    <div class="col s12 m12 l9 resizable-column right-column">
+                            <section>
+                            <h2 class="wsmpap-header grey-text">{$page.title} <span>(interaktywna mapa online)</span></h2>
+                            <div id="map"  class="scrollspy">
+                                <picture id="static-map-container" >
+                                        <!-- Mapa dla smartfonów -->
+                                    <source media="(max-width: 767px)" srcset="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ."?type=static&width=640&height=640" ?}">
+
+                                    <img id="static-map" src="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ."?type=static&width=1000&height=1000" ?}" alt="{$page.title} (mapa statyczna)">
+                                </picture>
+                            </div>
+                             </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {if: $page.belowcontent}
+            <div class="container">
+                <div class="section">
+                    <div class="row">
+                        <div class="col">
+                            {$page.belowcontent}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {/if}
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "{$page.title}",
+                "url": "https://mapa.wirtualneszlaki.pl/{$page.slug}",
+                "datePublished": "{$page.date}",
+                "dateModified": "{?= date('Y-m-d', strtotime('last wednesday')) ?}",
+                
+                "mainEntity": {
+                    "@type": "Map",
+                    "url": "https://mapa.wirtualneszlaki.pl/{$page.slug}#map",
+                    "name": "Mapa - {$page.title}",
+                    "mapType": "TouristMap",
+                    "inLanguage": "pl",
+                    "creator": {
+                        "@type": "Person",
+                        "name": "Marcin Wasilewski",
+                        "email": "mailto:poczta@wirtualneszlaki.pl",
+                        "telephone": "+48 797 934 718",
+                        "sameAs": "https://www.linkedin.com/in/marcin-wasilewski-95279b36/"
+                    }
+                },
+                
+                "publisher": {
+                    "@type": "Organization",
+                    "@id": "https://wirtualneszlaki.pl#Organization",
+                    "name": "Wirtualne Szlaki",
+                    "description": "Wirtualne Szlaki to platforma udostępniająca informacje o szlakach i interaktywne mapy turystyczne, pomagające w planowaniu podróży i wycieczek po Polsce.",
+                    "url": "https://wirtualneszlaki.pl",
+                    "sameAs": [
+                        "https://www.facebook.com/wirtualneszlaki",
+                        "https://instagram.com/wirtualneszlaki",
+                        "https://twitter.com/wirtualneszlaki"
+                    ],
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://mapa.wirtualneszlaki.pl/themes/matbatflat/img/wirtualneszlaki-logo.svg",
+                        "width": "112",
+                        "height": "112"
+                    }
+                },
+                
+                "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ."?type=static&width=1000&height=1000" ?}",
+                    "caption": "Statyczna wersja: {$page.title}",
+                    "width": "1000",
+                    "height": "1000"
+                },
+                
+                "significantLink": "https://mapa.wirtualneszlaki.pl/{$page.slug}#map",
+                
+                "specialty": {
+                    "@type": "Specialty",
+                    "name": "Map"
+                }
+            }
+            </script>
+            
+            
+            
+
+    </article>
+
+
+</main>
+<!-- Nowa stopka autora -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+{template: inc/footer-materialize.html}

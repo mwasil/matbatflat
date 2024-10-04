@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row center">
     <div class="col s12">
-      <div class="reklamowka_header_footer">
+      <div class="reklamowka_header_footer" aria-hidden="true">
           <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-6601178235337602"
@@ -27,20 +27,21 @@
   <div class="container">
     <div class="row">
       <div class="col l6 s12">
-        <h5 class="white-text">{$users.1.fullname}</h5>
+        <h2 class="white-text">{$users.1.fullname}</h2>
         <p class="grey-text text-lighten-4">{$users.1.description}</p>
 
-
+        {$snippet.autor}
+      
       </div>
       <div class="col l3 s12">
-        <h5 class="white-text">{$lang.blog.categories}</h5>
+        <h2 class="white-text">{$lang.blog.categories}</h2>
         <ul>
           {loop: $allTags}
           <li><a class="grey-text text-lighten-4" href="{?=url(['blog','tag', $value.slug]) ?}">{$value.name}
               ({$value.count})</a></li>
           {/loop}
         </ul>
-        <h5 class="white-text">{$lang.blog.latest_posts}</h5>
+        <h2 class="white-text">{$lang.blog.latest_posts}</h2>
         <ul>
           {loop: $latestPosts}
           <li><a class="grey-text text-lighten-4" href="{?= url(['blog', 'post', $value.slug]) ?}">{$value.title}</a>
@@ -49,7 +50,7 @@
         </ul>
       </div>
       <div class="col l3 s12">
-        <h5 class="white-text">Linki:</h5>
+        <h2 class="white-text">Linki:</h2>
         <div id="footer-links">
           {$navigation.mapy-administracyjne}
         </div>
@@ -62,22 +63,116 @@
         {$settings.footer}
       </p>
       <p class="copyright text-muted">
-        Made by <a target="_blank" href="https://marcinwasilewski.eu">marcinwasilewski.eu</a> with <a target="_blank"
-          href="http://materializecss.com">Materialize</a>.
-        {$bat.powered}.
+        {$bat.powered}
       </p>
     </div>
   </div>
 </footer>
 
+<!-- templates -->
+<ol id="tour" style="display: none;" data-nosnippet aria-hidden="true">
+  <li data-target=".map-search" data-angle="250">
+      Wyszukaj miejscowość.
+  </li>	
+  <li data-target=".map-layer" data-angle="250">
+  Wybierz podkłady mapy i nakładkę
+  </li>
+  <li data-target=".leaflet-routing-container" data-angle="250">
+    <p>Wyznacz trasę automatycznie i pobierz w GPX.</p> 
+
+<p>Odpowiednie opcje są też dostępne po kliknięciu prawym przyciskiem myszy na mapie.</p>
+  </li>
+  <li data-target=".leaflet-html-legend" data-angle="250">
+    Przełącz tymczasowo widoczność warst i zmień ich przezroczystość
+  </li>
+  
+  <li data-target=".sidenav-trigger" data-angle="250">
+  W tym menu wyłączysz m.in. powiększanie mapy z CTRL
+  </li>
+  <li data-target="#polyline-measure-control" data-angle="120">
+    Zmierz odeległość, rysuj trasę, pobierz w GPX
+  </li> 
+  <li data-target=".leaflet-control-locate" data-angle="120">
+    Wyświetl swoją lokalizację (włącz wcześniej GPS w urządzeniach mobilnych)
+  </li>
+
+
+  <li data-target=".leaflet-control-filelayer" data-angle="120">
+    Wczytaj swój plik .gpx, .kml lub .geojson, żeby przejrzeć go na tle mapy
+  </li>
+</li>
+  
+  <li data-target=".leaflet-control-fullscreen-button" data-angle="120">
+  Tu Wygodnie obejrzysz mapę w trybie pełnego ekranu
+  </li>
+  <li data-target=".leaflet-control-rainviewer-button" ddata-angle="120">
+    <p>Sprawdź aktualne opady.</p>
+  </li>
+  <li data-target="#jak_korzystac"  data-angle="0">
+    <p>Dodatkowe opcje znajdziesz pod prawym przyciskiem myszy i klikająć obiekty na mapie.</p> <p>PRZYJEMNEGO KORZYSTANIA! ;)</p>
+  </li>
+</ol>
+<div class="content_box pierwszy_raz" data-nosnippet aria-hidden="true">
+<h2>Pokazać, jak korzystać z mapy?</h2>
+<div class="przyciski"><a id="przewodnik_tak" class="btn tak sledz white-text">OK</a> <a id="przewodnik_nie" class="btn nie red sledz white-text">Nie, dzięki</a></div>
+</div>
+
+<ul id="poi-panel" class="sidenav" data-nosnippet aria-hidden="true">
+  <li>
+      <div class="user-view">
+          <div id="poi-panel__image" class="background">
+              <img src="">
+          </div>
+      </div>
+      <div class="sidenav-text">
+          <h2 id="poi-panel__title"></h2>
+          <p id="poi-panel__extract">
+          </p>
+          <p id="poi-panel__phototitle">
+          </p>
+          <p id="poi-panel__tags"></p>
+      </div>
+
+  </li>
+  <li>
+      <div class="divider"></div>
+  </li>
+  <li><a class="waves-effect" id="poi-panel__route-from" href="#!">Trasa z...</a></li>
+  <li><a class="waves-effect" id="poi-panel__route-via" href="#!">Trasa przez...</a></li>
+  <li><a class="waves-effect" id="poi-panel__route-to" href="#!">Trasa do...</a></li>
+  <li>
+      <div class="divider"></div>
+  </li>
+  <li><a class="waves-effect" id="poi-panel__download-gpx" href="#!"><i
+              class="material-icons">file_download</i>Pobierz GPX</a></li>
+  <li><a class="waves-effect" id="poi-panel__download-kml" href="#!"><i
+              class="material-icons">file_download</i>Pobierz KML</a></li>
+  <li>
+      <div class="sidenav-text">
+          <p id="poi-panel__source">
+
+          </p>
+
+      </div>
+  </li>
+</ul>
+
+
+<a href="#{$page.slug}" id="scrollToTopBtn" style="display: none;" class="">
+  <!-- &#x2C4; -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+    <path d="M12 4l-8 8h6v8h4v-8h6z"/>
+</svg>
+</a>
+
 
 <!--  Scripts-->
 
 {loop: $bat.footer}{$value}{/loop}
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
 <script src="{$bat.theme}/js/materialize.min.js"></script>
-<script src="{$bat.theme}/js/init.js"></script>
-<script type="text/javascript">
+
+<script >
  if ('serviceWorker' in navigator) {
     console.log("Will the service worker register?");
     navigator.serviceWorker.register('/service-worker.js')

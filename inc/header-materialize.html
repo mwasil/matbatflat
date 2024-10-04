@@ -2,173 +2,156 @@
 <html lang="pl">
 
 <head>
-  {$snippet.gtm-header}	
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width">
+  {$snippet.gtm-header}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="icon" href="favicon.ico">
   <title>{$page.title}</title>
   <meta name="description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
-  <meta name="keywords" content="{$settings.keywords}">
-  <!-- CSS  -->
+  <link rel="canonical" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <link href="{$bat.theme}/css/materialize.min.css" type="text/css" rel="stylesheet" />
-  <link href="{$bat.theme}/css/style-custom.css" type="text/css" rel="stylesheet" />
+  <style>
+  /* static */
+    .static .iframe-hidden,.static .navbar-fixed,.static footer,.static .leaflet-control,.static header,.static .reklamowka_header_footer,.static .pierwszy_raz,.static>.container-fluid,.static .fc-consent-root .fc-dialog-overlay,.static .fc-consent-root .fc-help-dialog-overlay,.static .fc-consent-root .fc-dialog,.static .drag-target,.static .adsbygoogle,.static .adsbygoogle-noablate,.static #wsmap-content,.static .drag-bar,.static #toast-container,.static .wsmpap-header{display:none!important;visibility:hidden!important}body.static>article>article>div>div>div>div.col.s12.m12.l3{display:none!important}body.static>main>article>div>div>div>div.col.s12.m12.l9.resizable-column.right-column{width:100%!important}body.static .section{padding-top:0!important;padding-bottom:0!important}body.static .row .col{padding:0 0!important}.static article article,.static article .container{} .static #map{height:100vh}.static{overflow:hidden}
+  /* critical */
+  img {
+  max-width: 100%;
+  }
+  .intro-header h1 {
+    font-size: 3rem;
+  }
+  #static-map {
+    height: 100%;
+    width: auto;
+    margin: auto;
+    display: flex;
+    object-fit: cover;
+  }
+  </style>
+  <link href="{$bat.theme}/css/materialize.min.css" type="text/css" rel="stylesheet" >
+  <link href="{$bat.theme}/css/style-custom.css?2024-09-26-14-57-24" type="text/css" rel="stylesheet" >
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#da532c">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/pwa/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <meta property="og:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"."?type=static" ?}" />
-  
-  
+  <meta property="og:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ."?type=static" ?}" >
+  <meta property="og:title" content="{$page.title}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{$page.title} - statyczna wersja mapy ">
+  <meta property="og:description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
+  <meta property="og:site_name" content="mapa.wirtualneszlaki.pl">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mapa turystyczna Polski">
+<meta name="twitter:description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
+<meta name="twitter:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ."?type=static" ?}">
+<meta name="twitter:url" content="https://mapa.wirtualneszlaki.pl/">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]" ."/feed" ?}" />
+
+  <script src="{$bat.theme}/js/preinit.js?2024-09-12-14-53-18"></script>
+
   {$snippet.google-ads}
-  {$snippet.hotjar}
+
 </head>
 
 <body>
-  {$snippet.gtm-body}	
-  <ol id="tour" style="display: none;">
-      <li data-target=".map-search" data-angle="250">
-          Wyszukaj miejscowość.
-      </li>	
-      <li data-target=".map-layer" data-angle="250">
-      Wybierz podkłady mapy i nakładkę
-      </li>
-      <li data-target=".leaflet-routing-container" data-angle="250">
-        <p>Wyznacz trasę automatycznie i pobierz w GPX.</p> 
+  {$snippet.gtm-body}
+  <header>
+    <div class="navbar-fixed">
+      <nav class="white">
+        <div class="nav-wrapper row">
+          <div class="col s12">
+            <a id="logo-container" class="brand-logo" href="{$bat.path}/">
+              <img class="brand-logo-image" width="48" height="47" alt="Logo serwisu {$page.title}"
+                src="{$bat.theme}/img/wirtualneszlaki-logo.svg" >
+              <span class="brand-logo-text">{$settings.title}</span>
+            </a>
+            <a href="#!" data-target="sidenav-left" class="sidenav-trigger right">
+              <i class="material-icons orange-text">menu</i>
+            </a>
+            <ul class="right map-layer">
+              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-map"><i
+                    class="material-icons right">map</i></a>
+                <ul id="dropdown-map" class="dropdown-content" tabindex="0" style="">
+                </ul>
+              </li>
+            </ul>
+            <ul class="right map-search">
+              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search"><i
+                    class="material-icons right">search</i></a>
+                <ul id="dropdown-search" class="dropdown-content" tabindex="0" style="">
+                </ul>
+                <div id="search-results-container"></div>
+              </li>
+            </ul>
 
-    <p>Odpowiednie opcje są też dostępne po kliknięciu prawym przyciskiem myszy na mapie.</p>
-      </li>
-      <li data-target=".leaflet-html-legend" data-angle="250">
-        Przełącz tymczasowo widoczność warst i zmień ich przezroczystość
-      </li>
-      
-      <li data-target=".sidenav-trigger" data-angle="120">
-      W tym menu wyłączysz m.in. powiększanie mapy z CTRL
-      </li>
-      <li data-target="#polyline-measure-control" data-angle="120">
-        Zmierz odeległość, rysuj trasę, pobierz w GPX
-      </li> 
-      <li data-target=".leaflet-control-locate" data-angle="120">
-        Wyświetl swoją lokalizację (włącz wcześniej GPS w urządzeniach mobilnych)
-      </li>
-  
-  
-      <li data-target=".leaflet-control-filelayer" data-angle="120">
-        Wczytaj swój plik .gpx, .kml lub .geojson, żeby przejrzeć go na tle mapy
-      </li>
-    </li>
-      
-      <li data-target=".leaflet-control-fullscreen-button" data-angle="120">
-      Tu Wygodnie obejrzysz mapę w trybie pełnego ekranu
-      </li>
-      <li data-target=".leaflet-control-rainviewer-button" ddata-angle="120">
-        <p>Sprawdź aktualne opady.</p>
-      </li>
-      <li data-target="#jak_korzystac"  data-angle="0">
-        <p>Dodatkowe opcje znajdziesz pod prawym przyciskiem myszy i klikająć obiekty na mapie.</p> </br> PRZYJEMNEGO KORZYSTANIA! ;)
-      </li>
-  </ol>
-  <div class="content_box pierwszy_raz">
-    <h2>Pokazać, jak korzystać z mapy?</h2>
-    <div class="przyciski"><a id="przewodnik_tak" class="przycisk tak sledz">OK</a> <a id="przewodnik_nie" class="przycisk nie sledz">Nie, dzięki</a></div>
-  </div>
-  <div class="navbar-fixed">
-    <nav class="white">
-      <div class="nav-wrapper row">
-        <div class="col s12">
-          <a id="logo-container" class="brand-logo" href="{$bat.path}">
-            <img class="brand-logo-image" src="{$bat.theme}/img/wirtualneszlaki-logo.svg" />
-            <span class="brand-logo-text">{$settings.title}</span>
-          </a>
-          <a href="#!" data-target="sidenav-left" class="sidenav-trigger right">
-            <i class="material-icons orange-text">settings</i>
-          </a>
-          <ul class="right map-layer">
-            <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-map"><i
-                  class="material-icons right">map</i></a>
-              <ul id="dropdown-map" class="dropdown-content" tabindex="0" style="">
-              </ul>
-            </li>
-          </ul>
-          <ul class="right map-search">
-            <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search"><i
-                  class="material-icons right">search</i></a>
-              <ul id="dropdown-search" class="dropdown-content" tabindex="0" style="">
-              </ul>
-              <div id="search-results-container"></div>
-            </li>
-          </ul>
+            <ul class="right hide-on-med-and-down">
+              <li id="jak_korzystac">Jak korzystać z mapy?</li>
+              {$navigation.main}
+              <li>{$langSwitcher}</li>
 
-          <ul class="right hide-on-med-and-down">
-            <li id="jak_korzystac">Jak korzystać z mapy?</li>
-            {$navigation.main}
-            <li>{$langSwitcher}</li>
-
-          </ul>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-  </div>
-  <ul id="sidenav-left" class="sidenav" style="transform: translateX(-105%);">
-    <li>
-      <div class="user-view orange">
-        <a class="circle" href="https://zapisy.krokdonatury.pl/login">
-          <div style="background-image: url(https://zapisy.krokdonatury.pl/images/user-solid.svg);"></div>
-        </a>
-        <span class="white-text name"></span>
-        <span class="white-text email">
-          <b>Ustawienia</b>
-        </span>
-      </div>
-    </li>
-    <li>
-      <div class="switch">
-        <label>
-          <input id="mapgest_switch" type="checkbox" checked>
-          <span class="lever"></span>
-          Przesuwanie mapy z CTRL / gestem
-        </label>
-      </div>
-    </li>
-    <li>
-      <div class="switch">
-        <label>
-          <input id="googleads_switch" type="checkbox" checked>
-          <span class="lever"></span>
-          Reklamy
-        </label>
-      </div>
-    </li>
-    <li>
-      <div class="switch">
-        <label>
-          <input id="elepointslimit_switch" type="checkbox" checked>
-          <span class="lever"></span>
-          Optymalizacja pobieranej trasy GPX do max. 600 pkt.
-        </label>
-      </div>
-    </li>
-    <li>
-      <div class="switch">
-        <label>
-          <input id="contextmenu_switch" type="checkbox" checked>
-          <span class="lever"></span>
-          Menu kontekstowe (prawy przycisk myszy / przytrzymaj na mobile)
-        </label>
-      </div>
-    </li>
-    <li>
-      <div class="switch">
-        <label>
-          <input id="centermarker_switch" type="checkbox">
-          <span class="lever"></span>
-          Ustaw marker na środku mapy (do udostępniania linków)
-        </label>
-      </div>
-    </li>
-    {$navigation.main}
+      </nav>
+    </div>
+    <nav style="height: auto;">
+      <ul id="sidenav-left" class="sidenav" style="transform: translateX(-105%);">
+        <li>
+          <div class="switch">
+            <label>
+              <input id="mapgest_switch" type="checkbox" checked>
+              <span class="lever"></span>
+              Przesuwanie mapy z CTRL / gestem
+            </label>
+          </div>
+        </li>
+        <li>
+          <div class="switch">
+            <label>
+              <input id="googleads_switch" type="checkbox" checked>
+              <span class="lever"></span>
+              Reklamy
+            </label>
+          </div>
+        </li>
+        <li>
+          <div class="switch">
+            <label>
+              <input id="elepointslimit_switch" type="checkbox" checked>
+              <span class="lever"></span>
+              Optymalizacja pobieranej trasy GPX do max. 600 pkt.
+            </label>
+          </div>
+        </li>
+        <li>
+          <div class="switch">
+            <label>
+              <input id="contextmenu_switch" type="checkbox" checked>
+              <span class="lever"></span>
+              Menu kontekstowe (prawy przycisk myszy / przytrzymaj na mobile)
+            </label>
+          </div>
+        </li>
+        <li>
+          <div class="switch">
+            <label>
+              <input id="centermarker_switch" type="checkbox">
+              <span class="lever"></span>
+              Ustaw marker na środku mapy (do udostępniania linków)
+            </label>
+          </div>
+        </li>
+        {$navigation.main}
 
-    <li>{$langSwitcher}</li>
-    
-  </ul>
+        <li>{$langSwitcher}</li>
+
+      </ul>
+    </nav>
+  </header>

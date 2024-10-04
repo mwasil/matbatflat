@@ -20,26 +20,29 @@
             </div>
         </div>
     </div>
-    <!---
-    <div id="reklamowka">
-        <div id="reklama">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
-                data-ad-slot="2690994103" data-ad-format="auto"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        <div id="zamknij_reklame">
-            [ zamknij ]
-        </div>
-    </div>
-    -->
-    <link href="{$bat.path}/app/css/css.php?2024-05-11-12-28-143" type="text/css" rel="stylesheet" />
+
+    <link href="{$bat.path}/app/css/css.php?2024-09-05-13-36-09" type="text/css" rel="stylesheet" />
     <!--<script defer src="https://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>-->
     <script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
-    <script defer src="{$bat.path}/app/js/script.min.js?2024-05-11-12-28-19"></script> 
-
+    <script defer src="{$bat.path}/app/js/script.min.js?2024-09-05-13-36-14"></script> 
+    <!-- <script defer src="{$bat.path}/app/js/mapa.js?2024-09-05-13-36-17"></script> -->
     <!-- <script defer src="{$bat.path}/app/compilejs.php?force=1"></script>-->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Ładujemy mapa.js
+    var mapaScript = document.createElement('script');
+    mapaScript.src = "https://mapa.wirtualneszlaki.pl/app/js/mapa.js";
+    mapaScript.onload = function() {
+        // Po zakończeniu ładowania mapa.js, ładowanie init.js
+        var initScript = document.createElement('script');
+        initScript.src = "{$bat.theme}/js/init.js";
+        document.body.appendChild(initScript);
+    };
+    document.body.appendChild(mapaScript);
+});
+
+    </script>
+    
 
     <!-- Page Header -->
     <header class="intro-header">
@@ -67,8 +70,8 @@
                 <h1 class="header center orange-text">{$page.title}</h1>
 
                 <div class="row center">
-                    <h5 class="header col s12 grey-text">{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}
-                    </h5>
+                    <p class="header wsmap-desc s12 grey-text">{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}
+                    </p>
                 </div>
 
             </div>
@@ -95,88 +98,7 @@
             <br><br>
         </div>
     </article>
-    <!-- Blog -->
-    <div class="container">
-        <div class="row">
-            <div class="col s12 m10 offset-m1 l10 offset-l1">
-                {if: $bat.notify}
-                <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
-                {/if}
-                {loop: $blog.posts}
-                <div class="post-preview">
-                    <a href="{$value.url}">
-                        {if: $value.cover_photo}
-                        <img src="{$value.cover_url}" alt="{$page.title}" class="post-cover" />
-                        {/if}
-                        <h2 class="post-title">
-                            {$value.title}
-                        </h2>
-                    </a>
-                    <p class="post-intro">{$value.content}</p>
-                    <p class="post-meta">
-                        {?= sprintf($lang.blog.posted, $value.author.name, $value.published_at) ?}
-                        | <a href="{$value.url}#disqus_thread"
-                            data-disqus-identifier="{$value.disqus_identifier}">{$lang.blog.no_comments}</a>
-                        | <i class="fa fa-tags"></i> {loop: $value.tags as $tag}{if: $key != 0}, {/if}<a
-                            href="{$tag.url}">{$tag.name}</a>{/loop}
-                    </p>
-                </div>
-                <hr> {/loop}
-                <!-- Pager -->
-                <ul class="pager">
-                    {if: isset($prev)}
-                    <li class="previous">
-                        <a href="{$prev.url}">&larr; {$lang.blog.newer}</a>
-                    </li>
-                    {/if} {if: isset($next)}
-                    <li class="next">
-                        <a href="{$next.url}">{$lang.blog.older} &rarr;</a>
-                    </li>
-                    {/if}
-                </ul>
-            </div>
-        </div>
-    </div>
 </article>
-
-<ul id="poi-panel" class="sidenav">
-    <li>
-        <div class="user-view">
-            <div id="poi-panel__image" class="background">
-                <img src="">
-            </div>
-            <!--
-            <a href="#user"><img class="circle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/ZF_grodzisko_Zamczysko.jpg/200px-ZF_grodzisko_Zamczysko.jpg"></a>
-            -->
-        </div>
-        <div class="sidenav-text">
-            <h1 id="poi-panel__title"></h1>
-            <p id="poi-panel__extract">
-            </p>
-            <p id="poi-panel__phototitle">
-            </p>
-            <p id="poi-panel__tags"></p>
-        </div>
-        
-    </li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="waves-effect" id="poi-panel__route-from" href="#!">Trasa z...</a></li>
-    <li><a class="waves-effect"  id="poi-panel__route-via" href="#!">Trasa przez...</a></li>
-    <li><a class="waves-effect"  id="poi-panel__route-to" href="#!">Trasa do...</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="waves-effect"  id="poi-panel__download-gpx"  href="#!"><i class="material-icons">file_download</i>Pobierz GPX</a></li>
-    <li><a class="waves-effect"  id="poi-panel__download-kml" href="#!"><i class="material-icons">file_download</i>Pobierz KML</a></li>
-    <li>
-        <div class="sidenav-text">
-            <p  id="poi-panel__source" >
-                
-            </p>
-
-        </div>
-    </li>
-</ul>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{$bat.theme}/js/init.js"></script>
 {template: inc/footer-materialize.html}
