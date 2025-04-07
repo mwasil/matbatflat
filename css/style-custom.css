@@ -29,6 +29,7 @@
   position: relative;
   outline: none;
   cursor: crosshair;
+  background-color: #fafafa;
 }
 
 .leaflet-popup-content strong {
@@ -41,6 +42,10 @@
   display:none;
 }
 
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 .custom-tooltip {
   background-color: white;
@@ -67,6 +72,7 @@ article .intro-header ul {
 }
 
 
+
 .reklamowka_header_footer:before, .google-auto-placed:before {
   text-transform: uppercase;
   color: #A4ADB0;
@@ -80,6 +86,9 @@ article .intro-header ul {
   content: 'reklama';
   display: block;
   margin-bottom: 2px;
+  text-decoration: underline;
+  text-align: left;
+  text-decoration-color: #fff;
 }
 
 
@@ -327,6 +336,9 @@ h4 {
   line-height: 1.2em;
 }
 
+.reklamowka_header_footer {
+  margin: auto;
+}
 
 /* Stylizacja listy rozwijanej */
 #mapSearchList {
@@ -382,13 +394,19 @@ h4 {
   }
   .reklamowka_header_footer {
     max-width: 100%;
-    /*height: 325px !important;*/
+    height: 358px !important;
   }
 }
 
 @media only screen and (min-width: 992px) {
 
   /* Twoje style dla większych od tabletów urządzeń */
+
+  .reklamowka_header_footer {
+    min-height: 280px !important;
+    padding: 5px 0px;
+  }
+
   #wsmap-content {
     width: 100%;
     height: calc(100vh - 64px);

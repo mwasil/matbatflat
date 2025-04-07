@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <link rel="icon" href="favicon.ico">
   <title>{$page.title}</title>
-  <meta name="description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
+  <meta name="description" content="{if: $page.desc}{$page.desc}{/if}">
   <link rel="canonical" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -32,32 +32,35 @@
   }
   </style>
   <link href="{$bat.theme}/css/materialize.min.css" type="text/css" rel="stylesheet" >
-  <link href="{$bat.theme}/css/style-custom.css?2024-09-26-14-57-24" type="text/css" rel="stylesheet" >
+  <link href="{$bat.theme}/css/style-custom.css?2024-10-11-18-43-28" type="text/css" rel="stylesheet" >
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#da532c">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/pwa/ms-icon-144x144.png">
-  <meta property="og:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ."?type=static" ?}" >
+  <meta property="og:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static' ?}">
   <meta property="og:title" content="{$page.title}">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="{$page.title} - statyczna wersja mapy ">
-  <meta property="og:description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
+  <meta property="og:description" content="{if: $page.desc}{$page.desc}{/if}">
   <meta property="og:site_name" content="mapa.wirtualneszlaki.pl">
   <meta property="og:type" content="website">
   <meta property="og:url" content="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mapa turystyczna Polski">
-<meta name="twitter:description" content="{if: $page.desc}{$page.desc}{else}{$settings.description}{/if}">
-<meta name="twitter:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ."?type=static" ?}">
-<meta name="twitter:url" content="https://mapa.wirtualneszlaki.pl/">
+  <meta name="twitter:title" content="{$page.title}">
+<meta name="twitter:description" content="{if: $page.desc}{$page.desc}{/if}">
+<meta name="twitter:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static' ?}">
+<meta name="twitter:url" content="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
+<meta name="twitter:site" content="https://mapa.wirtualneszlaki.pl">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="{?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]" ."/feed" ?}" />
-
-  <script src="{$bat.theme}/js/preinit.js?2024-09-12-14-53-18"></script>
+<script>
+  const currentHash = window.location.hash.substring(1); // Usuwa znak #
+</script>
+  <script src="{$bat.theme}/js/preinit.js?2024-10-19-19-24-41"></script>
 
   {$snippet.google-ads}
-
+  
 </head>
 
 <body>
@@ -68,22 +71,22 @@
         <div class="nav-wrapper row">
           <div class="col s12">
             <a id="logo-container" class="brand-logo" href="{$bat.path}/">
-              <img class="brand-logo-image" width="48" height="47" alt="Logo serwisu {$page.title}"
+              <img class="brand-logo-image" width="48" height="47" alt="Logo serwisu {$settings.title}"
                 src="{$bat.theme}/img/wirtualneszlaki-logo.svg" >
               <span class="brand-logo-text">{$settings.title}</span>
             </a>
-            <a href="#!" data-target="sidenav-left" class="sidenav-trigger right">
+            <a href="#!" data-target="sidenav-left" class="sidenav-trigger right tooltipped" data-position="bottom" data-tooltip="Otwórz ustawienia mapy" >
               <i class="material-icons orange-text">menu</i>
             </a>
-            <ul class="right map-layer">
-              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-map"><i
-                    class="material-icons right">map</i></a>
+            <ul class="right map-layer tooltipped" data-position="bottom" data-tooltip="Zmień warstwy mapy">
+              <li class=""><a class="dropdown-trigger map-dropdown"  href="#!" data-target="dropdown-map"><i
+                    class="material-icons right">layers</i></a>
                 <ul id="dropdown-map" class="dropdown-content" tabindex="0" style="">
                 </ul>
               </li>
             </ul>
-            <ul class="right map-search">
-              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search"><i
+            <ul class="right map-search tooltipped" data-position="bottom" data-tooltip="Wyszukiwarka miejsc i miejscowości">
+              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search" ><i
                     class="material-icons right">search</i></a>
                 <ul id="dropdown-search" class="dropdown-content" tabindex="0" style="">
                 </ul>
@@ -92,9 +95,9 @@
             </ul>
 
             <ul class="right hide-on-med-and-down">
-              <li id="jak_korzystac">Jak korzystać z mapy?</li>
+              <li id="jak_korzystac" class="tooltipped" data-position="bottom" data-tooltip="Uruchm przewodnik">Jak korzystać z mapy?</li>
               {$navigation.main}
-              <li>{$langSwitcher}</li>
+
 
             </ul>
           </div>
@@ -150,7 +153,7 @@
         </li>
         {$navigation.main}
 
-        <li>{$langSwitcher}</li>
+
 
       </ul>
     </nav>
