@@ -100,10 +100,21 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
 
 <body>
   {$snippet.gtm-body}
+  <!-- Announcement Bar HTML -->
+
+
   <header>
     <div class="navbar-fixed">
       <nav class="white">
         <div class="nav-wrapper row">
+          <div id="announcement-bar" class="col s12">
+          <div class="announcement-content">
+            {$snippet.announcement-bar}	
+            <button id="close-announcement" class="close-btn" aria-label="Zamknij ogłoszenie">
+              <i class="material-icons">close</i>
+            </button>
+          </div>
+         </div>
           <div class="col s12">
             <a id="logo-container" class="brand-logo" href="{$bat.path}/">
               <img class="brand-logo-image" width="48" height="47" alt="Logo serwisu {$settings.title}"
@@ -203,4 +214,5 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
 
       </ul>
     </nav>
+
   </header>

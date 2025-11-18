@@ -7,10 +7,21 @@
 
  .navbar-fixed nav {
     top: 0;
+    height: auto;
+}
+
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+    margin-bottom: 0;
 }
 
  nav .brand-logo {
   font-size: 1.2vw;
+ }
+
+ .sidenav {
+      padding-top: 40px;
  }
 
  :root {
@@ -292,6 +303,7 @@ h4 {
 .intro-header.background-image {
   background-size: cover;
   text-shadow: 1px 1px 2px #000, 0 0 1em #000, 0 0 0.2em #000;
+  padding: 50px 0;
 }
 
 .footer-copyright a {
@@ -418,12 +430,92 @@ h4 {
   font-size: 1rem;  
 }
 
+/* Announcement Bar Styles */
+#announcement-bar {
+  background-color: #d84315; /* Kolor pasujący do akcentu strony (#ec6a20) */
+  color: white;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Wyższy Z-index niż nawigacja Materialize (997) */
+  transition: padding 0.3s ease, font-size 0.3s ease;
+  padding: 12px 16px;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Styl zmniejszający pasek po przewinięciu strony */
+#announcement-bar.scrolled {
+  padding: 6px 16px;
+  font-size: 0.9rem;
+}
+
+.announcement-content {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%; /* Szerokość kontenera Materialize */
+}
+
+.announcement-content span, .announcement-content p, .announcement-content div {
+  padding-right: 30px; /* Miejsce na przycisk zamykania */
+  line-height: 1;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.announcement-content a {
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+announcement-content a:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0 8px;
+  line-height: 1;
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.close-btn .material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+
 @media only screen and (min-width: 0) {
     .modal-content {
       font-size: 1.3rem;
     }
 }
 
+@media only screen and (min-width: 601px) {
+    .navbar-fixed nav{
+        height: auto;
+    }
+}
+
+    
 @media only screen and (min-width: 992px) {
     .modal-conten {
       font-size: 1.3rem;
@@ -439,13 +531,13 @@ h4 {
 
 @media only screen and (max-width: 600px) {
   nav .brand-logo {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
-    left: 30%;
-    transform: translateX(-50%);
-    line-height: 1rem;
-    font-size: 1rem;
+        display: block;
+        align-items: center;
+        height: 100%;
+        left: 20px;
+        transform: none;
+        line-height: inherit;
+        font-size: 1rem;
   }
   .reklamowka_header_footer {
     max-width: 100%;

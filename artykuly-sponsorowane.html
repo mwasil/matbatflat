@@ -20,25 +20,19 @@
                 {if: $bat.notify}
                 <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
                 {/if}
-                {loop: $blog.posts}
-                {if: $value['user_id']!==2}
+                {? $blogs = array_reverse($this->core->db('blog')->toArray()) ?}
+                {loop: $blogs as $value}
+                {if: $value['user_id']===2}
                 <div class="post-preview">
-                    <a href="{$value.url}">
-                        {if: $value.cover_photo}
-                        <img src="{$value.cover_url}" alt="{$page.title}" class="post-cover" />
-                        {/if}
+
+                    <a href="/blog/post/{$value.slug}">
                         <h2 class="post-title">
                             {$value.title}
                         </h2>
                     </a>
-                    <p class="post-intro">{$value.content}</p>
-                    <p class="post-meta">
-                        {?= sprintf($lang.blog.posted, $value.author.name, $value.published_at) ?}
-                        | <a href="{$value.url}#disqus_thread"
-                            data-disqus-identifier="{$value.disqus_identifier}">{$lang.blog.no_comments}</a>
-                        | <i class="fa fa-tags"></i> {loop: $value.tags as $tag}{if: $key != 0}, {/if}<a
-                            href="{$tag.url}">{$tag.name}</a>{/loop}
-                    </p>
+                    <p class="post-intro"><p class="post-intro">{$value.intro}</p>
+</p>
+
                 </div>
                 <hr> 
                 {/if}
