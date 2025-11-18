@@ -29,7 +29,11 @@
                 {? $pages = array_reverse($this->core->db('pages')->toArray()) ?}
                 {? $count = 1 ?} <!-- Inicjalizacja licznika -->
                 {loop: $pages as $page}
-                {if: $page['template'] == 'content-map.html'}
+                {if: $page['template'] != 'content-map-city.html'}
+                {if: $page['template'] != 'pages-city.html'}
+                {if: $page['template'] != 'post.html'}
+                {if: $page['template'] != 'index.html'}
+                {if: $page['template'] != 'pages.html'}
                 {if: $page['slug'] != 'mapa'}
                 
                 <div class="col s12 m12 l12" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -66,6 +70,10 @@
                 
                 {/if}
                 {/if}
+                {/if}
+                {/if}
+                {/if}
+                {/if}
                 {/loop}
             </div>
         </div>
@@ -73,6 +81,6 @@
         
     </div>
 </article>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://mapa.wirtualneszlaki.pl/app/js/jquery/3.7.1/jquery-3.7.1.min.js"></script>
 <script src="{$bat.theme}/js/init.js"></script>
 {template: inc/footer-materialize.html}

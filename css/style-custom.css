@@ -5,6 +5,10 @@
  *
  */
 
+ .navbar-fixed nav {
+    top: 0;
+}
+
  nav .brand-logo {
   font-size: 1.2vw;
  }
@@ -93,7 +97,7 @@ article .intro-header ul {
 
 
 .pinned {
-  /*z-index: 9999;*/
+  z-index: 1;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -166,7 +170,7 @@ article li:not(.dropdown-content li):not(#mapSearchList li) {
   user-select: none;
   position: absolute;
   padding-left: 30px;
-  z-index: 9999;
+  z-index: 1002;
 }
 
 /* Stylowanie kolumny po ukryciu lewej */
@@ -382,6 +386,57 @@ h4 {
 }
 
 
+.latest-news .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px; /* to doda odstęp poziomy i pionowy */
+  margin: 0; /* usuń ujemne marginesy */
+}
+
+.latest-news .col {
+  display: flex;
+  flex: 1 1 calc(33.333% - 24px); /* 3 kolumny minus odstęp */
+}
+
+
+.latest-news .card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.latest-news .post-title {
+  font-size: 1.25rem;      /* odpowiada ~20px */
+  line-height: 1.4;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.latest-news .card-action a {
+  font-size: 1rem;  
+}
+
+@media only screen and (min-width: 0) {
+    .modal-content {
+      font-size: 1.3rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .modal-conten {
+      font-size: 1.3rem;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .modal-conten {
+      font-size: 1.3rem;
+    }
+}
+
+
 @media only screen and (max-width: 600px) {
   nav .brand-logo {
     display: inline-flex;
@@ -396,6 +451,9 @@ h4 {
     max-width: 100%;
     height: 358px !important;
   }
+  .wsmap-left-ad {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 992px) {
@@ -405,6 +463,7 @@ h4 {
   .reklamowka_header_footer {
     min-height: 280px !important;
     padding: 5px 0px;
+    margin-bottom: 40px;
   }
 
   #wsmap-content {
@@ -424,18 +483,42 @@ h4 {
   }
  
   .row .col.left-column {
-    width: calc(25% - 10px);
+    width: calc(33% - 10px);
   }
 
   .row .col.right-column {
     padding: 0 0 0 3px;
+    width: calc(66%);
   }
   
   .row .col.left-column {
     padding: 0 3px 0 10px;
   }
+
+  .wsmap-left-ad {
+    /*position: sticky;*/
+    top: 0;
+    margin-bottom: 24px;
+    width: 100%;
+    min-height: 250px;
+    overflow: hidden;
+  }
+
   #scrollToTopBtn.show {
     display: none !important; /* Przycisk widoczny na mniejszych ekranach */
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .row .col.left-column {
+    width: calc(25% - 10px);
+  }
+
+  .row .col.right-column {
+    width: calc(75%);
+  }
+  .wsmap-left-ad {
+    min-height: 400px;
   }
 }
 

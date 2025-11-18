@@ -10,11 +10,25 @@
   <meta name="description" content="{if: $page.desc}{$page.desc}{/if}">
   <link rel="canonical" href="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://static.wirtualneszlaki.pl" crossorigin>
+  <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="//fundingchoicesmessages.google.com">
+  <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
+      onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"></noscript>
+
+
 
   <style>
   /* static */
+    header .material-icons{
+    font-size:24px; line-height:1; 
+    display:inline-block; width:24px; height:24px; overflow:hidden;
+    vertical-align:middle;
+  }
     .static .iframe-hidden,.static .navbar-fixed,.static footer,.static .leaflet-control,.static header,.static .reklamowka_header_footer,.static .pierwszy_raz,.static>.container-fluid,.static .fc-consent-root .fc-dialog-overlay,.static .fc-consent-root .fc-help-dialog-overlay,.static .fc-consent-root .fc-dialog,.static .drag-target,.static .adsbygoogle,.static .adsbygoogle-noablate,.static #wsmap-content,.static .drag-bar,.static #toast-container,.static .wsmpap-header{display:none!important;visibility:hidden!important}body.static>article>article>div>div>div>div.col.s12.m12.l3{display:none!important}body.static>main>article>div>div>div>div.col.s12.m12.l9.resizable-column.right-column{width:100%!important}body.static .section{padding-top:0!important;padding-bottom:0!important}body.static .row .col{padding:0 0!important}.static article article,.static article .container{} .static #map{height:100vh}.static{overflow:hidden}
   /* critical */
   img {
@@ -30,9 +44,21 @@
     display: flex;
     object-fit: cover;
   }
+  article {
+    font-size: 1.3rem;
+  }
+  .intro-header h1 {
+    font-size: 3rem;
+  }
   </style>
-  <link href="{$bat.theme}/css/materialize.min.css" type="text/css" rel="stylesheet" >
-  <link href="{$bat.theme}/css/style-custom.css?2024-10-11-18-43-28" type="text/css" rel="stylesheet" >
+<!-- prefetch pobierze wcześnie, ale styl wciąż blokuje 1. render -->
+<link rel="preload" as="style" href="/themes/matbatflat/css/materialize.min.css">
+<link rel="stylesheet" href="/themes/matbatflat/css/materialize.min.css">
+
+<link rel="preload" as="style" href="/themes/matbatflat/css/style-custom.css?2024-10-11-18-43-28">
+<link rel="stylesheet" href="/themes/matbatflat/css/style-custom.css?2024-10-11-18-43-28">
+
+
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#da532c">
   <meta name="msapplication-TileColor" content="#ffffff">
@@ -52,15 +78,24 @@
 <meta name="twitter:description" content="{if: $page.desc}{$page.desc}{/if}">
 <meta name="twitter:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static' ?}">
 <meta name="twitter:url" content="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
-<meta name="twitter:site" content="https://mapa.wirtualneszlaki.pl">
+<meta name="twitter:site" content="@wirtualneszlaki">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="{?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]" ."/feed" ?}" />
 <script>
   const currentHash = window.location.hash.substring(1); // Usuwa znak #
 </script>
-  <script src="{$bat.theme}/js/preinit.js?2024-10-19-19-24-41"></script>
+  <script src="{$bat.theme}/js/preinit.js?2024-10-19-19-24-41" defer></script>
 
   {$snippet.google-ads}
   
+  <script async src="https://fundingchoicesmessages.google.com/i/pub-6601178235337602?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+<!-- Anti-flickering script -->
+<script>
+var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
+!function(h,i,d,e){var  t,n=h.createElement("style");n.id=e,n.innerHTML="body{opacity:0}",h.head.appendChild(n),t=d,i.rmfk=function(){var  t=h.getElementById(e);t&&t.parentNode.removeChild(t)},setTimeout(i.rmfk,t)}(document,window,timeout,"abhide");
+</script>
+
+<!-- Mida A/B Testing Script (Place in <HEAD> for speed & no flicker) -->
+<script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=w6GQ23b4dM9rXdzEeKpkDq"></script>
 </head>
 
 <body>
@@ -94,11 +129,18 @@
               </li>
             </ul>
 
+
             <ul class="right hide-on-med-and-down">
+
               <li id="jak_korzystac" class="tooltipped" data-position="bottom" data-tooltip="Uruchm przewodnik">Jak korzystać z mapy?</li>
               {$navigation.main}
-
-
+              <!--
+              <li>
+                <a class="modal-trigger" data-target="modal-coffee">
+                  <img src="https://buycoffee.to/img/share-button-primary.png" style="vertical-align: middle; width: 146px; height: 38px" alt="Postaw mi kawę na buycoffee.to">
+                </a>              
+              </li>
+              -->
             </ul>
           </div>
         </div>
@@ -152,7 +194,11 @@
           </div>
         </li>
         {$navigation.main}
-
+        <li>
+          <a class="modal-trigger" data-target="modal-coffee">
+            <img src="https://buycoffee.to/img/share-button-primary.png" style="vertical-align: middle; width: 146px; height: auto" alt="Postaw mi kawę na buycoffee.to">
+          </a>        
+        </li>
 
 
       </ul>

@@ -1,5 +1,5 @@
 <footer class="page-footer orange">
-  <div id="modal1" class="modal">
+  <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">
     </div>
     <div class="modal-footer">
@@ -36,6 +36,11 @@
         <h2 class="white-text">Linki:</h2>
         <div id="footer-links">
           {$navigation.mapy-administracyjne}
+        <p>                  
+          <a href="#" class="modal-trigger" data-target="modal-coffee">
+            <img src="https://buycoffee.to/img/share-button-primary.png" style="vertical-align: middle; width: 146px; height: auto" alt="Postaw mi kawę na buycoffee.to">
+          </a>  
+        </p>
         </div>
       </div>
     </div>
@@ -55,44 +60,43 @@
 <!-- templates -->
 <ol id="tour" style="display: none;" data-nosnippet aria-hidden="true">
   <li data-target=".map-search" data-angle="250">
-      Wyszukaj miejscowość.
+      Wyszukaj miejscowość.<br><br>1/11
   </li>	
   <li data-target=".map-layer" data-angle="250">
-  Wybierz podkłady mapy i nakładkę
+  Wybierz podkłady mapy i nakładkę<br><br>2/11
   </li>
   <li data-target=".leaflet-routing-container" data-angle="250">
-    <p>Wyznacz trasę automatycznie i pobierz w GPX.</p> 
+    Wyznacz trasę automatycznie i pobierz w GPX.
 
-<p>Odpowiednie opcje są też dostępne po kliknięciu prawym przyciskiem myszy na mapie.</p>
+  Odpowiednie opcje są też dostępne po kliknięciu prawym przyciskiem myszy na mapie.<br><br>3/11
   </li>
   <li data-target=".leaflet-html-legend" data-angle="250">
-    Przełącz tymczasowo widoczność warst i zmień ich przezroczystość
+    Przełącz tymczasowo widoczność warst i zmień ich przezroczystość<br><br>4/11
   </li>
   
   <li data-target=".sidenav-trigger" data-angle="250">
-  W tym menu wyłączysz m.in. powiększanie mapy z CTRL
+  W tym menu wyłączysz m.in. powiększanie mapy z CTRL<br><br>5/11
   </li>
   <li data-target="#polyline-measure-control" data-angle="120">
-    Zmierz odeległość, rysuj trasę, pobierz w GPX
+    Zmierz odeległość, rysuj trasę, pobierz w GPX<br><br>6/11
   </li> 
   <li data-target=".leaflet-control-locate" data-angle="120">
-    Wyświetl swoją lokalizację (włącz wcześniej GPS w urządzeniach mobilnych)
+    Wyświetl swoją lokalizację (włącz wcześniej GPS w urządzeniach mobilnych)<br><br>7/11
   </li>
 
 
   <li data-target=".leaflet-control-filelayer" data-angle="120">
-    Wczytaj swój plik .gpx, .kml lub .geojson, żeby przejrzeć go na tle mapy
+    Wczytaj swój plik .gpx, .kml lub .geojson, żeby przejrzeć go na tle mapy<br><br>8/11
   </li>
-</li>
   
   <li data-target=".leaflet-control-fullscreen-button" data-angle="120">
-  Tu Wygodnie obejrzysz mapę w trybie pełnego ekranu
+  Tu Wygodnie obejrzysz mapę w trybie pełnego ekranu<br><br>9/11
   </li>
   <li data-target=".leaflet-control-rainviewer-button" ddata-angle="120">
-    <p>Sprawdź aktualne opady.</p>
+    Sprawdź aktualne opady.<br><br>10/11
   </li>
   <li data-target="#jak_korzystac"  data-angle="0">
-    <p>Dodatkowe opcje znajdziesz pod prawym przyciskiem myszy i klikająć obiekty na mapie.</p> <p>PRZYJEMNEGO KORZYSTANIA! ;)</p>
+    Dodatkowe opcje znajdziesz pod prawym przyciskiem myszy i klikająć obiekty na mapie.<br><br>11/11</p> <p>PRZYJEMNEGO KORZYSTANIA! ;)</p>
   </li>
 </ol>
 <div class="content_box pierwszy_raz" data-nosnippet aria-hidden="true">
@@ -140,6 +144,30 @@
   </li>
 </ul>
 
+<div id="modal-coffee" class="modal">
+  <div class="modal-content center-align">
+    {$snippet.buycoffee}	
+  </div>
+      <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zamknij</a>
+    </div>
+</div>
+<script src="{$bat.theme}/js/materialize.min.js" defer></script>
+<script src="{$bat.theme}/js/modal_coffee_popup.js" defer></script>
+<script src="{$bat.theme}/js/scroll_to_map.js" defer></script>
+<script>
+
+  if (document.querySelector('#below-content-container img')) {
+  const s = document.createElement('script');
+  s.src = '{$bat.theme}/js/lightbox.js';
+  s.defer = true;
+  document.body.appendChild(s);
+}
+</script>
+
+<!--
+<script src="{$bat.theme}/js/lightbox.js" defer></script>
+-->
 
 <a href="#{$page.slug}" id="scrollToTopBtn" style="display: none;" class="">
   <!-- &#x2C4; -->
@@ -153,9 +181,8 @@
 
 {loop: $bat.footer}{$value}{/loop}
 
-<script src="{$bat.theme}/js/materialize.min.js"></script>
 
-<script >
+<script defer>
  if ('serviceWorker' in navigator) {
     console.log("Will the service worker register?");
     navigator.serviceWorker.register('/service-worker.js')

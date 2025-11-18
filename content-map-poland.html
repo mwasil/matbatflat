@@ -21,7 +21,7 @@
 
 <!-- Page Header -->
 <main>
-    <article class="{$page.slug}" id="{$page.slug}"">
+    <article class="{$page.slug}" id="{$page.slug}">
         <header class="intro-header">
             <div class="section no-pad-bot" id="index-banner">
                 <div class="container valign">
@@ -47,13 +47,23 @@
                                 <meta itemprop="position" content="2" >
                             </span>
 
+                            <span class="breadcrumb-separator grey-text"> > </span>
+
+                            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"
+                                class="breadcrumb-item">
+                                <a href="https://mapa.wirtualneszlaki.pl/mapa-polski" itemprop="item">
+                                    <span class="grey-text" itemprop="name">Mapa Polski</span>
+                                </a>
+                                <meta itemprop="position" content="3" >
+                            </span>
+
                             <!-- Slash separator -->
                             <span class="breadcrumb-separator grey-text"> > </span>
 
                             <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"
                                 class="breadcrumb-item active" aria-current="page">
                                 <span class="grey-text" itemprop="name">{$page.title}</span>
-                                <meta itemprop="position" content="3" >
+                                <meta itemprop="position" content="4" >
                             </span>
                         </div>
                     </nav>
@@ -84,7 +94,7 @@
             </div>
         </header>
 
-        {template: inc/map-content.html}        
+        {template: inc/map-content.html}
 
     </article>
 

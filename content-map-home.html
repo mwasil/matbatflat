@@ -21,7 +21,7 @@
 
 <!-- Page Header -->
 <main>
-    <article class="{$page.slug}" id="{$page.slug}"">
+    <article class="{$page.slug}" id="{$page.slug}">
         <header class="intro-header">
             <div class="section no-pad-bot" id="index-banner">
                 <div class="container valign">
@@ -61,7 +61,6 @@
 
                     <h1 class="header center orange-text">{$page.title}</h1>
 
-
                     <div class="row center">
                         <div class="header wsmap-desc col s12">
                             {if: $page.intro}{$page.intro}{elseif: $page.desc}{$page.desc}{else}{$settings.description}{/if}
@@ -84,11 +83,67 @@
             </div>
         </header>
 
-        {template: inc/map-content.html}        
-
+        {template: inc/map-content.html}
+            
     </article>
 
+    <section class="section latest-news grey lighten-5" role="complementary" aria-labelledby="latest-news-heading">
+        <div class="container">
+            {? $blogs = array_reverse($this->core->db('blog')->toArray()) ?}
+            <div class="row"> 
+                <h2 id="latest-news-heading" class="grey-text text-darken-2">Aktualności</h2>
+            </div>
+            <div class="row">
+                {loop: $blogs as $blog}
+                {if: $blog['user_id']!=2}
+                <div class="col s12">
+                    <article class="post-preview card">
+                        <div class="card-content">
+                            <a href="/blog/post/{?= $blog['slug'] ?}">
+                                <h3 class="post-title grey-text text-darken-3">
+                                    {?= $blog['title'] ?}
+                                </h3>
+                            </a>
+                        <div class="card-action">
+                            <a href="/blog/post/{?= $blog['slug'] ?}" class="orange-text text-darken-2">Czytaj dalej</a>
+                        </div>
+                    </article>
+                </div>
+                {/if}
 
+                {/loop}
+            </div>
+        </div>
+    </section>
+    <section class="section latest-news grey lighten-5" role="complementary" aria-labelledby="sponsored-heading">
+        <div class="container">
+            {? $blogs = array_reverse($this->core->db('blog')->toArray()) ?}
+            <div class="row"> 
+                <h2 id="sponsored-heading" class="grey-text text-darken-2">Artykuły sponsorowane</h2>
+            </div>
+            <div class="row">
+                {loop: $blogs as $blog}
+                {if: $blog['user_id']===2}
+                <div class="col s12">
+                    <article class="post-preview card">
+                        <div class="card-content">
+                            <a href="/blog/post/{?= $blog['slug'] ?}">
+                                <h3 class="post-title grey-text text-darken-3">
+                                    {?= $blog['title'] ?}
+                                </h3>
+                            </a>
+                        <div class="card-action">
+                            <a href="/blog/post/{?= $blog['slug'] ?}" class="orange-text text-darken-2">Czytaj dalej</a>
+                        </div>
+                    </article>
+                </div>
+                {/if}
+
+                {/loop}
+            </div>
+        </div>
+    </section>
+    
 </main>
 <!-- Nowa stopka autora -->
 <script src="https://mapa.wirtualneszlaki.pl/app/js/jquery/3.7.1/jquery-3.7.1.min.js"></script>
