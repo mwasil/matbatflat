@@ -464,7 +464,7 @@ h4 {
 .announcement-content span, .announcement-content p, .announcement-content div {
   padding-right: 30px; /* Miejsce na przycisk zamykania */
   line-height: 1;
-  padding-left: 20px;
+  padding-left: 62px; /* Bo tyle ma uchwyt od reklamy */
   text-align: left;
 }
 
