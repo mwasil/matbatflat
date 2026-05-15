@@ -16,34 +16,7 @@
 {else}
     {? $page['content'] = $page['content'] ?}  <!-- Domyślne zachowanie, jeśli nie ma podziału -->
 {/if}        
-        
-<link href="{$bat.path}/app/css/style.min.css?2025-09-19-13-37-33" type="text/css" rel="stylesheet" >
-<script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
-<script defer src="{$bat.path}/app/js/script.min.js?2024-10-19-09-31-59"></script>
-
-<script>
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Ładujemy map-utils.js
-    var utilsScript = document.createElement('script');
-    utilsScript.src = "https://mapa.wirtualneszlaki.pl/app/js/map-utils.js?2024-10-11-18-42-15";
-    utilsScript.onload = function() {
-        // Po załadowaniu map-utils.js, ładujemy mapa.js
-        var mapaScript = document.createElement('script');
-        mapaScript.src = "https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2024-10-25-16-43-49";
-        mapaScript.onload = function() {
-            // Po zakończeniu ładowania mapa.js, ładowanie init.js
-            var initScript = document.createElement('script');
-            initScript.src = "{$bat.theme}/js/init.js?2024-10-11-18-42-24";
-            document.body.appendChild(initScript);
-        };
-        document.body.appendChild(mapaScript);
-    };
-    document.body.appendChild(utilsScript);
-});
-
-
-</script>
+    
 
         <div class="container-fluid">
             <div class="section">
@@ -106,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         {/if}
-
+        <script src="https://mapa.wirtualneszlaki.pl/app/js/leaflet.popup-portal.js?v=1.1.0-2026-04-09" defer></script>
+        <script src="https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2026-04-16-06-17-06" defer></script>
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",

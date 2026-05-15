@@ -1,0 +1,18 @@
+<div class="ad-container=2"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const isDesktop = matchMedia('(min-width: 993px)').matches;
+  const slot = isDesktop ? '8597868913' : '8793509728';
+
+  const ins = document.createElement('ins');
+  ins.className = 'adsbygoogle reklamowka_header_footer';
+  ins.style.display = 'block';
+  ins.setAttribute('data-ad-client','ca-pub-6601178235337602');
+  ins.setAttribute('data-ad-slot', slot);
+  ins.setAttribute('data-ad-format','auto');
+  ins.setAttribute('data-full-width-responsive','true');
+
+  document.querySelector('.ad-container-2').appendChild(ins);
+  (window.adsbygoogle = window.adsbygoogle || []).push({});
+});
+</script>

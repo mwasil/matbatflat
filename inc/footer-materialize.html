@@ -1,3 +1,4 @@
+
 <footer class="page-footer orange">
   <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">
@@ -60,43 +61,44 @@
 <!-- templates -->
 <ol id="tour" style="display: none;" data-nosnippet aria-hidden="true">
   <li data-target=".map-search" data-angle="250">
-      Wyszukaj miejscowość.<br><br>1/11
+      Wyszukaj miejscowość.<br><br>1/10
   </li>	
   <li data-target=".map-layer" data-angle="250">
-  Wybierz podkłady mapy i nakładkę<br><br>2/11
+  Wybierz podkłady mapy i nakładkę<br><br>2/10
   </li>
-  <li data-target=".leaflet-routing-container" data-angle="250">
+
+  <li data-target=".sidenav-trigger" data-angle="250">
+  W tym menu wyłączysz m.in. powiększanie mapy z CTRL<br><br>3/10
+  </li>
+
+  <li data-target=".leaflet-control-lrm-placeholder" data-angle="250">
     Wyznacz trasę automatycznie i pobierz w GPX.
 
-  Odpowiednie opcje są też dostępne po kliknięciu prawym przyciskiem myszy na mapie.<br><br>3/11
+  Odpowiednie opcje są też dostępne po kliknięciu prawym przyciskiem myszy na mapie.<br><br>4/10
   </li>
+
   <li data-target=".leaflet-html-legend" data-angle="250">
-    Przełącz tymczasowo widoczność warst i zmień ich przezroczystość<br><br>4/11
+    Przełącz tymczasowo widoczność warst i zmień ich przezroczystość<br><br>5/10
   </li>
   
-  <li data-target=".sidenav-trigger" data-angle="250">
-  W tym menu wyłączysz m.in. powiększanie mapy z CTRL<br><br>5/11
-  </li>
-  <li data-target="#polyline-measure-control" data-angle="120">
-    Zmierz odeległość, rysuj trasę, pobierz w GPX<br><br>6/11
+  <li data-target=".leaflet-bar-polyline-measure" data-angle="120">
+    Zmierz odeległość, rysuj trasę, pobierz w GPX<br><br>6/10
   </li> 
   <li data-target=".leaflet-control-locate" data-angle="120">
-    Wyświetl swoją lokalizację (włącz wcześniej GPS w urządzeniach mobilnych)<br><br>7/11
+    Wyświetl swoją lokalizację (włącz wcześniej GPS w urządzeniach mobilnych)<br><br>7/10
   </li>
 
 
   <li data-target=".leaflet-control-filelayer" data-angle="120">
-    Wczytaj swój plik .gpx, .kml lub .geojson, żeby przejrzeć go na tle mapy<br><br>8/11
+    Wczytaj swój plik .gpx, .kml lub .geojson, żeby przejrzeć go na tle mapy<br><br>8/10
   </li>
   
   <li data-target=".leaflet-control-fullscreen-button" data-angle="120">
-  Tu Wygodnie obejrzysz mapę w trybie pełnego ekranu<br><br>9/11
+  Tu Wygodnie obejrzysz mapę w trybie pełnego ekranu<br><br>9/10
   </li>
-  <li data-target=".leaflet-control-rainviewer-button" ddata-angle="120">
-    Sprawdź aktualne opady.<br><br>10/11
-  </li>
+
   <li data-target="#jak_korzystac"  data-angle="0">
-    Dodatkowe opcje znajdziesz pod prawym przyciskiem myszy i klikająć obiekty na mapie.<br><br>11/11</p> <p>PRZYJEMNEGO KORZYSTANIA! ;)</p>
+    Dodatkowe opcje znajdziesz pod prawym przyciskiem myszy i klikająć obiekty na mapie.<br><br>10/10</p> <p>PRZYJEMNEGO KORZYSTANIA! ;)</p>
   </li>
 </ol>
 <div class="content_box pierwszy_raz" data-nosnippet aria-hidden="true">
@@ -152,10 +154,32 @@
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zamknij</a>
     </div>
 </div>
-<script src="{$bat.theme}/js/materialize.min.js" defer></script>
+
+<script src="{$bat.theme}/js/init.js?2026-04-03-07-56-49" defer></script>
 <script src="{$bat.theme}/js/modal_coffee_popup.js" defer></script>
 <script src="{$bat.theme}/js/scroll_to_map.js" defer></script>
 <script src="{$bat.theme}/js/announcement_bar.js" defer></script>
+<script src="{$bat.theme}/js/header_focffee_button.js" defer></script>
+<script src="https://mapa.wirtualneszlaki.pl/swiat/user/themes/wirtualneszlaki/js/map-ui-tracking.js" defer></script>
+
+<link rel="stylesheet" href="{$bat.path}/app/css/leaflet.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/leaflet.fullscreen.css">
+<!-- Leaflet.PolylineMeasure.css – ładowane na żądanie przez pluginLoader -->
+<!-- L.Control.Locate.min.css – ładowane na żądanie przez pluginLoader -->
+<link rel="stylesheet" href="{$bat.path}/app/css/grumble.min.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/jquery-ui.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/font-awesome.min.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/leaflet-gesture-handling.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/L.Control.HtmlLegend.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/leaflet.contextmenu.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/leaflet-routing-machine.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/leaflet-geocoder-mapzen.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/minimap.css">
+<link rel="stylesheet" href="{$bat.path}/app/css/map-custom.css?2026-04-03-07-56-39">
+<link rel="stylesheet" href="{$bat.theme}/css/style-custom.css?2026-04-03-07-56-35">
+
+
+
 
 <script>
 

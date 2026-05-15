@@ -5,27 +5,66 @@
  *
  */
 
- .navbar-fixed nav {
-    top: 0;
-    height: auto;
+.navbar-fixed {
+  height: 120px;
+}
+
+.navbar-fixed nav {
+  top: 0;
+  height: auto;
 }
 
 nav .nav-wrapper {
-    position: relative;
-    height: 100%;
-    margin-bottom: 0;
+  position: relative;
+  height: 100%;
+  margin-bottom: 0;
 }
 
- nav .brand-logo {
+#logo-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* odstęp między sygnetem a tekstem */
+#logo-container .brand-logo-image {
+  margin-right: 8px;
+}
+
+/* wrapper na 2 linie tekstu */
+.brand-logo-text-wrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+/* linia 1 – większy tekst */
+.brand-logo-main {
+  font-size: 1.35rem;     /* dostosuj, jeśli będzie za duże */
+  font-weight: 500;
+  color: #f57c00;         /* zbliżone do materialize orange */
+}
+
+/* linia 2 – małe drukowane litery */
+.brand-logo-sub {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #777;
+}
+
+
+nav .brand-logo {
   font-size: 1.2vw;
- }
+}
 
- .sidenav {
-      padding-top: 40px;
- }
+.sidenav {
+  padding-top: 40px;
+}
 
- :root {
-  --wsorange: #ec6a20; /* Twój własny kolor */
+:root {
+  --wsorange: #ec6a20;
+  /* Twój własny kolor */
 }
 
 .right.map-layer:hover,
@@ -39,7 +78,7 @@ nav .nav-wrapper {
 
 #map {
   width: 100%;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 90px);
   max-height: 1100px;
   position: relative;
   outline: none;
@@ -53,8 +92,9 @@ nav .nav-wrapper {
 
 /* ukrycie kontrolek na czes wczytywania skrytpów */
 
-#map .leaflet-locationiq-control, #map .leaflet-control-layers {
-  display:none;
+#map .leaflet-locationiq-control,
+#map .leaflet-control-layers {
+  display: none;
 }
 
 .flex {
@@ -81,14 +121,18 @@ nav .nav-wrapper {
 }
 
 article .intro-header ul {
-  list-style-position: inside; /* Ustawienie kropek wewnątrz listy */
-  padding-left: 0 !important; /* Usuń domyślny padding */
-  text-align: center; /* Wyśrodkuj tekst */
+  list-style-position: inside;
+  /* Ustawienie kropek wewnątrz listy */
+  padding-left: 0 !important;
+  /* Usuń domyślny padding */
+  text-align: center;
+  /* Wyśrodkuj tekst */
 }
 
 
 
-.reklamowka_header_footer:before, .google-auto-placed:before {
+.reklamowka_header_footer:before,
+.google-auto-placed:before {
   text-transform: uppercase;
   color: #A4ADB0;
   font-family: Arial, Helvetica, sans-serif;
@@ -121,17 +165,19 @@ article .intro-header ul {
   line-height: initial;
 }
 
-.wsmap-breadcrumb span, .wsmap-last-update {
+.wsmap-breadcrumb span,
+.wsmap-last-update {
   font-size: 15px;
 }
 
-.wsmap-breadcrumb a{
+.wsmap-breadcrumb a {
   font-weight: bold;
 }
 
 .wsmpap-header span {
   display: block;
 }
+
 strong.text-bold {
   font-weight: 900;
 }
@@ -149,29 +195,32 @@ article li:not(.dropdown-content li):not(#mapSearchList li) {
 }
 
 #wsmap-content img {
-  max-width: 100%; 
-  height: auto; 
+  max-width: 100%;
+  height: auto;
 }
 
 /* Styl dla paska przesuwania */
 .drag-bar {
   width: 10px;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 90px);
   max-height: 1100px;
   cursor: ew-resize;
   position: relative;
   display: flex;
-  align-items: center; /* Wyrównanie strzałki do środka */
+  align-items: center;
+  /* Wyrównanie strzałki do środka */
   justify-content: center;
   float: left;
-  transition: background-color 0.3s ease; /* Płynna zmiana koloru */
+  transition: background-color 0.3s ease;
+  /* Płynna zmiana koloru */
   /* Szraf kropkowany */
   background-image: radial-gradient(circle, #999 1px, transparent 1px);
   background-size: 5px 5px;
 }
 
 .drag-bar:hover {
-  background-image: radial-gradient(circle, #666 1px, transparent 1px); /* Ciemniejsze kropki */
+  background-image: radial-gradient(circle, #666 1px, transparent 1px);
+  /* Ciemniejsze kropki */
 }
 
 /* Strzałka w środku paska */
@@ -187,12 +236,15 @@ article li:not(.dropdown-content li):not(#mapSearchList li) {
 /* Stylowanie kolumny po ukryciu lewej */
 .left-column.collapsed {
   width: 0 !important;
-  display: none; /* Ukryj całą zawartość */
+  display: none;
+  /* Ukryj całą zawartość */
 }
 
 .right-column.expanded {
-  width: calc (100% - 10px) !important; /* Wypełnij całą przestrzeń */
+  width: calc (100% - 10px) !important;
+  /* Wypełnij całą przestrzeń */
 }
+
 /*
 .in-iframe {
   overflow: hidden;
@@ -203,6 +255,15 @@ article li:not(.dropdown-content li):not(#mapSearchList li) {
   display: none !important;
 }
 */
+
+.leaflet-routing-alternatives-container button {
+  display: block;
+  margin: 10px auto;
+}
+
+.leaflet-routing-container h2 {
+  margin: 0;
+}
 
 .static .iframe-hidden,
 .static .navbar-fixed,
@@ -219,7 +280,9 @@ article li:not(.dropdown-content li):not(#mapSearchList li) {
 .static .adsbygoogle,
 .static .adsbygoogle-noablate,
 .static #wsmap-content,
-.static .drag-bar {
+.static .drag-bar,
+.static .wsmpap-header,
+.static .toast{
   display: none !important;
   visibility: hidden !important;
 }
@@ -228,7 +291,7 @@ body.static>article>article>div>div>div>div.col.s12.m12.l3 {
   display: none !important;
 }
 
-body.static > main > article > div > div > div > div.col.s12.m12.l9.resizable-column.right-column {
+body.static>main>article>div>div>div>div.col.s12.m12.l9.resizable-column.right-column {
   width: 100% !important;
 }
 
@@ -241,9 +304,6 @@ body.static .row .col {
   padding: 0 0 !important;
 
 }
-
-.static article article,
-.static article .container {}
 
 .static #map {
   height: 100vh;
@@ -301,9 +361,10 @@ h4 {
 }
 
 .intro-header.background-image {
-  background-size: cover;
-  text-shadow: 1px 1px 2px #000, 0 0 1em #000, 0 0 0.2em #000;
-  padding: 50px 0;
+    background-size: cover;
+    text-shadow: 1px 1px 2px #000, 0 0 1em #000, 0 0 0.2em #000;
+    padding: 50px 0;
+    background-position: center;
 }
 
 .footer-copyright a {
@@ -358,56 +419,62 @@ h4 {
 
 /* Stylizacja listy rozwijanej */
 #mapSearchList {
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-    display: none; /* Ukrywamy listę, dopóki nie ma wyników */
-    position: absolute;
-    width: 100%;
-    background-color: #fff;
-    z-index: 1;
+  border: 1px solid #ccc;
+  max-height: 210px;
+  overflow-y: auto;
+  display: none;
+  /* Ukrywamy listę, dopóki nie ma wyników */
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
 }
+
 #mapSearchList li {
-    padding: 8px;
-    cursor: pointer;
+  padding: 8px;
+  cursor: pointer;
 }
+
 #mapSearchList li:hover {
-    background-color: #eee;
+  background-color: #eee;
 }
 
 #scrollToTopBtn {
   position: fixed;
   bottom: 20px;
   right: 50px;
-  width: 50px; 
+  width: 50px;
   height: 50px;
   background-color: #ec6a20;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px; 
-  border-radius: 50%; 
+  font-size: 24px;
+  border-radius: 50%;
   text-decoration: none;
   z-index: 1000;
-  display: none; 
+  display: none;
 }
 
 #scrollToTopBtn.show {
-  display: flex !important; 
+  display: flex !important;
 }
 
 
 .latest-news .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px; /* to doda odstęp poziomy i pionowy */
-  margin: 0; /* usuń ujemne marginesy */
+  gap: 24px;
+  /* to doda odstęp poziomy i pionowy */
+  margin: 0;
+  /* usuń ujemne marginesy */
 }
 
 .latest-news .col {
   display: flex;
-  flex: 1 1 calc(33.333% - 24px); /* 3 kolumny minus odstęp */
+  flex: 1 1 calc(33.333% - 24px);
+  /* 3 kolumny minus odstęp */
 }
 
 
@@ -419,7 +486,8 @@ h4 {
 }
 
 .latest-news .post-title {
-  font-size: 1.25rem;      /* odpowiada ~20px */
+  font-size: 1.25rem;
+  /* odpowiada ~20px */
   line-height: 1.4;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -427,22 +495,24 @@ h4 {
 }
 
 .latest-news .card-action a {
-  font-size: 1rem;  
+  font-size: 1rem;
 }
 
 /* Announcement Bar Styles */
 #announcement-bar {
-  background-color: #d84315; /* Kolor pasujący do akcentu strony (#ec6a20) */
+  background-color: #d84315;
+  /* Kolor pasujący do akcentu strony (#ec6a20) */
   color: white;
   text-align: center;
   position: sticky;
   top: 0;
-  z-index: 1000; /* Wyższy Z-index niż nawigacja Materialize (997) */
+  z-index: 1000;
+  /* Wyższy Z-index niż nawigacja Materialize (997) */
   transition: padding 0.3s ease, font-size 0.3s ease;
   padding: 12px 16px;
   font-size: 1rem;
   width: 100%;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Styl zmniejszający pasek po przewinięciu strony */
@@ -458,13 +528,18 @@ h4 {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  max-width: 100%; /* Szerokość kontenera Materialize */
+  max-width: 100%;
+  /* Szerokość kontenera Materialize */
 }
 
-.announcement-content span, .announcement-content p, .announcement-content div {
-  padding-right: 30px; /* Miejsce na przycisk zamykania */
+.announcement-content span,
+.announcement-content p,
+.announcement-content div {
+  padding-right: 30px;
+  /* Miejsce na przycisk zamykania */
   line-height: 1;
-  padding-left: 62px; /* Bo tyle ma uchwyt od reklamy */
+  /*padding-left: 62px;*/
+  /* Bo tyle ma uchwyt od reklamy */
   text-align: left;
 }
 
@@ -494,7 +569,7 @@ announcement-content a:hover {
 }
 
 .close-btn:hover {
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .close-btn .material-icons {
@@ -502,47 +577,99 @@ announcement-content a:hover {
   vertical-align: middle;
 }
 
+#modal-coffee {
+  z-index: 9999 !important;
+  max-height: 80% !important;
+}
+
+/* Blok pobierania trasy – trzyma wszystko w jednej linii */
+.leaflet-routing-container .download-route-wrap {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  margin: 8px auto;
+  text-align: center;
+}
+
+/* Etykieta bez rozpychania */
+.leaflet-routing-container .download-route-label {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-right: 6px;
+}
+
+/* Przyciski obok siebie, bez “wypychania” na boki */
+.leaflet-routing-container .download-route-wrap .btn {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+
+
+.download-route-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.download-route-label {
+  font-size: 14px;
+  opacity: .9;
+}
+
+/* gdy LRM jest zwinięty – chowamy blok pobierania */
+.leaflet-routing-container.leaflet-routing-container-hide #downloadRouteWrap {
+  display: none !important;
+}
+
 
 @media only screen and (min-width: 0) {
-    .modal-content {
-      font-size: 1.3rem;
-    }
+  .modal-content {
+    font-size: 1.3rem;
+  }
 }
 
 @media only screen and (min-width: 601px) {
-    .navbar-fixed nav{
-        height: auto;
-    }
+  .navbar-fixed nav {
+    height: auto;
+  }
 }
 
-    
+
 @media only screen and (min-width: 992px) {
-    .modal-conten {
-      font-size: 1.3rem;
-    }
+  .modal-conten {
+    font-size: 1.3rem;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
-    .modal-conten {
-      font-size: 1.3rem;
-    }
+  .modal-conten {
+    font-size: 1.3rem;
+  }
 }
 
 
 @media only screen and (max-width: 600px) {
+
   nav .brand-logo {
-        display: block;
-        align-items: center;
-        height: 100%;
-        left: 20px;
-        transform: none;
-        line-height: inherit;
-        font-size: 1rem;
+    display: block;
+    align-items: center;
+    height: auto;
+    left: 20px;
+    transform: none;
+    line-height: inherit;
+    font-size: 1rem;
   }
+
   .reklamowka_header_footer {
     max-width: 100%;
     height: 358px !important;
   }
+
   .wsmap-left-ad {
     display: none;
   }
@@ -560,12 +687,13 @@ announcement-content a:hover {
 
   #wsmap-content {
     width: 100%;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 90px);
     max-height: 1100px;
     position: relative;
     outline: none;
     overflow-y: auto;
   }
+
   .wsmpap-header {
     margin: 0;
     padding: 00;
@@ -573,18 +701,15 @@ announcement-content a:hover {
     text-align: right;
     margin-top: -32px;
   }
- 
+
   .row .col.left-column {
     width: calc(33% - 10px);
+    padding: 0 3px 0 10px;
   }
 
   .row .col.right-column {
     padding: 0 0 0 3px;
     width: calc(66%);
-  }
-  
-  .row .col.left-column {
-    padding: 0 3px 0 10px;
   }
 
   .wsmap-left-ad {
@@ -597,7 +722,8 @@ announcement-content a:hover {
   }
 
   #scrollToTopBtn.show {
-    display: none !important; /* Przycisk widoczny na mniejszych ekranach */
+    display: none !important;
+    /* Przycisk widoczny na mniejszych ekranach */
   }
 }
 
@@ -609,6 +735,7 @@ announcement-content a:hover {
   .row .col.right-column {
     width: calc(75%);
   }
+
   .wsmap-left-ad {
     min-height: 400px;
   }
@@ -622,7 +749,39 @@ announcement-content a:hover {
   }
 
   #scrollToTopBtn {
-    display: flex; /* Przycisk widoczny na mniejszych ekranach */
+    display: flex;
+    /* Przycisk widoczny na mniejszych ekranach */
   }
 
+}
+
+/* Mobile: hide brand text and show coffee button when scrolling down */
+@media only screen and (max-width: 600px) {
+  .brand-logo-main {
+    font-size: 1.1rem;
+  }
+  .brand-logo-sub {
+    font-size: 0.6rem;
+  }
+  /* default: hide coffee button (header also sets inline display:none) */
+  #header-focffee-button {
+    display: none !important;
+  }
+
+  /* ensure brand text is visible by default */
+  .brand-logo-text-wrap {
+    display: flex;
+    transition: opacity .15s ease;
+  }
+
+  /* when body has this class (added by JS on scroll down) swap visibility */
+  body.hide-logo-show-coffee .brand-logo-text-wrap {
+    display: none !important;
+    opacity: 0;
+  }
+
+  body.hide-logo-show-coffee #header-focffee-button {
+    display: inline-block !important;
+    padding-left: 60px;
+  }
 }

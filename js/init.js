@@ -7,6 +7,30 @@ var searchDropdown, mapDropdown;
 (function ($) {
   $(function () {
 
+    $('.sidenav').sidenav();
+
+    $('.tooltipped').tooltip();
+
+    if (window.innerWidth <= 1024) { // Uruchamia się dla urządzeń mobilnych i tabletów (do 1024px szerokości)
+      $('.pushpin').pushpin({
+        top: 600,
+        offset: 90
+      });
+    }
+    $('.dropdown-trigger').dropdown({
+      constrainWidth: false
+    });
+
+    try {
+      resizableColumns();
+    } catch (e) {
+      // Opcjonalnie: Zaloguj błąd, jeśli chcesz wiedzieć, że funkcja nie zadziałała.
+      console.warn("Błąd przy wywoływaniu resizableColumns:", e); 
+    }
+
+    if ($('#map').length === 0) {
+      $('.switch-map-option').css('display', 'none'); //ukryj opcje mapy w menu jeśli nie ma mapy
+    }
 
     $('.leaflet-control-layers-list').appendTo($('#dropdown-map'));
     mapDropdown = $(".dropdown-trigger[data-target='dropdown-map']").dropdown({
@@ -19,7 +43,8 @@ var searchDropdown, mapDropdown;
     searchDropdown = $(".dropdown-trigger[data-target='dropdown-search']").dropdown({
       closeOnClick: false,
       hover: false,
-      constrainWidth: false
+      constrainWidth: false,
+      autoFocus: false
     });
 
     $('.map-search').on('click', function () {
@@ -40,6 +65,16 @@ var searchDropdown, mapDropdown;
 
     //$('#search-results-container').append($('.leaflet-locationiq-results'));
     $('.leaflet-locationiq-control').append($('.leaflet-locationiq-results'));
+
+    // Prevent Materialize dropdown keyboard navigation from stealing focus
+    // from the embedded LocationIQ input while the user is typing.
+    $('#dropdown-search').on('keydown keyup keypress', '.leaflet-locationiq-input', function (e) {
+      e.stopPropagation();
+    });
+
+    $('#dropdown-search').on('keydown keyup keypress', '.leaflet-locationiq-results', function (e) {
+      e.stopPropagation();
+    });
 
     $(".dropdown").each(function (index) {
 

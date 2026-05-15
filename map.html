@@ -1,0 +1,106 @@
+{template: inc/header-materialize.html}
+<article>
+    <!-- Map Content -->
+    <div class="container-fluid">
+        <div class="row center iframe-hidden">
+            <div class="header col s12 ">
+                <div class="reklamowka_header_footer reklamowka_half-height">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
+                        data-ad-slot="2690994103" data-ad-format="auto" data-full-width-responsive="true"></ins>
+
+                </div>
+            </div>
+        </div>
+        <div class="row center">
+            <div id="map" class="anchor">
+            </div>
+        </div>
+    </div>
+
+    <link href="{$bat.path}/app/css/css.php?2024-09-05-13-36-09" type="text/css" rel="stylesheet" />
+    <!--<script defer src="https://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>-->
+    <script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
+    <script defer src="{$bat.path}/app/js/script.min.js?2024-09-05-13-36-14"></script>
+    <!-- <script defer src="{$bat.path}/app/js/mapa.js?2024-09-05-13-36-17"></script> -->
+    <!-- <script defer src="{$bat.path}/app/compilejs.php?force=1"></script>-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ładujemy map-utils.js
+            var utilsScript = document.createElement('script');
+            utilsScript.src = "https://mapa.wirtualneszlaki.pl/app/js/map-utils.js?2024-10-11-14-00-00";
+            utilsScript.onload = function () {
+                // Po załadowaniu map-utils.js, ładujemy mapa.js
+                var mapaScript = document.createElement('script');
+                mapaScript.src = "https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2024-10-10-13-37-43";
+                mapaScript.onload = function () {
+                    // Po zakończeniu ładowania mapa.js, ładowanie init.js
+                    var initScript = document.createElement('script');
+                    initScript.src = "{$bat.theme}/js/init.js?2024-10-10-13-37-56";
+                    document.body.appendChild(initScript);
+                };
+                document.body.appendChild(mapaScript);
+            };
+            document.body.appendChild(utilsScript);
+        });
+    </script>
+
+
+    <!-- Page Header -->
+    <header class="intro-header">
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="valign hide-on-small-only">
+                <div class="row center">
+                    <div class="header col s12 ">
+                        <div class="reklamowka_header_footer">
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6601178235337602"
+                                data-ad-slot="2690994103" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                (window.requestIdleCallback || function(cb){setTimeout(cb,0)})(() => {
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                });
+                            });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container valign">
+                <h1 class="header center orange-text">{$page.title}</h1>
+
+                <div class="row center">
+                    <p class="header wsmap-desc s12 grey-text">{if:
+                        $page.desc}{$page.desc}{else}{$settings.description}{/if}
+                    </p>
+                </div>
+
+            </div>
+
+
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="section">
+
+                <!--   Icon Section   -->
+                <div class="row">
+                    <div class="col s12">
+                        {if: $bat.notify}
+                        <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
+                        {/if}
+                        {$page.content}
+                    </div>
+
+                </div>
+
+            </div>
+            <br><br>
+        </div>
+    </article>
+</article>
+<script src="https://mapa.wirtualneszlaki.pl/app/js/jquery/3.7.1/jquery-3.7.1.min.js"></script>
+<script src="{$bat.theme}/js/init.js"></script>
+{template: inc/footer-materialize.html}

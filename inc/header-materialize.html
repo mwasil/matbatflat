@@ -14,14 +14,13 @@
   <link rel="preconnect" href="https://static.wirtualneszlaki.pl" crossorigin>
   <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
   <link rel="dns-prefetch" href="//fundingchoicesmessages.google.com">
-  <link rel="preload" as="style"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
-      onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
+    onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"></noscript>
 
 
-
+  <!--
   <style>
   /* static */
     header .material-icons{
@@ -51,19 +50,1326 @@
     font-size: 3rem;
   }
   </style>
-<!-- prefetch pobierze wcześnie, ale styl wciąż blokuje 1. render -->
-<link rel="preload" as="style" href="/themes/matbatflat/css/materialize.min.css">
-<link rel="stylesheet" href="/themes/matbatflat/css/materialize.min.css">
+-->
+  <style>
+    .navbar-fixed {
+      height: 120px !important;
+    }
 
-<link rel="preload" as="style" href="/themes/matbatflat/css/style-custom.css?2024-10-11-18-43-28">
-<link rel="stylesheet" href="/themes/matbatflat/css/style-custom.css?2024-10-11-18-43-28">
+    nav .brand-logo {
+      font-size: 1.2vw !important;
+    }
+
+    .wsmap-breadcrumb {
+      color: initial !important;
+      background-color: initial !important;
+      box-shadow: none !important;
+      height: auto !important;
+      line-height: initial !important;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .intro-header h1 {
+      font-size: 3rem !important;
+    }
+
+    .wsmap-breadcrumb span,
+    .wsmap-last-update {
+      font-size: 15px !important;
+    }
+
+    #logo-container {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    /* odstęp między sygnetem a tekstem */
+    #logo-container .brand-logo-image {
+      margin-right: 8px;
+    }
+
+    /* wrapper na 2 linie tekstu */
+    .brand-logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    /* linia 1 – większy tekst */
+    .brand-logo-main {
+      font-size: 1.35rem;
+      /* dostosuj, jeśli będzie za duże */
+      font-weight: 500;
+      color: #f57c00;
+      /* zbliżone do materialize orange */
+    }
+
+    /* linia 2 – małe drukowane litery */
+    .brand-logo-sub {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #777;
+    }
+
+        #announcement-bar {
+      background-color: #d84315;
+      color: #fff;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 12px 16px;
+      font-size: 1rem;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .2)
+    }
+
+    .announcement-content {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      max-width: 100%
+    }
+
+    .announcement-content span {
+      padding-right: 30px;
+      line-height: 1;
+      /*padding-left: 62px;*/
+      text-align: left
+    }
+
+    .announcement-content a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: underline
+    }
+
+    @media only screen and (max-width: 600px) {
+      nav .brand-logo {
+        font-size: 1rem !important;
+      }
+
+      nav .brand-logo {
+        display: flex !important;
+        align-items: center !important;
+        height: auto !important;
+        left: 20px !important;
+        transform: none !important;
+        line-height: inherit !important;
+        font-size: 1rem !important;
+      }
+
+      .brand-logo-main {
+        font-size: 1.1rem;
+      }
+
+      .brand-logo-sub {
+        font-size: 0.6rem;
+      }
+    }
+
+    #static-map {
+      height: 100%;
+      width: auto;
+      margin: auto;
+      display: flex;
+      object-fit: cover;
+    }
+
+    article {
+      font-size: 1.3rem !important;
+    }
+
+    .intro-header h1 {
+      font-size: 3rem !important;
+    }
+
+    @font-face {
+      font-family: 'Material Icons';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNZ.ttf) format('truetype')
+    }
+
+    article,
+    header,
+    nav {
+      display: block
+    }
+
+    .toggle-arrow {
+      font-size: 100px;
+      position: absolute;
+      padding-left: 30px;
+      z-index: 1002
+    }
+
+    @media only screen and (max-width:600px) {
+      nav .brand-logo {
+        display: block;
+        align-items: center;
+        height: auto;
+        left: 20px;
+        transform: none;
+        line-height: inherit;
+        font-size: 1rem
+      }
+
+      .wsmap-left-ad {
+        display: none
+      }
+    }
+
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: 400;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr
+    }
+
+    header .material-icons {
+      font-size: 24px;
+      line-height: 1;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+      vertical-align: middle
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    #static-map {
+      height: 100%;
+      width: auto;
+      margin: auto;
+      display: flex;
+      object-fit: cover
+    }
+
+    .red {
+      background-color: #f44336 !important
+    }
+
+    .orange-text {
+      color: #ec6a20 !important
+    }
+
+    .grey-text {
+      color: #9e9e9e !important
+    }
+
+    .white {
+      background-color: #fff !important
+    }
+
+    .white-text {
+      color: #fff !important
+    }
+
+    html {
+      line-height: 1.15;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      margin: 0
+    }
+
+    article,
+    header,
+    nav,
+    section {
+      display: block
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: .67em 0
+    }
+
+    main {
+      display: block
+    }
+
+    a {
+      background-color: transparent;
+      -webkit-text-decoration-skip: objects
+    }
+
+    b,
+    strong {
+      font-weight: inherit
+    }
+
+    b,
+    strong {
+      font-weight: bolder
+    }
+
+    small {
+      font-size: 80%
+    }
+
+    img {
+      border-style: none
+    }
+
+    svg:not(:root) {
+      overflow: hidden
+    }
+
+    button,
+    input {
+      font-family: sans-serif;
+      font-size: 100%;
+      line-height: 1.15;
+      margin: 0
+    }
+
+    button,
+    input {
+      overflow: visible
+    }
+
+    button {
+      text-transform: none
+    }
+
+    button {
+      -webkit-appearance: button
+    }
+
+    button::-moz-focus-inner {
+      border-style: none;
+      padding: 0
+    }
+
+    button:-moz-focusring {
+      outline: ButtonText dotted 1px
+    }
+
+    [type=checkbox] {
+      box-sizing: border-box;
+      padding: 0
+    }
+
+    ::-webkit-file-upload-button {
+      -webkit-appearance: button;
+      font: inherit
+    }
+
+    html {
+      box-sizing: border-box
+    }
+
+    *,
+    :after,
+    :before {
+      box-sizing: inherit
+    }
+
+    button,
+    input {
+      font-family: -apple-system, BlinkMacSystemFont, Nunito, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
+    }
+
+    ul:not(.browser-default) {
+      padding-left: 0;
+      list-style-type: none
+    }
+
+    ul:not(.browser-default)>li {
+      list-style-type: none
+    }
+
+    a {
+      color: #039be5;
+      text-decoration: none
+    }
+
+    .btn,
+    .dropdown-content,
+    .sidenav,
+    nav {
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12), 0 1px 5px 0 rgba(0, 0, 0, .2)
+    }
+
+    .modal {
+      box-shadow: 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12), 0 11px 15px -7px rgba(0, 0, 0, .2)
+    }
+
+    .divider {
+      height: 1px;
+      overflow: hidden;
+      background-color: #e0e0e0
+    }
+
+    i {
+      line-height: inherit
+    }
+
+    i.right {
+      float: right;
+      margin-left: 15px
+    }
+
+    @media only screen and (max-width:992px) {
+      .hide-on-med-and-down {
+        display: none !important
+      }
+    }
+
+    .center,
+    .center-align {
+      text-align: center
+    }
+
+    .right {
+      float: right !important
+    }
+
+    .material-icons {
+      text-rendering: optimizeLegibility;
+      font-feature-settings: 'liga'
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 1280px;
+      width: 90%
+    }
+
+    @media only screen and (min-width:601px) {
+      .container {
+        width: 85%
+      }
+
+      .row .col.m12 {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto
+      }
+    }
+
+    .section {
+      padding-top: 1rem;
+      padding-bottom: 1rem
+    }
+
+    .section.no-pad-bot {
+      padding-bottom: 0
+    }
+
+    .row {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px
+    }
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both
+    }
+
+    .row .col {
+      float: left;
+      box-sizing: border-box;
+      padding: 0 .75rem;
+      min-height: 1px
+    }
+
+    .row .col.s12 {
+      width: 100%;
+      margin-left: auto;
+      left: auto;
+      right: auto
+    }
+
+    nav {
+      color: #ec6a20;
+      background-color: #ee6e73;
+      width: 100%;
+      height: 56px;
+      line-height: 56px
+    }
+
+    nav a {
+      color: #ec6a20
+    }
+
+    nav i,
+    nav i.material-icons {
+      display: block;
+      font-size: 24px;
+      height: 56px;
+      line-height: 56px
+    }
+
+    nav .nav-wrapper {
+      position: relative;
+      height: 100%
+    }
+
+    @media only screen and (min-width:993px) {
+      .hide-on-large-only {
+        display: none !important
+      }
+
+      .container {
+        width: 70%
+      }
+
+      .row .col.l3 {
+        width: 25%;
+        margin-left: auto;
+        left: auto;
+        right: auto
+      }
+
+      .row .col.l9 {
+        width: 75%;
+        margin-left: auto;
+        left: auto;
+        right: auto
+      }
+
+      nav a.sidenav-trigger {
+        display: block
+      }
+    }
+
+    nav .sidenav-trigger {
+      float: left;
+      position: relative;
+      z-index: 1;
+      height: 56px;
+      margin: 0 18px
+    }
+
+    nav .sidenav-trigger i {
+      height: 56px;
+      line-height: 56px
+    }
+
+    nav .brand-logo {
+      position: absolute;
+      color: #ec6a20;
+      display: inline-block;
+      font-size: 1.4rem;
+      padding: 0
+    }
+
+    @media only screen and (max-width:600px) {
+      nav .brand-logo {
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        line-height: 1rem;
+        font-size: 1rem
+      }
+    }
+
+    nav .brand-logo-image {
+      height: 2.5rem;
+      vertical-align: middle;
+      padding-right: 10px
+    }
+
+    nav ul {
+      margin: 0
+    }
+
+    nav ul li {
+      float: left;
+      padding: 0
+    }
+
+    nav ul a {
+      font-size: 1rem;
+      color: #ec6a20;
+      display: block;
+      padding: 0 15px
+    }
+
+    .navbar-fixed {
+      position: relative;
+      height: 56px;
+      z-index: 9997
+    }
+
+    .navbar-fixed nav {
+      position: fixed
+    }
+
+    @media only screen and (min-width:601px) {
+
+      nav,
+      nav .nav-wrapper i,
+      nav a.sidenav-trigger,
+      nav a.sidenav-trigger i {
+        height: 64px;
+        line-height: 64px
+      }
+
+      .navbar-fixed {
+        height: 64px
+      }
+    }
+
+    a {
+      text-decoration: none
+    }
+
+    html {
+      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, Nunito, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      font-weight: 400;
+      color: rgba(0, 0, 0, .87)
+    }
+
+    @media only screen and (min-width:0) {
+      html {
+        font-size: 14px
+      }
+    }
+
+    @media only screen and (min-width:992px) {
+      html {
+        font-size: 14.5px
+      }
+    }
+
+    @media only screen and (min-width:1200px) {
+      html {
+        font-size: 15px
+      }
+    }
+
+    h1,
+    h2,
+    h4 {
+      font-weight: 400;
+      line-height: 1.3
+    }
+
+    h1 {
+      font-size: 4.2rem;
+      line-height: 110%;
+      margin: 2.8rem 0 1.68rem
+    }
+
+    h2 {
+      font-size: 3.56rem;
+      line-height: 110%;
+      margin: 2.37333rem 0 1.424rem
+    }
+
+    h4 {
+      font-size: 2.28rem;
+      line-height: 110%;
+      margin: 1.52rem 0 .912rem
+    }
+
+    em {
+      font-style: italic
+    }
+
+    strong {
+      font-weight: 500
+    }
+
+    small {
+      font-size: 75%
+    }
+
+    .btn,
+    .btn-flat {
+      border: none;
+      border-radius: 2px;
+      display: inline-block;
+      height: 36px;
+      line-height: 36px;
+      padding: 0 16px;
+      text-transform: uppercase;
+      vertical-align: middle
+    }
+
+    .btn,
+    .btn-flat {
+      font-size: 14px;
+      outline: 0
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #fff;
+      background-color: #26a69a;
+      text-align: center;
+      letter-spacing: .5px
+    }
+
+    .btn-flat {
+      box-shadow: none;
+      background-color: transparent;
+      color: #343434
+    }
+
+    .dropdown-content {
+      background-color: #fff;
+      margin: 0;
+      display: none;
+      min-width: 100px;
+      overflow-y: auto;
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 9999;
+      transform-origin: 0 0
+    }
+
+    .dropdown-content li {
+      clear: both;
+      color: rgba(0, 0, 0, .87);
+      min-height: 50px;
+      line-height: 1.5rem;
+      width: 100%;
+      text-align: left
+    }
+
+    .dropdown-content li>a {
+      font-size: 16px;
+      color: #26a69a;
+      display: block;
+      line-height: 22px;
+      padding: 14px 16px
+    }
+
+    .waves-effect {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: middle;
+      z-index: 1
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      left: 0;
+      right: 0;
+      background-color: #fafafa;
+      padding: 0;
+      max-height: 70%;
+      width: 55%;
+      margin: auto;
+      overflow-y: auto;
+      border-radius: 2px;
+      will-change: top, opacity
+    }
+
+    @media only screen and (max-width:992px) {
+      .modal {
+        width: 80%
+      }
+    }
+
+    .modal h4 {
+      margin-top: 0
+    }
+
+    .modal .modal-content {
+      padding: 24px
+    }
+
+    .modal .modal-footer {
+      border-radius: 0 0 2px 2px;
+      background-color: #fafafa;
+      padding: 4px 6px;
+      height: 56px;
+      width: 100%;
+      text-align: right
+    }
+
+    .modal .modal-footer .btn-flat {
+      margin: 6px 0
+    }
+
+    .modal.modal-fixed-footer {
+      padding: 0;
+      height: 70%
+    }
+
+    .modal.modal-fixed-footer .modal-content {
+      position: absolute;
+      height: calc(100% - 56px);
+      max-height: 100%;
+      width: 100%;
+      overflow-y: auto
+    }
+
+    .modal.modal-fixed-footer .modal-footer {
+      border-top: 1px solid rgba(0, 0, 0, .1);
+      position: absolute;
+      bottom: 0
+    }
+
+    label {
+      font-size: .8rem;
+      color: #9e9e9e
+    }
+
+    ::placeholder {
+      color: #d1d1d1
+    }
+
+    [type=checkbox]:checked,
+    [type=checkbox]:not(:checked) {
+      position: absolute;
+      opacity: 0
+    }
+
+    .switch label input[type=checkbox] {
+      opacity: 0;
+      width: 0;
+      height: 0
+    }
+
+    .switch label input[type=checkbox]:checked+.lever {
+      background-color: #84c7c1
+    }
+
+    .switch label input[type=checkbox]:checked+.lever:after,
+    .switch label input[type=checkbox]:checked+.lever:before {
+      left: 18px
+    }
+
+    .switch label input[type=checkbox]:checked+.lever:after {
+      background-color: #26a69a
+    }
+
+    .switch label .lever {
+      content: "";
+      display: inline-block;
+      position: relative;
+      width: 36px;
+      height: 14px;
+      background-color: rgba(0, 0, 0, .38);
+      border-radius: 15px;
+      margin-right: 10px;
+      vertical-align: middle;
+      margin: 0 16px
+    }
+
+    .switch label .lever:after,
+    .switch label .lever:before {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      left: 0;
+      top: -3px
+    }
+
+    .switch label .lever:before {
+      background-color: rgba(38, 166, 154, .15)
+    }
+
+    .switch label .lever:after {
+      background-color: #f1f1f1;
+      box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12)
+    }
+
+    .sidenav {
+      position: fixed;
+      width: 300px;
+      left: 0;
+      top: 0;
+      margin: 0;
+      transform: translateX(-100%);
+      height: 100%;
+      height: calc(100% + 60px);
+      height: -moz-calc(100%);
+      padding-bottom: 60px;
+      background-color: #fff;
+      z-index: 9999;
+      overflow-y: auto;
+      will-change: transform;
+      backface-visibility: hidden;
+      transform: translateX(-105%)
+    }
+
+    .sidenav li {
+      float: none;
+      line-height: 48px
+    }
+
+    .sidenav li>a {
+      color: rgba(0, 0, 0, .87);
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      height: 48px;
+      line-height: 48px;
+      padding: 0 32px
+    }
+
+    .sidenav li>a>i,
+    .sidenav li>a>i.material-icons {
+      float: left;
+      height: 48px;
+      line-height: 48px;
+      margin: 0 32px 0 0;
+      width: 24px;
+      color: rgba(0, 0, 0, .54)
+    }
+
+    .sidenav .divider {
+      margin: 8px 0 0
+    }
+
+    .sidenav .user-view {
+      position: relative;
+      padding: 32px 32px 0;
+      margin-bottom: 8px
+    }
+
+    .sidenav .user-view .background {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1
+    }
+
+    .nav-wrapper .dropdown ul {
+      top: 60px !important;
+      display: none
+    }
+
+    .content_box {
+      position: absolute;
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      color: #223;
+      background-color: #fff;
+      background-color: #fff;
+      box-shadow: 0 0 15px rgb(0 0 0 / .2);
+      border-radius: 5px
+    }
+
+    .pierwszy_raz {
+      z-index: 10000;
+      top: 5px;
+      width: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: auto;
+      text-align: center;
+      display: none
+    }
+
+    .tak {
+      color: #349421
+    }
+
+    .nie {
+      color: #bd3b3b
+    }
+
+    .przyciski {
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    #jak_korzystac {
+      background: rgb(255 255 255 / .8);
+      font-weight: 700;
+      padding: 0 15px
+    }
+
+    .map-dropdown i.right {
+      margin-left: -8px;
+      margin-right: -8px
+    }
+
+    #dropdown-map {
+      overflow: hidden
+    }
+
+    #dropdown-search {
+      overflow-y: visible !important;
+      top: 10px !important
+    }
+
+    #search-results-container {
+      z-index: 10000;
+      position: absolute;
+      width: 300px;
+      right: 20px;
+      top: 40px;
+      max-height: 100vh;
+      background-color: #fff
+    }
+
+    .reklamowka_header_footer {
+      max-width: 100%;
+      padding: 20px 0
+    }
+
+    @media only screen and (max-width:1370px) {
+      nav ul a {
+        padding: 0 10px
+      }
+    }
+
+    @media only screen and (max-width:1024px) {
+      .sidenav>li>ul>li>a {
+        color: rgb(0 0 0 / .87);
+        font-size: 14px;
+        font-weight: 500;
+        height: auto !important;
+        line-height: 1em !important;
+        padding: 0 32px
+      }
+    }
+
+    .navbar-fixed {
+      height: 120px
+    }
+
+    .navbar-fixed nav {
+      top: 0;
+      height: auto
+    }
+
+    nav .nav-wrapper {
+      position: relative;
+      height: 100%;
+      margin-bottom: 0
+    }
+
+    nav .brand-logo {
+      font-size: 1.2vw
+    }
+
+    .sidenav {
+      padding-top: 40px
+    }
+
+    :root {
+      --wsorange: #ec6a20
+    }
+
+    #map {
+      width: 100%;
+      height: calc(100vh - 64px);
+      max-height: 1100px;
+      position: relative;
+      outline: 0;
+      background-color: #fafafa
+    }
+
+    .wsmap-desc {
+      font-size: 1.3rem;
+      line-height: 110%;
+      margin: 1.09333rem 0 .656rem;
+      font-weight: 400
+    }
+
+    article .intro-header ul {
+      list-style-position: inside;
+      padding-left: 0 !important;
+      text-align: center
+    }
+
+    .reklamowka_header_footer:before {
+      text-transform: uppercase;
+      color: #a4adb0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9px;
+      line-height: normal;
+      content: 'reklama';
+      display: block;
+      margin-bottom: 2px;
+      text-decoration: underline;
+      text-align: left;
+      text-decoration-color: #fff
+    }
+
+    .wsmap-last-update {
+      font-size: 15px
+    }
+
+    .wsmpap-header span {
+      display: block
+    }
+
+    strong.text-bold {
+      font-weight: 900
+    }
+
+    .drag-bar {
+      width: 10px;
+      height: calc(100vh - 64px);
+      max-height: 1100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      background-image: radial-gradient(circle, #999 1px, transparent 1px);
+      background-size: 5px 5px
+    }
+
+    article {
+      font-size: 1.3rem
+    }
+
+    .dropdown ul {
+      display: none
+    }
+
+    .intro-header {
+      padding: 0
+    }
+
+    .intro-header h1 {
+      font-size: 3rem
+    }
+
+    h2 {
+      font-size: 2rem
+    }
+
+    h4 {
+      font-size: 1.6rem
+    }
+
+    .pierwszy_raz {
+      display: none
+    }
+
+    .sidenav .user-view .background img {
+      width: 100%
+    }
+
+    .sidenav-text {
+      padding: 16px
+    }
+
+    .sidenav-text p {
+      line-height: 1em
+    }
+
+    .sidenav li li {
+      line-height: 1.5em
+    }
+
+    .sidenav label {
+      font-size: inherit;
+      display: flex;
+      align-items: center;
+      line-height: 1.3em;
+      margin: 20px 0
+    }
+
+    #poi-panel__extract {
+      word-break: break-word
+    }
+
+    .reklamowka_header_footer {
+      margin: auto
+    }
+
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      background-color: #ec6a20;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      border-radius: 50%;
+      text-decoration: none;
+      z-index: 1000;
+      display: none
+    }
+
+
+
+    .close-btn {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: 0 0;
+      border: none;
+      color: #fff;
+      padding: 0 8px;
+      line-height: 1;
+      border-radius: 50%
+    }
+
+    .close-btn .material-icons {
+      font-size: 20px;
+      vertical-align: middle
+    }
+
+    #modal-coffee {
+      z-index: 9999 !important;
+      max-height: 80% !important
+    }
+
+    @media only screen and (min-width:0) {
+      .modal-content {
+        font-size: 1.3rem
+      }
+    }
+
+    @media only screen and (min-width:601px) {
+      .navbar-fixed nav {
+        height: auto
+      }
+    }
+
+    @media only screen and (max-width:600px) {
+      nav .brand-logo {
+        display: block;
+        align-items: center;
+        height: auto;
+        left: 20px;
+        transform: none;
+        line-height: inherit;
+        font-size: 1rem
+      }
+
+      .reklamowka_header_footer {
+        max-width: 100%;
+        height: 358px !important
+      }
+
+      .wsmap-left-ad {
+        display: none
+      }
+    }
+
+    @media only screen and (min-width:992px) {
+      .reklamowka_header_footer {
+        min-height: 280px !important;
+        padding: 5px 0;
+        margin-bottom: 40px
+      }
+
+      #wsmap-content {
+        width: 100%;
+        height: calc(100vh - 64px);
+        max-height: 1100px;
+        position: relative;
+        outline: 0;
+        overflow-y: auto
+      }
+
+      .wsmpap-header {
+        margin: 0;
+        padding: 00;
+        font-size: 1rem;
+        text-align: right;
+        margin-top: -32px
+      }
+
+      .row .col.left-column {
+        width: calc(33% - 10px)
+      }
+
+      .row .col.right-column {
+        padding: 0 0 0 3px;
+        width: calc(66%)
+      }
+
+      .row .col.left-column {
+        padding: 0 3px 0 10px
+      }
+
+      .wsmap-left-ad {
+        top: 0;
+        margin-bottom: 24px;
+        width: 100%;
+        min-height: 250px;
+        overflow: hidden
+      }
+    }
+
+    @media only screen and (max-width:992px) {
+      .sidenav .user-view {
+        padding: 16px 16px 0
+      }
+
+      .drag-bar {
+        display: none
+      }
+
+      #scrollToTopBtn {
+        display: flex
+      }
+    }
+    @media only screen and (min-width: 1440px) {
+      .row .col.left-column {
+        width: calc(25% - 10px);
+      }
+
+      .row .col.right-column {
+        width: calc(75%);
+      }
+
+      .wsmap-left-ad {
+        min-height: 400px;
+      }
+    }
+  </style>
+  <!-- prefetch pobierze wcześnie, ale styl wciąż blokuje 1. render -->
+  <link rel="preload" as="style" href="/themes/matbatflat/css/materialize.min.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/themes/matbatflat/css/materialize.min.css"></noscript>
 
 
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#da532c">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/pwa/ms-icon-144x144.png">
-  <meta property="og:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static' ?}">
+  <meta property="og:image"
+    content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static' ?}">
   <meta property="og:title" content="{$page.title}">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
@@ -75,27 +1381,63 @@
   <meta property="og:url" content="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{$page.title}">
-<meta name="twitter:description" content="{if: $page.desc}{$page.desc}{/if}">
-<meta name="twitter:image" content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static' ?}">
-<meta name="twitter:url" content="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
-<meta name="twitter:site" content="@wirtualneszlaki">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http" ) . "://$_SERVER[HTTP_HOST]" ."/feed" ?}" />
-<script>
-  const currentHash = window.location.hash.substring(1); // Usuwa znak #
-</script>
-  <script src="{$bat.theme}/js/preinit.js?2024-10-19-19-24-41" defer></script>
+  <meta name="twitter:description" content="{if: $page.desc}{$page.desc}{/if}">
+  <meta name="twitter:image"
+    content="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static' ?}">
+  <meta name="twitter:url" content="<?= 'https://' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') ?>">
+  <meta name="twitter:site" content="@wirtualneszlaki">
+  <link rel="alternate" type="application/rss+xml" title="RSS"
+    href="{?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? " https" : "http" ) . "://$_SERVER[HTTP_HOST]"
+    ."/feed" ?}" />
+  <script src="https://mapa.wirtualneszlaki.pl/app/js/jquery/3.7.1/jquery-3.7.1.min.js" defer></script>
+  <script src="{$bat.theme}/js/materialize.min.js" defer></script>
+
+  <script>
+    const currentHash = window.location.hash.substring(1); // Usuwa znak #
+  </script>
+  <script src="{$bat.theme}/js/preinit.js?2026-04-03-07-55-53" defer></script>
 
   {$snippet.google-ads}
-  
-  <script async src="https://fundingchoicesmessages.google.com/i/pub-6601178235337602?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
-<!-- Anti-flickering script -->
+
+  <script async src="https://fundingchoicesmessages.google.com/i/pub-6601178235337602?ers=1"></script>
+  <script>
+    (function () {
+      function signalGooglefcPresent() {
+        if (!window.frames['googlefcPresent']) {
+          if (document.body) {
+            const iframe = document.createElement('iframe');
+            iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+            iframe.style.display = 'none';
+            iframe.name = 'googlefcPresent';
+            document.body.appendChild(iframe);
+          } else {
+            setTimeout(signalGooglefcPresent, 0);
+          }
+        }
+      }
+      signalGooglefcPresent();
+    })();
+  </script>
+  <!-- Anti-flickering script -->
+
+  <!--
 <script>
-var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
+var  timeout = 300; // Timeout value to remove the flicker (in milliseconds)
 !function(h,i,d,e){var  t,n=h.createElement("style");n.id=e,n.innerHTML="body{opacity:0}",h.head.appendChild(n),t=d,i.rmfk=function(){var  t=h.getElementById(e);t&&t.parentNode.removeChild(t)},setTimeout(i.rmfk,t)}(document,window,timeout,"abhide");
 </script>
+-->
 
-<!-- Mida A/B Testing Script (Place in <HEAD> for speed & no flicker) -->
+  <!-- Mida A/B Testing Script (Place in <HEAD> for speed & no flicker) -->
+  <!-- 
 <script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=w6GQ23b4dM9rXdzEeKpkDq"></script>
+-->
+  <script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
+
+  <script defer src="{$bat.path}/app/js/script.min.js?2026-04-15-04-13-43"></script>
+
+  <script src="https://mapa.wirtualneszlaki.pl/app/js/map-utils.js?2026-04-03-07-56-09" defer></script>
+
+
 </head>
 
 <body>
@@ -108,31 +1450,41 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
       <nav class="white">
         <div class="nav-wrapper row">
           <div id="announcement-bar" class="col s12">
-          <div class="announcement-content">
-            {$snippet.announcement-bar}	
-            <button id="close-announcement" class="close-btn" aria-label="Zamknij ogłoszenie">
-              <i class="material-icons">close</i>
-            </button>
+            <div class="announcement-content">
+              {$snippet.announcement-bar}
+              <button id="close-announcement" class="close-btn" aria-label="Zamknij ogłoszenie">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
           </div>
-         </div>
           <div class="col s12">
             <a id="logo-container" class="brand-logo" href="{$bat.path}/">
               <img class="brand-logo-image" width="48" height="47" alt="Logo serwisu {$settings.title}"
-                src="{$bat.theme}/img/wirtualneszlaki-logo.svg" >
-              <span class="brand-logo-text">{$settings.title}</span>
+                src="{$bat.theme}/img/wirtualneszlaki-logo.svg">
+              <span class="brand-logo-text-wrap">
+                <span class="brand-logo-main">{$settings.title}</span>
+                <span class="brand-logo-sub">Wirtualne Szlaki</span>
+              </span>
+
             </a>
-            <a href="#!" data-target="sidenav-left" class="sidenav-trigger right tooltipped" data-position="bottom" data-tooltip="Otwórz ustawienia mapy" >
+            <a style="display:none" id="header-focffee-button" class="modal-trigger" data-target="modal-coffee">
+              <img src="https://buycoffee.to/img/share-button-primary.png"
+                style="vertical-align: middle; width: 146px; height: 38px" alt="Postaw mi kawę na buycoffee.to">
+            </a>
+            <a href="#!" data-target="sidenav-left" class="sidenav-trigger right tooltipped" data-position="bottom"
+              data-tooltip="Otwórz ustawienia mapy">
               <i class="material-icons orange-text">menu</i>
             </a>
             <ul class="right map-layer tooltipped" data-position="bottom" data-tooltip="Zmień warstwy mapy">
-              <li class=""><a class="dropdown-trigger map-dropdown"  href="#!" data-target="dropdown-map"><i
+              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-map"><i
                     class="material-icons right">layers</i></a>
                 <ul id="dropdown-map" class="dropdown-content" tabindex="0" style="">
                 </ul>
               </li>
             </ul>
-            <ul class="right map-search tooltipped" data-position="bottom" data-tooltip="Wyszukiwarka miejsc i miejscowości">
-              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search" ><i
+            <ul class="right map-search tooltipped" data-position="bottom"
+              data-tooltip="Wyszukiwarka miejsc i miejscowości">
+              <li class=""><a class="dropdown-trigger map-dropdown" href="#!" data-target="dropdown-search"><i
                     class="material-icons right">search</i></a>
                 <ul id="dropdown-search" class="dropdown-content" tabindex="0" style="">
                 </ul>
@@ -143,15 +1495,15 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
 
             <ul class="right hide-on-med-and-down">
 
-              <li id="jak_korzystac" class="tooltipped" data-position="bottom" data-tooltip="Uruchm przewodnik">Jak korzystać z mapy?</li>
+              <li id="jak_korzystac" class="tooltipped" data-position="bottom" data-tooltip="Uruchm przewodnik">Jak
+                korzystać z mapy?</li>
               {$navigation.main}
-              <!--
               <li>
                 <a class="modal-trigger" data-target="modal-coffee">
-                  <img src="https://buycoffee.to/img/share-button-primary.png" style="vertical-align: middle; width: 146px; height: 38px" alt="Postaw mi kawę na buycoffee.to">
-                </a>              
+                  <img src="https://buycoffee.to/img/share-button-primary.png"
+                    style="vertical-align: middle; width: 146px; height: 38px" alt="Postaw mi kawę na buycoffee.to">
+                </a>
               </li>
-              -->
             </ul>
           </div>
         </div>
@@ -159,7 +1511,7 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
     </div>
     <nav style="height: auto;">
       <ul id="sidenav-left" class="sidenav" style="transform: translateX(-105%);">
-        <li>
+        <li class="switch-map-option">
           <div class="switch">
             <label>
               <input id="mapgest_switch" type="checkbox" checked>
@@ -168,7 +1520,7 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
             </label>
           </div>
         </li>
-        <li>
+        <li class="switch-map-option">
           <div class="switch">
             <label>
               <input id="googleads_switch" type="checkbox" checked>
@@ -177,16 +1529,25 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
             </label>
           </div>
         </li>
-        <li>
+        <li class="switch-map-option">
           <div class="switch">
             <label>
               <input id="elepointslimit_switch" type="checkbox" checked>
               <span class="lever"></span>
-              Optymalizacja pobieranej trasy GPX do max. 600 pkt.
+              Optymalizacja  trasy przy EKSPORCIE do max. 600 pkt.
             </label>
           </div>
         </li>
-        <li>
+        <li class="switch-map-option">
+          <div class="switch">
+            <label>
+              <input id="elepointsImportlimit_switch" type="checkbox" checked>
+              <span class="lever"></span>
+              Optymalizacja trasy przy IMPORCIE do max. 1000 pkt.
+            </label>
+          </div>
+        </li>
+        <li class="switch-map-option">
           <div class="switch">
             <label>
               <input id="contextmenu_switch" type="checkbox" checked>
@@ -195,7 +1556,7 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
             </label>
           </div>
         </li>
-        <li>
+        <li class="switch-map-option">
           <div class="switch">
             <label>
               <input id="centermarker_switch" type="checkbox">
@@ -207,8 +1568,9 @@ var  timeout = 3000; // Timeout value to remove the flicker (in milliseconds)
         {$navigation.main}
         <li>
           <a class="modal-trigger" data-target="modal-coffee">
-            <img src="https://buycoffee.to/img/share-button-primary.png" style="vertical-align: middle; width: 146px; height: auto" alt="Postaw mi kawę na buycoffee.to">
-          </a>        
+            <img src="https://buycoffee.to/img/share-button-primary.png"
+              style="vertical-align: middle; width: 146px; height: auto" alt="Postaw mi kawę na buycoffee.to">
+          </a>
         </li>
 
 
