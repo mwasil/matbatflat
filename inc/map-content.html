@@ -80,36 +80,41 @@
             </div>
         {/if}
         <script src="https://mapa.wirtualneszlaki.pl/app/js/leaflet.popup-portal.js?v=1.1.0-2026-04-09" defer></script>
-        <script src="https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2026-04-16-06-17-06" defer></script>
+        <script src="https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2026-05-29-18-20-00" defer></script>
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
                 "@type": "WebPage",
                 "name": "{$page.title}",
                 "url": "https://mapa.wirtualneszlaki.pl/{$page.slug}",
-                "datePublished": "{$page.date}",
+                "datePublished": "{?= date('c', strtotime($page['date'])) ?}",
                 "dateModified": "{?= date('Y-m-d', strtotime('last wednesday')) ?}",
+                "author": {
+                    "@id": "#map-author"
+                },
                 
                 "mainEntity": {
                     "@type": "Map",
                     "url": "https://mapa.wirtualneszlaki.pl/{$page.slug}#map",
                     "name": "Mapa - {$page.title}",
                     "inLanguage": "pl",
+                    "author": {
+                        "@id": "#map-author"
+                    },
                     "creator": {
-                        "@type": "Person",
-                        "name": "Marcin Wasilewski",
-                        "email": "mailto:poczta@wirtualneszlaki.pl",
-                        "telephone": "+48 797 934 718",
-                        "sameAs": "https://www.linkedin.com/in/marcin-wasilewski-95279b36/"
+                        "@type": "Organization",
+                        "@id": "https://wirtualneszlaki.pl/#Organization",
+                        "name": "Wirtualne Szlaki",
+                        "url": "https://wirtualneszlaki.pl/"
                     }
                 },
                 
                 "publisher": {
                     "@type": "Organization",
-                    "@id": "https://wirtualneszlaki.pl#Organization",
+                    "@id": "https://wirtualneszlaki.pl/#Organization",
                     "name": "Wirtualne Szlaki",
                     "description": "Wirtualne Szlaki to platforma udostępniająca informacje o szlakach i interaktywne mapy turystyczne, pomagające w planowaniu podróży i wycieczek po Polsce.",
-                    "url": "https://wirtualneszlaki.pl",
+                    "url": "https://wirtualneszlaki.pl/",
                     "sameAs": [
                         "https://www.facebook.com/wirtualneszlaki",
                         "https://instagram.com/wirtualneszlaki",
@@ -131,6 +136,11 @@
                     "height": "1000"
                 },
                 
-                "significantLink": "https://mapa.wirtualneszlaki.pl/{$page.slug}#map"
+                "significantLink": "https://mapa.wirtualneszlaki.pl/{$page.slug}#map",
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "Wirtualne Szlaki - mapa",
+                    "url": "https://mapa.wirtualneszlaki.pl/"
+                }
             }
             </script>
