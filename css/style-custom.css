@@ -265,6 +265,38 @@ article li:not(.dropdown-content li):not(#mapSearchList li) {
   margin: 0;
 }
 
+/* LRM: wycentrowanie ikonki zwijania/rozwijania w obu stanach. */
+.leaflet-routing-container .leaflet-routing-collapse-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+}
+
+.leaflet-routing-container.leaflet-routing-container-hide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.leaflet-routing-container.leaflet-routing-container-hide .leaflet-routing-collapse-btn {
+  position: static !important;
+  width: 32px !important;
+  height: 32px !important;
+  left: auto !important;
+  top: auto !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: 18px 18px !important;
+}
+
 .static .iframe-hidden,
 .static .navbar-fixed,
 .static footer,
@@ -588,7 +620,7 @@ announcement-content a:hover {
   justify-content: center !important;
   align-items: center;
   gap: 10px;
-
+  padding: 0 5px;
   width: 100%;
   margin: 8px auto;
   text-align: center;
