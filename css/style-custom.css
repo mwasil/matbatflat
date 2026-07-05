@@ -609,9 +609,16 @@ announcement-content a:hover {
   vertical-align: middle;
 }
 
-#modal-coffee {
+#modal-coffee,
+#modal-coffee-download {
   z-index: 9999 !important;
   max-height: 80% !important;
+}
+
+.coffee-modal-buycoffee-image {
+  width: 293px;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Blok pobierania trasy – trzyma wszystko w jednej linii */
