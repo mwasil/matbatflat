@@ -1,0 +1,131 @@
+{template: inc/header-materialize.html}
+
+{? $split_content = (strpos($page['content'], ':::') !== false) ? preg_split('/<[^>]+>:::<\/[^>]+>|:::/', $page['content'], (substr_count($page['content'], ':::') >= 2 ? 3 : 2)) : false ?}
+{if: !$split_content}
+{? $split_content = (strpos($page['content'], ':::') !== false) ? explode(':::', $page['content']) : false ?}
+{/if}
+{if: $split_content}
+    {if: count($split_content) > 1}
+        {? $page['intro'] = $split_content[0] ?}
+        {? $page['content'] = $split_content[1] ?}
+        {if: $split_content[2]}{? $page['belowcontent'] = $split_content[2] ?}{/if}
+    {else}
+        {? $page['content'] = $split_content[0] ?}
+    {/if}
+{/if}
+
+<main>
+    <article class="ws3d-template {$page.slug}" id="{$page.slug}">
+        <header class="intro-header">
+            <div class="section no-pad-bot" id="index-banner">
+                <div class="container valign">
+                    <h1 class="header center orange-text">{$page.title}</h1>
+                    <div class="row center">
+                        <div class="header wsmap-desc col s12">
+                            {if: $page.intro}{$page.intro}{elseif: $page.desc}{$page.desc}{else}{$settings.description}{/if}
+
+
+                        
+                          <!-- Dropdown Trigger -->
+                        <span class='dropdown-trigger hide-on-large-only btn' href='#' data-target='toc'>Spis treści</span>
+                        <!-- Dropdown Structure -->
+                        <ul id='toc' class='dropdown-content'>
+                            <li><a href="#map-3d"><strong class="text-bold">{$page.title}</strong></a></li>
+                        </ul>
+                        <a class="btn pushpin show-on-med-and-down hide-on-large-only" href="#map-3d">Przewiń do mapy </a>
+                        </div>
+                        <div class="iframe-hidden col s12" aria-hidden="true">
+                            {template: inc/reklamowka_header_footer.html}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container-fluid">
+            <div class="section">
+                <div class="row resizable-columns-row ws3d-map-layout">
+                    <aside class="col s12 m12 l3 resizable-column left-column ws3d-sidebar" aria-label="Treść strony">
+                        {if: $bat.notify}
+                        <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
+                        {/if}
+                        <div id="wsmap-content">
+                            <section id="wsmap-search-section">
+                                {$page.content}
+                            </section>
+                        </div>
+                    </aside>
+
+                    <div class="drag-bar" aria-hidden="true"><span class="toggle-arrow">&lsaquo;</span></div>
+
+                    <div class="col s12 m12 l9 resizable-column right-column ws3d-map-column">
+                        <section>
+                            <h2 class="wsmpap-header grey-text">{$page.title} <span>(interaktywna mapa 3D)</span></h2>
+                            <div id="map-3d" class="ws3d-shell anchor">
+                                <div id="map-3d-canvas" class="ws3d-canvas" aria-label="Interaktywna mapa trójwymiarowa"></div>
+
+                                <aside id="ws3d-layer-panel" class="ws3d-panel" aria-label="Warstwy mapy">
+                                    <div class="ws3d-panel-header">
+                                        <div>
+                                            <span class="ws3d-eyebrow">Warstwy</span>
+                                            <h2>Mapa 3D</h2>
+                                        </div>
+                                        <button id="ws3d-panel-close" class="ws3d-icon-button" type="button" aria-label="Zwiń panel warstw">×</button>
+                                    </div>
+
+                                    <div class="ws3d-terrain-controls">
+                                        <div class="ws3d-switch-row">
+                                            <span><strong>Rzeźba terenu</strong><small>DEM i perspektywa 3D</small></span>
+                                            <div class="switch"><label aria-label="Włącz rzeźbę terenu"><input id="ws3d-terrain-toggle" type="checkbox" checked><span class="lever"></span></label></div>
+                                        </div>
+                                        <label class="ws3d-range-row" for="ws3d-exaggeration">
+                                            <span>Przewyższenie</span><input id="ws3d-exaggeration-value" class="ws3d-exaggeration-value" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Mnożnik przewyższenia DEM" value="1,0×">
+                                        </label>
+                                        <input id="ws3d-exaggeration" type="range" min="0.5" max="3" step="0.05" value="1.0">
+                                    </div>
+
+                                    <div class="ws3d-search">
+                                        <label>
+                                            <span class="ws3d-visually-hidden">Filtruj warstwy</span>
+                                            <input id="ws3d-layer-filter" type="search" placeholder="Filtruj warstwy…">
+                                        </label>
+                                        <button id="ws3d-layer-filter-clear" type="button" aria-label="Wyczyść wyszukiwanie" title="Wyczyść wyszukiwanie" hidden>×</button>
+                                    </div>
+
+                                    <div class="ws3d-layer-scroll">
+                                        <section class="ws3d-layer-section"><h3><button class="ws3d-layer-section-toggle" type="button" aria-expanded="true"><span>Podkłady</span></button></h3><div id="ws3d-base-layers" class="ws3d-layer-list"></div></section>
+                                        <section class="ws3d-layer-section"><h3><button class="ws3d-layer-section-toggle" type="button" aria-expanded="true"><span>Nakładki</span></button></h3><div id="ws3d-overlays" class="ws3d-layer-list"></div></section>
+                                    </div>
+
+                                    <div class="ws3d-panel-footer">
+                                        <button id="ws3d-copy-link" type="button">Kopiuj link</button>
+                                        <span id="ws3d-status" role="status">Uruchamianie mapy…</span>
+                                    </div>
+                                </aside>
+                                <button id="ws3d-panel-open" class="ws3d-panel-open" type="button" aria-label="Pokaż warstwy">Warstwy</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {if: $page.belowcontent}
+        <div class="container" id="below-content-container">
+            <div class="section"><div class="row"><div class="col s12">{$page.belowcontent}</div></div></div>
+        </div>
+        {/if}
+    </article>
+</main>
+
+<link rel="stylesheet" href="{$bat.path}/3d/vendor/maplibre-gl/maplibre-gl.css">
+<script>(function () { if (new URLSearchParams(window.location.search).get('type') === 'static') document.documentElement.classList.add('ws3d-static'); }());</script>
+<link rel="stylesheet" href="{$bat.path}/3d/css/map-3d.css?v=20260804a">
+<script defer src="{$bat.path}/3d/vendor/maplibre-gl/maplibre-gl.js"></script>
+<script defer src="{$bat.path}/3d/vendor/pmtiles/pmtiles.js"></script>
+<script defer charset="utf-8" src="{$bat.path}/3d/js/config.js?v=2026-08-05-09-53-00"></script>
+<script defer charset="utf-8" src="{$bat.path}/3d/js/layers.js?v=2026-08-05-09-55-08"></script>
+<script defer charset="utf-8" src="{$bat.path}/3d/js/plugin-loader.js?v=20260728c"></script>
+<script defer charset="utf-8" src="{$bat.path}/3d/js/layer-search.js?v=20260728a"></script>
+<script defer charset="utf-8" src="{$bat.path}/3d/js/app.js?v=20260805h"></script>
+{template: inc/footer-materialize.html}

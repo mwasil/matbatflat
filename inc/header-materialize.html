@@ -1397,6 +1397,7 @@
   </script>
   <script src="{$bat.theme}/js/preinit.js?2026-04-03-07-55-53" defer></script>
 
+  <?php if (!isset($_GET['type']) || $_GET['type'] !== 'static'): ?>
   {$snippet.google-ads}
 
   <script async src="https://fundingchoicesmessages.google.com/i/pub-6601178235337602?ers=1"></script>
@@ -1418,6 +1419,7 @@
       signalGooglefcPresent();
     })();
   </script>
+  <?php endif; ?>
   <!-- Anti-flickering script -->
 
   <!--

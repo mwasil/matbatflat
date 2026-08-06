@@ -28,7 +28,7 @@ var searchDropdown, mapDropdown;
       console.warn("Błąd przy wywoływaniu resizableColumns:", e); 
     }
 
-    if ($('#map').length === 0) {
+    if ($('#map').length === 0 && $('#map-3d').length === 0) {
       $('.switch-map-option').css('display', 'none'); //ukryj opcje mapy w menu jeśli nie ma mapy
     }
 
