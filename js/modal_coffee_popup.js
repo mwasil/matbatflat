@@ -414,14 +414,14 @@ function startPopupCountdownIfEligible() {
     }
 
     popupCountdownStarted = true;
-    let secondsLeft = secondsUntilPopup;
+    let secondsLeft = coffeeExperimentContext.variantSeconds;
 
     if (coffeeModalDebugMode) {
         console.log(
             '%c[DEBUG] Osiągnięto ' +
                 minMapInteractionsToTrigger +
                 ' interakcje z mapą. Start odliczania: ' +
-                secondsUntilPopup +
+                coffeeExperimentContext.variantSeconds +
                 's.',
             'color: #4caf50; font-weight: bold;'
         );
@@ -578,10 +578,12 @@ function attachCoffeeExternalLinkObserver() {
         );
 
         const parentModal = link.closest('#modal-coffee-download');
-        sendCoffeeExperimentEvent('buycoffee_click', {
-            popup_type: parentModal ? 'download' : 'main',
-            popup_source: parentModal ? 'download' : coffeePopupOpenSource
-        });
+        if (parentModal || coffeePopupOpenSource === 'map_interaction' || coffeePopupOpenSource === 'manual') {
+            sendCoffeeExperimentEvent('buycoffee_click', {
+                popup_type: parentModal ? 'download' : 'main',
+                popup_source: parentModal ? 'download' : coffeePopupOpenSource
+            });
+        }
     }, true);
 }
 
@@ -819,10 +821,12 @@ $(document).ready(function () {
     $('#modal-coffee').modal({
         onOpenStart: function () {
             coffeePopupOpenStartedAt = Date.now();
-            sendCoffeeExperimentEvent('popup_shown', {
-                popup_type: 'main',
-                popup_source: coffeePopupOpenSource
-            });
+            if (coffeePopupOpenSource === 'map_interaction' || coffeePopupOpenSource === 'manual') {
+                sendCoffeeExperimentEvent('popup_shown', {
+                    popup_type: 'main',
+                    popup_source: coffeePopupOpenSource
+                });
+            }
             sendCoffeeModalShownEvent();
         },
         onCloseStart: function () {
