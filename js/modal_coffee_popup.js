@@ -2,7 +2,9 @@
 const coffeeModalDebugMode = false;
 
 // --- Ustawienia Częstotliwości i Czasu ---
-const secondsUntilPopup = 20;             // ile sekund od 3. interakcji z mapą do pokazania pop-upu
+const coffeeExperimentName = 'coffee_popup_wait_time_v1';
+const coffeeExperimentVariants = [20, 40, 60];
+const coffeeExperimentEndpoint = '/stat/modal-coffee/collect.php';
 const minMapInteractionsToTrigger = 3;    // minimalna liczba interakcji z mapą, aby uruchomić odliczanie
 const intervalInHours = 24;               // minimalna przerwa między pokazaniami (w godzinach)
 const daysInLongBreak = 5;                // długość przerwy po zakończeniu cyklu (w dniach)
@@ -13,6 +15,7 @@ const downloadPopupDelayMs = 700;
 // Nazwa zdarzenia do GA4
 const eventName = 'modal_coffee_popup_shown';
 const buttonClickEventName = 'modal_coffee_button_click';
+const externalLinkClickEventName = 'modal_coffee_external_link_click';
 const downloadPopupEventName = 'modal_coffee_download_popup_shown';
 const fileDownloadEventName = 'map:file-download';
 
@@ -27,7 +30,178 @@ let lastDownloadSignalKey = '';
 let lastDownloadSignalTime = 0;
 let mapObserverAttached = false;
 let coffeeButtonObserverAttached = false;
+let coffeeExternalLinkObserverAttached = false;
 let lastCoffeeModalShownSignalTime = 0;
+let coffeePopupOpenStartedAt = 0;
+let coffeePopupOpenSource = 'manual';
+
+function getCoffeeExperimentContext() {
+    const storagePrefix = 'coffeeExperiment_' + coffeeExperimentName + '_';
+    const visitorStorageKey = storagePrefix + 'visitorId';
+    const variantStorageKey = storagePrefix + 'variantSeconds';
+
+    let visitorId = '';
+    let variantSeconds = 0;
+    let isNewAssignment = false;
+
+    try {
+        visitorId = localStorage.getItem(visitorStorageKey) || '';
+        if (!visitorId && window.crypto && typeof window.crypto.randomUUID === 'function') {
+            visitorId = window.crypto.randomUUID();
+        }
+        if (!visitorId) {
+            visitorId = 'v-' + Date.now().toString(36) + '-' +
+                Math.random().toString(36).slice(2, 12);
+        }
+        localStorage.setItem(visitorStorageKey, visitorId);
+
+        variantSeconds = parseInt(
+            localStorage.getItem(variantStorageKey) || '0',
+            10
+        );
+
+        if (coffeeExperimentVariants.indexOf(variantSeconds) === -1) {
+            variantSeconds = coffeeExperimentVariants[
+                Math.floor(Math.random() * coffeeExperimentVariants.length)
+            ];
+            localStorage.setItem(variantStorageKey, String(variantSeconds));
+            isNewAssignment = true;
+        }
+    } catch (error) {
+        visitorId = visitorId || 'session-' + Date.now().toString(36) + '-' +
+            Math.random().toString(36).slice(2, 12);
+    }
+
+    if (coffeeExperimentVariants.indexOf(variantSeconds) === -1) {
+        variantSeconds = coffeeExperimentVariants[0];
+        isNewAssignment = true;
+    }
+
+    return {
+        visitorId: visitorId,
+        variantSeconds: variantSeconds,
+        isNewAssignment: isNewAssignment
+    };
+}
+
+const coffeeExperimentContext = getCoffeeExperimentContext();
+
+function getCoffeeDeviceType() {
+    const width = window.innerWidth || document.documentElement.clientWidth || 0;
+
+    if (width < 768) {
+        return 'mobile';
+    }
+    if (width < 1024) {
+        return 'tablet';
+    }
+    return 'desktop';
+}
+
+function getCoffeePageContext() {
+    const pageUrl = window.location.href.split('#')[0];
+    const parsedUrl = new URL(pageUrl, window.location.origin);
+    let referrerHost = '';
+
+    if (document.referrer) {
+        try {
+            referrerHost = new URL(document.referrer).host;
+        } catch (error) {
+            referrerHost = '';
+        }
+    }
+
+    return {
+        page_url: pageUrl.slice(0, 1000),
+        page_path: (parsedUrl.pathname + parsedUrl.search).slice(0, 500),
+        device_type: getCoffeeDeviceType(),
+        viewport_width: window.innerWidth || document.documentElement.clientWidth || 0,
+        referrer_host: referrerHost.slice(0, 255)
+    };
+}
+
+function createCoffeeEventId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+    }
+
+    return 'e-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 14);
+}
+
+function sendCoffeeExperimentEvent(eventType, details) {
+    const payload = Object.assign({
+        event_id: createCoffeeEventId(),
+        event_type: eventType,
+        experiment_name: coffeeExperimentName,
+        variant_seconds: coffeeExperimentContext.variantSeconds,
+        visitor_id: coffeeExperimentContext.visitorId,
+        client_timestamp: Date.now(),
+        popup_type: 'main',
+        popup_source: 'map_interaction'
+    }, getCoffeePageContext(), details || {});
+
+    const body = JSON.stringify(payload);
+    const endpoint = new URL(coffeeExperimentEndpoint, window.location.origin).href;
+
+    try {
+        if (navigator.sendBeacon) {
+            const accepted = navigator.sendBeacon(
+                endpoint,
+                new Blob([body], { type: 'application/json' })
+            );
+            if (accepted) {
+                return;
+            }
+        }
+    } catch (error) {
+        // Fallback below handles browsers that reject sendBeacon requests.
+    }
+
+    if (typeof window.fetch === 'function') {
+        window.fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: body,
+            keepalive: true,
+            credentials: 'same-origin'
+        }).catch(function () {});
+    }
+}
+
+function sendCoffeeExperimentAssignmentIfNeeded() {
+    if (!coffeeExperimentContext.isNewAssignment) {
+        return;
+    }
+
+    sendCoffeeExperimentEvent('experiment_assigned', {
+        popup_type: 'main',
+        popup_source: 'assignment'
+    });
+}
+
+function recordCoffeePopupClosed(closeReason) {
+    if (!coffeePopupOpenStartedAt) {
+        return;
+    }
+
+    const popupType = $('#modal-coffee-download').hasClass('open') ? 'download' : 'main';
+    const popupSource = popupType === 'download' ? 'download' : coffeePopupOpenSource;
+
+    sendCoffeeExperimentEvent('popup_closed', {
+        popup_type: popupType,
+        popup_source: popupSource,
+        close_reason: closeReason || 'modal',
+        duration_seconds: Math.max(
+            0,
+            (Date.now() - coffeePopupOpenStartedAt) / 1000
+        )
+    });
+    coffeePopupOpenStartedAt = 0;
+}
+
+window.addEventListener('pagehide', function () {
+    recordCoffeePopupClosed('pagehide');
+});
 
 // Funkcja do wysyłania zdarzenia do GA4
 function sendGA4Event(customEventName, customEventLabel) {
@@ -82,6 +256,7 @@ function showCoffeePopup(state) {
         );
     }
 
+    coffeePopupOpenSource = 'map_interaction';
     $('#modal-coffee').modal('open');
     sendCoffeeModalShownEvent();
     popupAlreadyShownThisSession = true;
@@ -358,6 +533,7 @@ function attachCoffeeButtonObserver() {
             return;
         }
 
+        coffeePopupOpenSource = 'manual';
         sendGA4Event(buttonClickEventName, 'Postaw_kawe_przycisk');
 
         window.setTimeout(function () {
@@ -375,6 +551,37 @@ function attachCoffeeButtonObserver() {
                 sendCoffeeModalShownEvent();
             }
         }, 0);
+    }, true);
+}
+
+function attachCoffeeExternalLinkObserver() {
+    if (coffeeExternalLinkObserverAttached) {
+        return;
+    }
+
+    coffeeExternalLinkObserverAttached = true;
+
+    document.addEventListener('click', function (event) {
+        const link = event.target && event.target.closest ?
+            event.target.closest(
+                '#modal-coffee a[href^="https://buycoffee.to/"], ' +
+                '#modal-coffee-download a[href^="https://buycoffee.to/"]'
+            ) : null;
+
+        if (!link) {
+            return;
+        }
+
+        sendGA4Event(
+            externalLinkClickEventName,
+            'Postaw_kawe_link_buycoffee'
+        );
+
+        const parentModal = link.closest('#modal-coffee-download');
+        sendCoffeeExperimentEvent('buycoffee_click', {
+            popup_type: parentModal ? 'download' : 'main',
+            popup_source: parentModal ? 'download' : coffeePopupOpenSource
+        });
     }, true);
 }
 
@@ -611,7 +818,15 @@ attachCoffeeButtonObserver();
 $(document).ready(function () {
     $('#modal-coffee').modal({
         onOpenStart: function () {
+            coffeePopupOpenStartedAt = Date.now();
+            sendCoffeeExperimentEvent('popup_shown', {
+                popup_type: 'main',
+                popup_source: coffeePopupOpenSource
+            });
             sendCoffeeModalShownEvent();
+        },
+        onCloseStart: function () {
+            recordCoffeePopupClosed('modal');
         },
         onCloseEnd: function () {
             if (downloadPopupPending) {
@@ -624,12 +839,18 @@ $(document).ready(function () {
     $('#modal-coffee-download').modal({
         onOpenStart: function () {
             localStorage.setItem('lastCoffeeDownloadPopup', String(Date.now()));
+            coffeePopupOpenStartedAt = Date.now();
+            sendCoffeeExperimentEvent('popup_shown', {
+                popup_type: 'download',
+                popup_source: 'download'
+            });
             sendGA4Event(
                 downloadPopupEventName,
                 'Popup_wsparcie_po_pobraniu'
             );
         },
         onCloseStart: function () {
+            recordCoffeePopupClosed('modal');
             animateDownloadCoffeeModalClose();
         }
     });
@@ -637,6 +858,8 @@ $(document).ready(function () {
     document.addEventListener(fileDownloadEventName, requestDownloadCoffeePopup);
     attachFileDownloadObserver();
     attachCoffeeButtonObserver();
+    attachCoffeeExternalLinkObserver();
+    sendCoffeeExperimentAssignmentIfNeeded();
 
     getPopupEligibilityState();
     attachMapInteractionObserver();
