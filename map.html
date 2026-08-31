@@ -27,15 +27,15 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Ładujemy map-utils.js
             var utilsScript = document.createElement('script');
-            utilsScript.src = "https://mapa.wirtualneszlaki.pl/app/js/map-utils.js?2024-10-11-14-00-00";
+            utilsScript.src = "https://mapa.wirtualneszlaki.pl/app/js/map-utils.js?2026-08-31-11-05-00";
             utilsScript.onload = function () {
                 // Po załadowaniu map-utils.js, ładujemy mapa.js
                 var mapaScript = document.createElement('script');
-                mapaScript.src = "https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2024-10-10-13-37-43";
+                mapaScript.src = "https://mapa.wirtualneszlaki.pl/app/js/mapa.js?2026-08-31-11-05-00";
                 mapaScript.onload = function () {
                     // Po zakończeniu ładowania mapa.js, ładowanie init.js
                     var initScript = document.createElement('script');
-                    initScript.src = "{$bat.theme}/js/init.js?2024-10-10-13-37-56";
+                    initScript.src = "{$bat.theme}/js/init.js?2026-08-31-11-05-00";
                     document.body.appendChild(initScript);
                 };
                 document.body.appendChild(mapaScript);
@@ -102,5 +102,5 @@
     </article>
 </article>
 <script src="https://mapa.wirtualneszlaki.pl/app/js/jquery/3.7.1/jquery-3.7.1.min.js"></script>
-<script src="{$bat.theme}/js/init.js"></script>
+<script src="{$bat.theme}/js/init.js?2026-08-31-11-05-00"></script>
 {template: inc/footer-materialize.html}

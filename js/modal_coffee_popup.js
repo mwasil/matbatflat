@@ -819,6 +819,7 @@ attachCoffeeButtonObserver();
 
 $(document).ready(function () {
     $('#modal-coffee').modal({
+        preventScrolling: false,
         onOpenStart: function () {
             coffeePopupOpenStartedAt = Date.now();
             if (coffeePopupOpenSource === 'map_interaction' || coffeePopupOpenSource === 'manual') {
@@ -841,6 +842,7 @@ $(document).ready(function () {
     });
 
     $('#modal-coffee-download').modal({
+        preventScrolling: false,
         onOpenStart: function () {
             localStorage.setItem('lastCoffeeDownloadPopup', String(Date.now()));
             coffeePopupOpenStartedAt = Date.now();

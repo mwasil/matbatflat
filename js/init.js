@@ -7,6 +7,13 @@ var searchDropdown, mapDropdown;
 (function ($) {
   $(function () {
 
+    // Nie blokuj przewijania strony przy modalach. Reklamy winietowe AdSense
+    // mogą otworzyć się podczas interakcji z modalem i błędnie przywrócić
+    // zapamiętany stan `overflow: hidden` na body po swoim zamknięciu.
+    if (window.M && M.Modal && M.Modal.defaults) {
+      M.Modal.defaults.preventScrolling = false;
+    }
+
     $('.sidenav').sidenav();
 
     $('.tooltipped').tooltip();
