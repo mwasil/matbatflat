@@ -2,8 +2,11 @@
 const coffeeModalDebugMode = false;
 
 // --- Ustawienia Częstotliwości i Czasu ---
-const coffeeExperimentName = 'coffee_popup_wait_time_v1';
-const coffeeExperimentVariants = [20, 40, 60];
+const coffeeExperimentName = 'coffee_popup_wait_time_v2';
+const coffeeExperimentVariants = [
+    { key: 'fixed20', label: '20 s — stałe', seconds: 20, idleSeconds: 0 },
+    { key: 'idle20_4', label: '20 s + 4 s bezczynności', seconds: 20, idleSeconds: 4 }
+];
 const coffeeExperimentEndpoint = '/stat/modal-coffee/collect.php';
 const minMapInteractionsToTrigger = 3;    // minimalna liczba interakcji z mapą, aby uruchomić odliczanie
 const intervalInHours = 24;               // minimalna przerwa między pokazaniami (w godzinach)
@@ -22,8 +25,13 @@ const fileDownloadEventName = 'map:file-download';
 // --- Stan sesji dotyczący zaangażowania w mapę ---
 let mapInteractionCount = 0;
 let popupCountdownStarted = false;
+let popupCountdownStartedAt = 0;
+let popupCountdownReady = false;
+let popupCountdownReadyAt = 0;
 let popupAlreadyShownThisSession = false;
 let countdownTimer = null;
+let popupIdleTimer = null;
+let lastMapInteractionAt = 0;
 let downloadPopupScheduled = false;
 let downloadPopupPending = false;
 let lastDownloadSignalKey = '';
@@ -38,10 +46,10 @@ let coffeePopupOpenSource = 'manual';
 function getCoffeeExperimentContext() {
     const storagePrefix = 'coffeeExperiment_' + coffeeExperimentName + '_';
     const visitorStorageKey = storagePrefix + 'visitorId';
-    const variantStorageKey = storagePrefix + 'variantSeconds';
+    const variantStorageKey = storagePrefix + 'variantKey';
 
     let visitorId = '';
-    let variantSeconds = 0;
+    let variantKey = '';
     let isNewAssignment = false;
 
     try {
@@ -55,16 +63,16 @@ function getCoffeeExperimentContext() {
         }
         localStorage.setItem(visitorStorageKey, visitorId);
 
-        variantSeconds = parseInt(
-            localStorage.getItem(variantStorageKey) || '0',
-            10
-        );
+        variantKey = localStorage.getItem(variantStorageKey) || '';
 
-        if (coffeeExperimentVariants.indexOf(variantSeconds) === -1) {
-            variantSeconds = coffeeExperimentVariants[
+        if (!coffeeExperimentVariants.some(function (variant) {
+            return variant.key === variantKey;
+        })) {
+            const assignedVariant = coffeeExperimentVariants[
                 Math.floor(Math.random() * coffeeExperimentVariants.length)
             ];
-            localStorage.setItem(variantStorageKey, String(variantSeconds));
+            variantKey = assignedVariant.key;
+            localStorage.setItem(variantStorageKey, variantKey);
             isNewAssignment = true;
         }
     } catch (error) {
@@ -72,14 +80,21 @@ function getCoffeeExperimentContext() {
             Math.random().toString(36).slice(2, 12);
     }
 
-    if (coffeeExperimentVariants.indexOf(variantSeconds) === -1) {
-        variantSeconds = coffeeExperimentVariants[0];
+    let assignedVariant = coffeeExperimentVariants.find(function (variant) {
+        return variant.key === variantKey;
+    });
+    if (!assignedVariant) {
+        assignedVariant = coffeeExperimentVariants[0];
+        variantKey = assignedVariant.key;
         isNewAssignment = true;
     }
 
     return {
         visitorId: visitorId,
-        variantSeconds: variantSeconds,
+        variantKey: assignedVariant.key,
+        variantLabel: assignedVariant.label,
+        variantSeconds: assignedVariant.seconds,
+        idleSeconds: assignedVariant.idleSeconds,
         isNewAssignment: isNewAssignment
     };
 }
@@ -134,6 +149,10 @@ function sendCoffeeExperimentEvent(eventType, details) {
         event_type: eventType,
         experiment_name: coffeeExperimentName,
         variant_seconds: coffeeExperimentContext.variantSeconds,
+        variant_key: coffeeExperimentContext.variantKey,
+        variant_label: coffeeExperimentContext.variantLabel,
+        base_wait_seconds: coffeeExperimentContext.variantSeconds,
+        idle_wait_seconds: coffeeExperimentContext.idleSeconds,
         visitor_id: coffeeExperimentContext.visitorId,
         client_timestamp: Date.now(),
         popup_type: 'main',
@@ -389,6 +408,41 @@ function getPopupEligibilityState() {
 }
 
 // Start odliczania po osiągnięciu wymaganej liczby interakcji
+function clearPopupIdleTimer() {
+    if (popupIdleTimer) {
+        clearTimeout(popupIdleTimer);
+        popupIdleTimer = null;
+    }
+}
+
+function showPopupWhenIdleIfReady() {
+    if (!popupCountdownReady || popupAlreadyShownThisSession) {
+        return;
+    }
+
+    const freshState = getPopupEligibilityState();
+    if (!freshState.isEligible) {
+        popupCountdownReady = false;
+        clearPopupIdleTimer();
+        return;
+    }
+
+    const idleRequiredMs = coffeeExperimentContext.idleSeconds * 1000;
+    const idleSince = lastMapInteractionAt || popupCountdownReadyAt;
+    const idleElapsedMs = Math.max(0, Date.now() - idleSince);
+    const remainingMs = idleRequiredMs - idleElapsedMs;
+
+    if (remainingMs > 0) {
+        clearPopupIdleTimer();
+        popupIdleTimer = setTimeout(showPopupWhenIdleIfReady, remainingMs);
+        return;
+    }
+
+    popupCountdownReady = false;
+    clearPopupIdleTimer();
+    showCoffeePopup(freshState);
+}
+
 function startPopupCountdownIfEligible() {
     if (popupCountdownStarted) {
         if (coffeeModalDebugMode) {
@@ -414,7 +468,16 @@ function startPopupCountdownIfEligible() {
     }
 
     popupCountdownStarted = true;
-    let secondsLeft = coffeeExperimentContext.variantSeconds;
+    popupCountdownStartedAt = Date.now();
+    popupCountdownReady = false;
+    popupCountdownReadyAt = 0;
+
+    sendCoffeeExperimentEvent('popup_countdown_started', {
+        popup_type: 'main',
+        popup_source: 'diagnostic',
+        map_interaction_count: mapInteractionCount,
+        trigger_source: 'map_interaction'
+    });
 
     if (coffeeModalDebugMode) {
         console.log(
@@ -427,10 +490,9 @@ function startPopupCountdownIfEligible() {
         );
     }
 
-    countdownTimer = setInterval(() => {
-        if (secondsLeft <= 0) {
-            clearInterval(countdownTimer);
-            countdownTimer = null;
+    countdownTimer = setTimeout(() => {
+        clearTimeout(countdownTimer);
+        countdownTimer = null;
 
             const freshState = getPopupEligibilityState();
 
@@ -441,14 +503,18 @@ function startPopupCountdownIfEligible() {
                 return;
             }
 
-            showCoffeePopup(freshState);
-        } else {
-            if (coffeeModalDebugMode) {
-                console.log('[DEBUG] Sekundy do popupu:', secondsLeft);
-            }
-            secondsLeft--;
-        }
-    }, 1000);
+            popupCountdownReady = true;
+            popupCountdownReadyAt = Date.now();
+            sendCoffeeExperimentEvent('popup_countdown_ready', {
+                popup_type: 'main',
+                popup_source: 'diagnostic',
+                map_interaction_count: mapInteractionCount,
+                base_wait_elapsed_seconds: Math.round((popupCountdownReadyAt - popupCountdownStartedAt) / 10) / 100,
+                idle_required_seconds: coffeeExperimentContext.idleSeconds
+            });
+            showPopupWhenIdleIfReady();
+
+    }, coffeeExperimentContext.variantSeconds * 1000);
 }
 
 // Rejestracja interakcji z mapą
@@ -458,12 +524,24 @@ function registerMapInteraction(source) {
     }
 
     mapInteractionCount += 1;
+    lastMapInteractionAt = Date.now();
 
     if (coffeeModalDebugMode) {
         console.log(
             '%c[DEBUG] Interakcja mapy #' + mapInteractionCount + ' (' + source + ')',
             'color: #03a9f4; font-weight: bold;'
         );
+    }
+
+    if (popupCountdownReady && coffeeExperimentContext.idleSeconds > 0) {
+        sendCoffeeExperimentEvent('popup_deferred', {
+            popup_type: 'main',
+            popup_source: 'diagnostic',
+            map_interaction_count: mapInteractionCount,
+            deferred_by_source: source,
+            idle_required_seconds: coffeeExperimentContext.idleSeconds
+        });
+        showPopupWhenIdleIfReady();
     }
 
     if (mapInteractionCount >= minMapInteractionsToTrigger) {
@@ -823,10 +901,20 @@ $(document).ready(function () {
         onOpenStart: function () {
             coffeePopupOpenStartedAt = Date.now();
             if (coffeePopupOpenSource === 'map_interaction' || coffeePopupOpenSource === 'manual') {
-                sendCoffeeExperimentEvent('popup_shown', {
+                const popupShownDetails = {
                     popup_type: 'main',
                     popup_source: coffeePopupOpenSource
-                });
+                };
+                if (coffeePopupOpenSource === 'map_interaction') {
+                    popupShownDetails.map_interaction_count = mapInteractionCount;
+                    popupShownDetails.countdown_elapsed_seconds = popupCountdownStartedAt ?
+                        Math.round((Date.now() - popupCountdownStartedAt) / 10) / 100 : null;
+                    popupShownDetails.idle_seconds_before_showing = popupCountdownReadyAt ?
+                        Math.round((Date.now() - popupCountdownReadyAt) / 10) / 100 : 0;
+                    popupCountdownStartedAt = 0;
+                    popupCountdownReadyAt = 0;
+                }
+                sendCoffeeExperimentEvent('popup_shown', popupShownDetails);
             }
             sendCoffeeModalShownEvent();
         },
