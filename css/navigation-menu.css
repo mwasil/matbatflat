@@ -1,0 +1,197 @@
+.nav-menu-mobile-entry {
+  display: none !important;
+}
+
+.sidenav .nav-menu-desktop-entry {
+  display: none !important;
+}
+
+.nav-menu-desktop-entry {
+  position: relative;
+}
+
+.nav-menu-desktop-entry > .nav-menu-link {
+  display: inline-block;
+}
+
+.nav-desktop-list .nav-submenu > li {
+  display: block;
+  float: none !important;
+  width: auto;
+  line-height: 1.4;
+}
+
+.nav-desktop-list .nav-submenu > li > .nav-menu-link {
+  display: block;
+  height: auto;
+  padding: 10px 16px;
+  line-height: 1.4;
+  white-space: normal;
+}
+
+.nav-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 48px;
+  padding: 0 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nav-menu-toggle:focus-visible,
+.nav-menu-link:focus-visible,
+.mega-menu-panel a:focus-visible {
+  outline: 2px solid #ec6a20;
+  outline-offset: 2px;
+}
+
+.nav-menu-toggle:focus {
+  background: transparent;
+}
+
+.nav-menu-desktop-entry > .nav-submenu {
+  display: none;
+  position: absolute;
+  z-index: 10010;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  max-height: min(75vh, 680px);
+  margin: 0;
+  padding: 8px 0;
+  overflow: auto;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / .2);
+}
+
+.nav-menu-desktop-entry:hover > .nav-submenu:not(.mega-menu-panel),
+.nav-menu-desktop-entry:focus-within > .nav-submenu:not(.mega-menu-panel),
+.nav-menu-desktop-entry.is-open > .nav-submenu:not(.mega-menu-panel) {
+  display: block;
+}
+
+.nav-submenu .nav-menu-desktop-entry > .nav-submenu {
+  top: 0;
+  left: 100%;
+}
+
+.nav-menu-desktop-entry.mega-menu {
+  position: static;
+}
+
+.nav-menu-desktop-entry > .mega-menu-panel {
+  left: 50%;
+  width: min(1200px, calc(100vw - 32px));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 0 24px;
+  padding: 18px 24px;
+  transform: translateX(-50%);
+  border-top: 3px solid #ec6a20;
+}
+
+.nav-menu-desktop-entry:hover > .mega-menu-panel,
+.nav-menu-desktop-entry:focus-within > .mega-menu-panel,
+.nav-menu-desktop-entry.is-open > .mega-menu-panel {
+  display: grid;
+}
+
+.mega-menu-column {
+  float: none !important;
+  width: auto !important;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 12px;
+  line-height: 1.4;
+}
+
+.mega-menu-column > .mega-menu-heading {
+  display: block;
+  height: auto;
+  padding: 8px 0;
+  color: #169f95;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.mega-menu-links {
+  margin: 0;
+  padding: 0;
+}
+
+.mega-menu-links li {
+  float: none !important;
+  line-height: 1.35;
+}
+
+.mega-menu-links a {
+  display: block;
+  height: auto;
+  padding: 6px 0;
+  color: #333;
+  font-size: .95rem;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+@media only screen and (max-width: 992px) {
+  .nav-desktop-list > .nav-menu-desktop-entry {
+    display: none !important;
+  }
+
+  .sidenav .nav-menu-mobile-entry {
+    display: flex !important;
+    position: relative;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    min-height: 48px;
+    line-height: normal;
+  }
+
+  .sidenav .nav-menu-mobile-entry > .nav-menu-link {
+    display: block;
+    flex: 1 1 calc(100% - 48px);
+    width: auto;
+    height: auto;
+    min-height: 48px;
+    padding: 14px 8px 14px 32px;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+  }
+
+  .sidenav .nav-menu-mobile-entry > .nav-menu-toggle {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    color: rgba(0, 0, 0, .7);
+  }
+
+  .sidenav .nav-menu-mobile-entry > .nav-submenu {
+    position: static;
+    flex: 0 0 100%;
+    display: block;
+    width: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0 0 0 12px;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .sidenav .nav-menu-mobile-entry > .nav-submenu[hidden] {
+    display: none !important;
+  }
+
+  .sidenav .nav-menu-mobile-entry .nav-menu-link {
+    white-space: normal;
+  }
+}

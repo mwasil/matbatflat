@@ -1362,6 +1362,7 @@
   <!-- prefetch pobierze wcześnie, ale styl wciąż blokuje 1. render -->
   <link rel="preload" as="style" href="/themes/matbatflat/css/materialize.min.css" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="/themes/matbatflat/css/materialize.min.css"></noscript>
+  <link rel="stylesheet" href="{$bat.theme}/css/navigation-menu.css?v=20260926-1">
 
 
   <link rel="manifest" href="/manifest.json">
@@ -1495,7 +1496,7 @@ var  timeout = 300; // Timeout value to remove the flicker (in milliseconds)
             </ul>
 
 
-            <ul class="right hide-on-med-and-down">
+            <ul class="right hide-on-med-and-down nav-desktop-list">
 
               <li id="jak_korzystac" class="tooltipped" data-position="bottom" data-tooltip="Uruchm przewodnik">Jak
                 korzystać z mapy?</li>
@@ -1512,7 +1513,7 @@ var  timeout = 300; // Timeout value to remove the flicker (in milliseconds)
       </nav>
     </div>
     <nav style="height: auto;">
-      <ul id="sidenav-left" class="sidenav" style="transform: translateX(-105%);">
+      <ul id="sidenav-left" class="sidenav nav-mobile-list" style="transform: translateX(-105%);">
         <li class="switch-map-option">
           <div class="switch">
             <label>
@@ -1567,7 +1568,7 @@ var  timeout = 300; // Timeout value to remove the flicker (in milliseconds)
             </label>
           </div>
         </li>
-        {$navigation.main}
+        {$navigation.main_mobile}
         <li>
           <a class="modal-trigger" data-target="modal-coffee">
             <img src="https://buycoffee.to/img/share-button-primary.png"
