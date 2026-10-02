@@ -55,7 +55,7 @@
                     <div class="col s12 m12 l9 resizable-column right-column">
                             <section>
                             <h2 class="wsmpap-header grey-text">{$page.title} <span>(interaktywna mapa online)</span></h2>
-                            <div id="map"  class="scrollspy">
+                            <div id="map"  class="scrollspy" {if: $wsPhysicalMap3D}data-physical-map="{?= wsPhysicalMapPage($page['slug'])['key'] ?}"{/if}>
                                 <picture id="static-map-container" >
                                         <!-- Mapa dla smartfonów -->
                                         <source media="(max-width: 767px)" srcset="https://static.wirtualneszlaki.pl/?url={?= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . '?type=static&width=640&height=640' ?}">
@@ -79,8 +79,42 @@
                 </div>
             </div>
         {/if}
+        {if: $wsPhysicalMap3D}
+        <link rel="stylesheet" href="/3d/vendor/maplibre-gl/maplibre-gl.css">
+        <link rel="stylesheet" href="/3d/css/physical-map-v4.css?v=20261002-shared1">
+        <link rel="stylesheet" href="/3d/css/physical-map-v5.css?v=20261002-shared1">
+        <link rel="stylesheet" href="/3d/plugins/geocoder.css?v=20260810c">
+        <link rel="stylesheet" href="/3d/plugins/fullscreen.css?v=20260929-shared1">
+        <link rel="stylesheet" href="/3d/plugins/location.css?v=20260810a">
+        <link rel="stylesheet" href="/3d/plugins/reset-view.css?v=20260929-shared1">
+        <link rel="stylesheet" href="/3d/plugins/gesture-handling.css?v=20260929-shared2">
+        <link rel="stylesheet" href="/3d/css/layer-panel.css?v=20261001-group-sort1">
+        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261002-1">
+        <script defer src="/3d/js/topo-style.js?v=20260814l"></script>
+        <script defer src="/3d/js/neutral-style.js?v=20260813a"></script>
+        <script defer src="/3d/js/config.js?v=20260920-layercompatD"></script>
+        <script defer src="/3d/vendor/maplibre-gl/maplibre-gl.js"></script>
+        <script defer src="/3d/js/physical-base-layers.js?v=20261002-shared1"></script>
+        <script defer src="/3d/plugins/fullscreen.js?v=20260929-shared1"></script>
+        <script defer src="/3d/plugins/location.js?v=20260810a"></script>
+        <script defer src="/3d/plugins/reset-view.js?v=20260929-shared1"></script>
+        <script defer src="/3d/plugins/gesture-handling.js?v=20260929-shared2"></script>
+        <script defer src="/3d/js/layer-panel.js?v=20261001-group-sort2"></script>
+        <script defer src="/3d/plugins/geocoder.js?v=20261002-europe-config1"></script>
+        <script defer src="/3d/js/renderer-state.js?v=20261002-shared1"></script>
+        <script defer src="/3d/js/physical-map-bridges.js?v=20261002-shared1"></script>
+        <script defer src="/3d/js/physical-map.js?v=20261002-shared3"></script>
+        <script defer src="{?= wsPhysicalMapPage($page['slug'])['adapter'] ?}?v=20261002-1"></script>
+        {else}
         <script src="https://mapa.wirtualneszlaki.pl/app/js/leaflet.popup-portal.js?v=1.1.0-2026-04-09" defer></script>
         <script src="https://mapa.wirtualneszlaki.pl/app/js/mapa.js?20260918-manualqr2" defer></script>
+        {if: wsPhysicalMapPage($page['slug'] ?? '') && ($_GET['type'] ?? '') !== 'static'}
+        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261002-3">
+        <script defer src="/3d/js/renderer-state.js?v=20261002-shared1"></script>
+        <script defer src="/3d/js/physical-map-bridges.js?v=20261002-shared1"></script>
+        <script defer src="/app/js/maplibre/physical-leaflet-switch.js?v=20261002-1"></script>
+        {/if}
+        {/if}
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",

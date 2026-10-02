@@ -1434,11 +1434,14 @@ var  timeout = 300; // Timeout value to remove the flicker (in milliseconds)
   <!-- 
 <script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=w6GQ23b4dM9rXdzEeKpkDq"></script>
 -->
+  {? $wsPhysicalMap3D = (require_once $_SERVER['DOCUMENT_ROOT'] . '/app/map-renderers.php') && wsPhysicalMapUsesMapLibre($page['slug'] ?? '') ?}
+  {if: !$wsPhysicalMap3D}
   <script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
 
   <script defer src="{$bat.path}/app/js/script.min.js?2026-04-15-04-13-43"></script>
 
   <script src="https://mapa.wirtualneszlaki.pl/app/js/map-utils.js?2026-09-18-21-00-00" defer></script>
+  {/if}
 
 
 </head>
