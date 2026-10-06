@@ -1435,6 +1435,7 @@ var  timeout = 300; // Timeout value to remove the flicker (in milliseconds)
 <script type="text/javascript" async src="https://cdn.mida.so/js/optimize.js?key=w6GQ23b4dM9rXdzEeKpkDq"></script>
 -->
   {? $wsPhysicalMap3D = (require_once $_SERVER['DOCUMENT_ROOT'] . '/app/map-renderers.php') && wsPhysicalMapUsesMapLibre($page['slug'] ?? '') ?}
+  {? $wsStaticPhysicalMap = wsPhysicalMapPage($page['slug'] ?? '') !== null && ($_GET['type'] ?? '') === 'static' ?}
   {if: !$wsPhysicalMap3D}
   <script defer src="{$bat.path}/app/js/proj4-compressed.js"></script>
 
@@ -1446,7 +1447,7 @@ var  timeout = 300; // Timeout value to remove the flicker (in milliseconds)
 
 </head>
 
-<body>
+<body{if: $wsStaticPhysicalMap} class="ws-static-map"{/if}>
   {$snippet.gtm-body}
   <!-- Announcement Bar HTML -->
 
