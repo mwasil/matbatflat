@@ -91,7 +91,7 @@
         <link rel="stylesheet" href="/3d/plugins/reset-view.css?v=20260929-shared1">
         <link rel="stylesheet" href="/3d/plugins/gesture-handling.css?v=20260929-shared2">
         <link rel="stylesheet" href="/3d/css/layer-panel.css?v=20261001-group-sort1">
-        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-static5">
+        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-switch1">
         <script defer src="/3d/js/topo-style.js?v=20260814l"></script>
         <script defer src="/3d/js/neutral-style.js?v=20260813a"></script>
         <script defer src="/3d/js/config.js?v=20260920-layercompatD"></script>
@@ -104,20 +104,20 @@
         <script defer src="/3d/js/layer-panel.js?v=20261001-group-sort2"></script>
         <script defer src="/3d/plugins/geocoder.js?v=20261002-europe-config1"></script>
         <script defer src="/3d/js/renderer-state.js?v=20261002-shared1"></script>
-        <script defer src="/3d/js/physical-map-bridges.js?v=20261002-shared1"></script>
+        <script defer src="/3d/js/physical-map-bridges.js?v=20261006-polish-default1"></script>
         <script defer src="/3d/js/physical-map.js?v=20261002-shared3"></script>
         <script defer src="{?= wsPhysicalMapPage($page['slug'])['adapter'] ?}?v=20261002-1"></script>
         {else}
         {if: $wsStaticPhysicalMap}
-        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-static5">
+        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-switch1">
         {/if}
         <script src="https://mapa.wirtualneszlaki.pl/app/js/leaflet.popup-portal.js?v=1.1.0-2026-04-09" defer></script>
         <script src="https://mapa.wirtualneszlaki.pl/app/js/mapa.js?20260918-manualqr2" defer></script>
         {if: wsPhysicalMapPage($page['slug'] ?? '') && ($_GET['type'] ?? '') !== 'static'}
-        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-static5">
+        <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-switch1">
         <script defer src="/3d/js/renderer-state.js?v=20261002-shared1"></script>
-        <script defer src="/3d/js/physical-map-bridges.js?v=20261002-shared1"></script>
-        <script defer src="/app/js/maplibre/physical-leaflet-switch.js?v=20261002-1"></script>
+        <script defer src="/3d/js/physical-map-bridges.js?v=20261006-polish-default1"></script>
+        <script defer src="/app/js/maplibre/physical-leaflet-switch.js?v=20261006-control1"></script>
         {/if}
         {/if}
         <script type="application/ld+json">
