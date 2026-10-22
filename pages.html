@@ -29,11 +29,7 @@
                 {? $pages = array_reverse($this->core->db('pages')->toArray()) ?}
                 {? $count = 1 ?} <!-- Inicjalizacja licznika -->
                 {loop: $pages as $page}
-                {if: $page['template'] != 'content-map-city.html'}
-                {if: $page['template'] != 'pages-city.html'}
-                {if: $page['template'] != 'post.html'}
-                {if: $page['template'] != 'index.html'}
-                {if: $page['template'] != 'pages.html'}
+                {if: in_array($page['template'], ['content-map.html', 'content-map-adm.html', 'content-map-city.html', 'content-map-home.html', 'content-map-lasy.html', 'content-map-poland.html', 'map.html', 'map-3d.html'], true)}
                 {if: $page['slug'] != 'mapa'}
                 
                 <div class="col s12 m12 l12" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -68,10 +64,6 @@
                 
                 {? $count++ ?} <!-- Zwiększanie licznika w każdej iteracji -->
                 
-                {/if}
-                {/if}
-                {/if}
-                {/if}
                 {/if}
                 {/if}
                 {/loop}
