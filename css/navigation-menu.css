@@ -110,6 +110,10 @@
   line-height: 1.4;
 }
 
+.nav-desktop-list .mega-menu-panel > .mega-menu-column {
+  background-color: #fff !important;
+}
+
 .mega-menu-column > .mega-menu-heading {
   display: block;
   height: auto;
