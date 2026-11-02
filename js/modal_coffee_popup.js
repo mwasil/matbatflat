@@ -2,10 +2,9 @@
 const coffeeModalDebugMode = false;
 
 // --- Ustawienia Częstotliwości i Czasu ---
-const coffeeExperimentName = 'coffee_popup_idle_threshold_v1';
+const coffeeExperimentName = 'coffee_popup_idle_threshold_v2';
 const coffeeExperimentVariants = [
     { key: 'idle20_2', label: '20 s + 2 s bezczynności', seconds: 20, idleSeconds: 2 },
-    { key: 'idle20_4', label: '20 s + 4 s bezczynności', seconds: 20, idleSeconds: 4 },
     { key: 'idle20_8', label: '20 s + 8 s bezczynności', seconds: 20, idleSeconds: 8 }
 ];
 const coffeeExperimentEndpoint = '/stat/modal-coffee/collect.php';
