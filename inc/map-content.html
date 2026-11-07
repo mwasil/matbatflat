@@ -39,7 +39,10 @@
                                 data-full-width-responsive="true"></ins>
                             </div>
                             <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                var sidebarAd = document.querySelector('#wsmap-content .wsmap-left-ad .adsbygoogle');
+                                if (sidebarAd && sidebarAd.getBoundingClientRect().width > 0) {
+                                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                                }
                             </script>
                             <div id="search-header"></div>
                             {$page.content}
