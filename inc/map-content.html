@@ -27,7 +27,7 @@
                         {if: $bat.notify}
                         <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
                         {/if}
-                        <div id="wsmap-content">
+                        <div id="wsmap-content" class="google-anno-skip">
                             <section id="wsmap-search-section">
                             <p class="grey-text wsmap-last-update">Data ostatniej aktualizacji: {?= date('d-m-Y', strtotime('last Wednesday')) ?}</p>
                             <div class="wsmap-left-ad">
@@ -48,14 +48,14 @@
                     </div>
 
                     <!-- Dodaj pasek przesuwania ze strzałką -->
-                    <div class="drag-bar">
+                    <div class="drag-bar google-anno-skip">
                         <span class="toggle-arrow">&lsaquo;</span> <!-- Strzałka -->
                     </div>
 
                     <div class="col s12 m12 l9 resizable-column right-column">
                             <section>
                             <h2 class="wsmpap-header grey-text">{$page.title} <span>(interaktywna mapa online)</span></h2>
-                            <div id="map"  class="scrollspy" {if: $wsPhysicalMap3D}data-physical-map="{?= wsPhysicalMapPage($page['slug'])['key'] ?}"{/if}>
+                            <div id="map"  class="scrollspy google-anno-skip" {if: $wsPhysicalMap3D}data-physical-map="{?= wsPhysicalMapPage($page['slug'])['key'] ?}"{/if}>
                                 {if: !$wsStaticPhysicalMap}
                                 <picture id="static-map-container" >
                                         <!-- Mapa dla smartfonów -->
@@ -113,7 +113,7 @@
         <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-switch1">
         {/if}
         <script src="https://mapa.wirtualneszlaki.pl/app/js/leaflet.popup-portal.js?v=1.1.0-2026-04-09" defer></script>
-        <script src="https://mapa.wirtualneszlaki.pl/app/js/mapa.js?20260918-manualqr2" defer></script>
+        <script src="https://mapa.wirtualneszlaki.pl/app/js/mapa.js?v=20261107-ad-exclusions1" defer></script>
         {if: wsPhysicalMapPage($page['slug'] ?? '') && ($_GET['type'] ?? '') !== 'static'}
         <link rel="stylesheet" href="/app/css/maplibre-physical-poland.css?v=20261006-switch1">
         <script defer src="/3d/js/renderer-state.js?v=20261002-shared1"></script>

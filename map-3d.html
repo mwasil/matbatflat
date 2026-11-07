@@ -49,19 +49,19 @@
                         {if: $bat.notify}
                         <div id="notify" class="alert alert-{$bat.notify.type}">{$bat.notify.text}</div>
                         {/if}
-                        <div id="wsmap-content">
+                        <div id="wsmap-content" class="google-anno-skip">
                             <section id="wsmap-search-section">
                                 {$page.content}
                             </section>
                         </div>
                     </aside>
 
-                    <div class="drag-bar" aria-hidden="true"><span class="toggle-arrow">&lsaquo;</span></div>
+                    <div class="drag-bar google-anno-skip" aria-hidden="true"><span class="toggle-arrow">&lsaquo;</span></div>
 
                     <div class="col s12 m12 l9 resizable-column right-column ws3d-map-column">
                         <section>
                             <h2 class="wsmpap-header grey-text">{$page.title} <span>(interaktywna mapa 3D)</span></h2>
-                            <div id="map-3d" class="ws3d-shell anchor">
+                            <div id="map-3d" class="ws3d-shell anchor google-anno-skip">
                                 <div id="map-3d-canvas" class="ws3d-canvas" aria-label="Interaktywna mapa trójwymiarowa"></div>
 
                                 <aside id="ws3d-layer-panel" class="ws3d-panel" aria-label="Warstwy mapy">
